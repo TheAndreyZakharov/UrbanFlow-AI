@@ -1,14 +1,21 @@
 from typing import Any
 
 
-def split_osm_elements(osm_json: dict[str, Any]) -> tuple[dict[int, dict], list[dict]]:
+def split_osm_elements(osm_json: dict[str, Any]) -> tuple[dict[int, dict], list[dict], list[dict]]:
     nodes: dict[int, dict] = {}
     ways: list[dict] = []
+    relations: list[dict] = []
 
     for element in osm_json.get("elements", []):
-        if element.get("type") == "node":
+        element_type = element.get("type")
+
+        if element_type == "node":
             nodes[int(element["id"])] = element
-        elif element.get("type") == "way":
+
+        elif element_type == "way":
             ways.append(element)
 
-    return nodes, ways
+        elif element_type == "relation":
+            relations.append(element)
+
+    return nodes, ways, relations

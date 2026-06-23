@@ -12,12 +12,5 @@ dependencies = [
   "pytest>=8.0.0"
 ]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["."]
-filterwarnings = [
-  "ignore:.*starlette.testclient.*:Warning"
-]
-
 [tool.ruff]
 line-length = 100
