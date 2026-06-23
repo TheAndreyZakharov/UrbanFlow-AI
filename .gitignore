@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+
+# env
+.env
+.env.local
+
+# logs
+*.log
+
+# node
+node_modules
+dist
+build
+.vite
+
+# python
+__pycache__
+*.pyc
+.venv
+.pytest_cache
+.ruff_cache
+.mypy_cache
+
+# data / models
+data/*
+!data/.gitkeep
+
+# AI artifacts
+*.pt
+*.pth
+*.ckpt
+*.onnx
