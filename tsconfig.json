@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@web/*": ["web/src/*"],
+      "vitest": ["web/node_modules/vitest/dist/index.d.ts"],
+      "vitest/*": ["web/node_modules/vitest/*"]
+    },
+    "typeRoots": [
+      "web/node_modules/@types",
+      "node_modules/@types"
+    ],
+    "ignoreDeprecations": "6.0"
+  },
+  "include": [
+    "web/src/**/*.ts",
+    "web/src/**/*.tsx",
+    "tests/web/**/*.ts",
+    "tests/web/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "web/node_modules",
+    "server",
+    "ai",
+    "data"
+  ]
+}
