@@ -17,6 +17,7 @@ class SimulationSessionStore:
         pedestrians_count: int,
         random_events_enabled: bool,
         seed: int,
+        signals_on_all_intersections: bool,
     ) -> SimulationEngine:
         session_id = f"session:{uuid4().hex}"
 
@@ -28,6 +29,7 @@ class SimulationSessionStore:
             pedestrians_count=pedestrians_count,
             random_events_enabled=random_events_enabled,
             seed=seed,
+            signals_on_all_intersections=signals_on_all_intersections,
         )
 
         self._sessions[session_id] = engine

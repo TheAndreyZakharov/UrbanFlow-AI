@@ -20,7 +20,9 @@ export function MetricsPanel({ state, cityMap }: Props) {
           <Metric label="Pedestrians" value={state.metrics.active_pedestrians.toString()} />
           <Metric label="Avg speed" value={formatSpeed(state.metrics.average_speed_mps)} />
           <Metric label="Vehicle wait" value={`${formatNumber(state.metrics.average_vehicle_wait_time)}s`} />
+          <Metric label="Pedestrian wait" value={`${formatNumber(state.metrics.average_pedestrian_wait_time)}s`} />
           <Metric label="Congestion" value={`${formatNumber(state.metrics.congestion_score * 100)}%`} />
+          <Metric label="Stopped" value={state.metrics.stopped_vehicles.toString()} />
           <Metric label="Events" value={state.metrics.active_events.toString()} />
           <Metric label="Throughput" value={state.metrics.throughput.toString()} />
         </div>
@@ -30,6 +32,7 @@ export function MetricsPanel({ state, cityMap }: Props) {
         <div className="city-summary">
           <p>Roads: {cityMap.roads.length}</p>
           <p>Buildings: {cityMap.buildings.length}</p>
+          <p>Surfaces: {(cityMap.surfaces ?? []).length}</p>
           <p>Intersections: {cityMap.intersections.length}</p>
           <p>Signals: {cityMap.traffic_signals.length}</p>
           <p>Crossings: {cityMap.crossings.length}</p>

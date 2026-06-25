@@ -20,11 +20,24 @@ export type Road = {
   name: string | null;
   kind: string;
   lanes: number;
+  lanes_forward: number | null;
+  lanes_backward: number | null;
+  turn_lanes: string | null;
+  turn_lanes_forward: string | null;
+  turn_lanes_backward: string | null;
+  route_refs: string[];
+  route_types: string[];
   one_way: boolean;
   max_speed_kph: number;
+  surface: string | null;
+  access: string | null;
+  bridge: string | null;
+  tunnel: string | null;
+  layer: number | null;
   is_driveable: boolean;
   is_walkable: boolean;
   coordinates: Coordinate[];
+  tags: Record<string, string>;
 };
 
 export type Building = {
@@ -34,6 +47,46 @@ export type Building = {
   levels: number | null;
   kind: string | null;
   coordinates: Coordinate[];
+  holes: Coordinate[][];
+  tags: Record<string, string>;
+};
+
+export type Surface = {
+  id: string;
+  osm_id: string;
+  kind: string;
+  name: string | null;
+  coordinates: Coordinate[];
+  tags: Record<string, string>;
+};
+
+export type RailLine = {
+  id: string;
+  osm_id: string;
+  kind: string;
+  name: string | null;
+  is_tram: boolean;
+  is_service: boolean;
+  route_refs: string[];
+  route_types: string[];
+  bridge: string | null;
+  tunnel: string | null;
+  layer: number | null;
+  coordinates: Coordinate[];
+  tags: Record<string, string>;
+};
+
+export type TransitStop = {
+  id: string;
+  osm_id: string;
+  kind: string;
+  name: string | null;
+  route_refs: string[];
+  lat: number;
+  lon: number;
+  x: number;
+  z: number;
+  tags: Record<string, string>;
 };
 
 export type Intersection = {
@@ -53,6 +106,9 @@ export type TrafficSignal = {
   lon: number;
   x: number;
   z: number;
+  signal_type: string | null;
+  direction: string | null;
+  tags: Record<string, string>;
 };
 
 export type Crossing = {
@@ -62,6 +118,7 @@ export type Crossing = {
   lon: number;
   x: number;
   z: number;
+  tags: Record<string, string>;
 };
 
 export type Infrastructure = {
@@ -73,6 +130,7 @@ export type Infrastructure = {
   lon: number;
   x: number;
   z: number;
+  tags: Record<string, string>;
 };
 
 export type CityMap = {
@@ -81,6 +139,9 @@ export type CityMap = {
   origin_lon: number;
   roads: Road[];
   buildings: Building[];
+  surfaces: Surface[];
+  rail_lines: RailLine[];
+  transit_stops: TransitStop[];
   intersections: Intersection[];
   traffic_signals: TrafficSignal[];
   crossings: Crossing[];
@@ -95,11 +156,16 @@ export type VehicleState = {
   lon: number;
   x: number;
   z: number;
+  elevation_m: number;
   speed_mps: number;
   wait_time: number;
   road_id: string;
   route_edge_ids: string[];
   current_edge_id: string | null;
+  heading_rad: number;
+  lane_offset_m: number;
+  length_m: number;
+  width_m: number;
 };
 
 export type PedestrianState = {
@@ -111,6 +177,7 @@ export type PedestrianState = {
   z: number;
   speed_mps: number;
   wait_time: number;
+  heading_rad: number;
 };
 
 export type SignalState = {
@@ -158,7 +225,8 @@ export type EditorPatch = {
     | "accident"
     | "roadwork"
     | "traffic_boost"
-    | "attraction_point";
+    | "attraction_point"
+    | "clear_event";
   target_id: string | null;
   payload: Record<string, unknown>;
 };
@@ -187,6 +255,8 @@ export type SimulationState = {
   intersection_load: IntersectionLoad[];
   metrics: SimulationMetrics;
   editor_patches: EditorPatch[];
+  closed_road_ids: string[];
+  forced_open_road_ids: string[];
 };
 
 export type SimulationSession = {

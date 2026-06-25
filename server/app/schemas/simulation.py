@@ -16,14 +16,13 @@ class CreateSimulationRequest(BaseModel):
     pedestrians_count: int = Field(default=120, ge=0, le=10000)
     random_events_enabled: bool = True
     seed: int = 42
+    signals_on_all_intersections: bool = False
 
 
-class CreateDemoSimulationRequest(BaseModel):
-    mode: SimulationMode = "fixed"
+class UpdateSimulationSettingsRequest(BaseModel):
     vehicles_count: int = Field(default=80, ge=0, le=5000)
     pedestrians_count: int = Field(default=120, ge=0, le=10000)
-    random_events_enabled: bool = True
-    seed: int = 42
+    signals_on_all_intersections: bool = False
 
 
 class StepSimulationRequest(BaseModel):
@@ -38,11 +37,16 @@ class VehicleStateDto(BaseModel):
     lon: float
     x: float
     z: float
+    elevation_m: float
     speed_mps: float
     wait_time: float
     road_id: str
     route_edge_ids: list[str]
     current_edge_id: str | None
+    heading_rad: float
+    lane_offset_m: float
+    length_m: float
+    width_m: float
 
 
 class PedestrianStateDto(BaseModel):
@@ -54,6 +58,7 @@ class PedestrianStateDto(BaseModel):
     z: float
     speed_mps: float
     wait_time: float
+    heading_rad: float
 
 
 class TrafficSignalStateDto(BaseModel):
@@ -111,6 +116,8 @@ class SimulationStateDto(BaseModel):
     intersection_load: list[IntersectionLoadDto]
     metrics: SimulationMetricsDto
     editor_patches: list[EditorPatchDto]
+    closed_road_ids: list[str]
+    forced_open_road_ids: list[str]
 
 
 class SimulationSessionDto(BaseModel):

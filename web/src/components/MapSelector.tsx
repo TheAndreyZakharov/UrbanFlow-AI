@@ -12,7 +12,19 @@ type SearchResult = {
 
 type Props = {
   bbox: BoundingBox | null;
+  center: [number, number];
+  selectedCenter: [number, number];
+  zoom: number;
+  query: string;
+  areaSizeText: string;
+  isImporting: boolean;
+  error: string | null;
   onBboxChange: (bbox: BoundingBox) => void;
+  onCenterChange: (center: [number, number]) => void;
+  onSelectedCenterChange: (center: [number, number]) => void;
+  onZoomChange: (zoom: number) => void;
+  onQueryChange: (query: string) => void;
+  onAreaSizeTextChange: (value: string) => void;
   onImportOsm: (bbox: BoundingBox) => void;
   onClose: () => void;
 };
@@ -21,7 +33,7 @@ function MapFocus({ center }: { center: [number, number] }) {
   const map = useMap();
 
   useEffect(() => {
-    map.setView(center, 15, { animate: true });
+    map.setView(center, map.getZoom(), { animate: true });
     setTimeout(() => map.invalidateSize(), 50);
   }, [center, map]);
 
@@ -30,38 +42,52 @@ function MapFocus({ center }: { center: [number, number] }) {
 
 function CenterAreaBinder({
   sizeMeters,
-  onCenterChange
+  onMapMove
 }: {
   sizeMeters: number;
-  onCenterChange: (lat: number, lon: number) => void;
+  onMapMove: (lat: number, lon: number, zoom: number) => void;
 }) {
   const map = useMap();
 
   useEffect(() => {
     const center = map.getCenter();
-    onCenterChange(center.lat, center.lng);
-  }, [map, onCenterChange, sizeMeters]);
+    onMapMove(center.lat, center.lng, map.getZoom());
+  }, [map, onMapMove, sizeMeters]);
 
   useMapEvents({
     move() {
       const center = map.getCenter();
-      onCenterChange(center.lat, center.lng);
+      onMapMove(center.lat, center.lng, map.getZoom());
     },
     zoomend() {
       const center = map.getCenter();
-      onCenterChange(center.lat, center.lng);
+      onMapMove(center.lat, center.lng, map.getZoom());
     }
   });
 
   return null;
 }
 
-export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props) {
-  const [query, setQuery] = useState("");
-  const [center, setCenter] = useState<[number, number]>([55.751244, 37.618423]);
-  const [selectedCenter, setSelectedCenter] = useState<[number, number]>([55.751244, 37.618423]);
-  const [areaSizeText, setAreaSizeText] = useState("1000");
-  const [visualAreaSize, setVisualAreaSize] = useState(1000);
+export function MapSelector({
+  bbox,
+  center,
+  selectedCenter,
+  zoom,
+  query,
+  areaSizeText,
+  isImporting,
+  error,
+  onBboxChange,
+  onCenterChange,
+  onSelectedCenterChange,
+  onZoomChange,
+  onQueryChange,
+  onAreaSizeTextChange,
+  onImportOsm,
+  onClose
+}: Props) {
+  const [focusCenter, setFocusCenter] = useState<[number, number]>(center);
+  const [visualAreaSize, setVisualAreaSize] = useState(clampAreaSize(Number(areaSizeText) || 1000));
   const animationRef = useRef<number | null>(null);
 
   const targetAreaSize = clampAreaSize(Number(areaSizeText) || 1000);
@@ -74,11 +100,15 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
     : null;
 
   const updateSelectionFromCenter = useCallback(
-    (lat: number, lon: number) => {
-      setSelectedCenter([lat, lon]);
+    (lat: number, lon: number, nextZoom: number) => {
+      const nextCenter: [number, number] = [lat, lon];
+
+      onCenterChange(nextCenter);
+      onSelectedCenterChange(nextCenter);
+      onZoomChange(nextZoom);
       onBboxChange(buildSquareBbox(lat, lon, visualAreaSize));
     },
-    [onBboxChange, visualAreaSize]
+    [onBboxChange, onCenterChange, onSelectedCenterChange, onZoomChange, visualAreaSize]
   );
 
   useEffect(() => {
@@ -117,7 +147,7 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
 
   async function searchPlace() {
     const trimmed = query.trim();
-    if (!trimmed) return;
+    if (!trimmed || isImporting) return;
 
     const url = new URL("https://nominatim.openstreetmap.org/search");
     url.searchParams.set("format", "json");
@@ -140,18 +170,24 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
 
     const lat = Number(firstResult.lat);
     const lon = Number(firstResult.lon);
+    const nextCenter: [number, number] = [lat, lon];
 
-    setCenter([lat, lon]);
-    setSelectedCenter([lat, lon]);
+    setFocusCenter(nextCenter);
+    onCenterChange(nextCenter);
+    onSelectedCenterChange(nextCenter);
     onBboxChange(buildSquareBbox(lat, lon, targetAreaSize));
   }
 
   function changeAreaSize(delta: number) {
+    if (isImporting) return;
+
     const nextSize = clampAreaSize(targetAreaSize + delta);
-    setAreaSizeText(String(nextSize));
+    onAreaSizeTextChange(String(nextSize));
   }
 
   function confirmSelection() {
+    if (isImporting) return;
+
     const [lat, lon] = selectedCenter;
     const finalBbox = buildSquareBbox(lat, lon, targetAreaSize);
 
@@ -165,6 +201,7 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
         className="round-close map-round-close"
         type="button"
         onClick={onClose}
+        disabled={isImporting}
         aria-label="Close map"
       >
         ‹
@@ -173,7 +210,7 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
       <div className="fullscreen-map">
         <MapContainer
           center={center}
-          zoom={15}
+          zoom={zoom}
           scrollWheelZoom
           zoomControl={false}
           attributionControl={false}
@@ -181,8 +218,8 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          <MapFocus center={center} />
-          <CenterAreaBinder sizeMeters={visualAreaSize} onCenterChange={updateSelectionFromCenter} />
+          <MapFocus center={focusCenter} />
+          <CenterAreaBinder sizeMeters={visualAreaSize} onMapMove={updateSelectionFromCenter} />
 
           {rectangleBounds && (
             <Rectangle
@@ -205,8 +242,9 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
         <div className="map-footer-grid map-footer-grid-compact">
           <input
             value={query}
+            disabled={isImporting}
             placeholder="Search city, street, district..."
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => onQueryChange(event.target.value)}
             onKeyDown={(event) => {
               if (event.key === "Enter") void searchPlace();
             }}
@@ -216,32 +254,45 @@ export function MapSelector({ bbox, onBboxChange, onImportOsm, onClose }: Props)
             <input
               className="area-size-input"
               value={areaSizeText}
+              disabled={isImporting}
               inputMode="numeric"
               aria-label="Area size in meters"
               placeholder="Area size, m"
-              onChange={(event) => setAreaSizeText(event.target.value.replace(/[^\d]/g, ""))}
-              onBlur={() => setAreaSizeText(String(targetAreaSize))}
+              onChange={(event) => onAreaSizeTextChange(event.target.value.replace(/[^\d]/g, ""))}
+              onBlur={() => onAreaSizeTextChange(String(targetAreaSize))}
             />
 
             <div className="area-size-stepper">
-              <button type="button" onClick={() => changeAreaSize(100)} aria-label="Increase area size">
+              <button type="button" disabled={isImporting} onClick={() => changeAreaSize(100)} aria-label="Increase area size">
                 +
               </button>
-              <button type="button" onClick={() => changeAreaSize(-100)} aria-label="Decrease area size">
+              <button type="button" disabled={isImporting} onClick={() => changeAreaSize(-100)} aria-label="Decrease area size">
                 -
               </button>
             </div>
           </div>
 
-          <button type="button" onClick={() => void searchPlace()}>
+          <button type="button" disabled={isImporting} onClick={() => void searchPlace()}>
             Find
           </button>
 
-          <button type="button" onClick={confirmSelection}>
-            Confirm area
+          <button type="button" disabled={isImporting} onClick={confirmSelection}>
+            {isImporting ? "Loading..." : "Confirm area"}
           </button>
         </div>
+
+        {error && <p className="map-error">{error}</p>}
       </footer>
+
+      {isImporting && (
+        <div className="map-loading-overlay">
+          <div className="map-loading-card">
+            <div className="map-loading-spinner" />
+            <strong>Generating selected OSM area</strong>
+            <span>Loading roads, buildings, parks, water, infrastructure and creating traffic simulation...</span>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

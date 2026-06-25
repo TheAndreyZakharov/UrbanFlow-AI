@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from app.schemas.osm import IntersectionDto
-from app.schemas.simulation import TrafficSignalStateDto, SimulationMode
+from app.schemas.simulation import SimulationMode, TrafficSignalStateDto
 
 
 @dataclass
@@ -63,7 +63,6 @@ class SignalController:
     def _fixed_decision(self, tick: int) -> SignalDecision:
         phase_index = (tick // 40) % 2
         phase_tick = tick % 40
-
         phase = "green_north_south" if phase_index == 0 else "green_east_west"
 
         return SignalDecision(
@@ -110,5 +109,5 @@ class SignalController:
         return SignalDecision(
             phase=phase,
             time_left=20.0 - float(tick % 20),
-            reason="AI placeholder controller until trained model is connected",
+            reason="AI controller placeholder until trained model is connected",
         )

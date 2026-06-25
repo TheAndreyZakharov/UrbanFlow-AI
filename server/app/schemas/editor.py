@@ -16,6 +16,7 @@ EditorPatchKind = Literal[
     "roadwork",
     "traffic_boost",
     "attraction_point",
+    "clear_event",
 ]
 
 
