@@ -1,0 +1,24 @@
+<configuration>
+  <input>
+    <net-file value="map.net.xml"/>
+    <route-files value="all_routes.rou.xml"/>
+    <additional-files value="public_transport.add.xml"/>
+  </input>
+  <time>
+    <begin value="0"/>
+    <end value="86400"/>
+    <step-length value="1"/>
+  </time>
+  <processing>
+    <collision.action value="warn"/>
+    <collision.check-junctions value="true"/>
+    <ignore-route-errors value="true"/>
+    <pedestrian.model value="striping"/>
+    <time-to-teleport value="45"/>
+  </processing>
+  <report>
+    <verbose value="false"/>
+    <no-step-log value="true"/>
+    <no-warnings value="true"/>
+  </report>
+</configuration>

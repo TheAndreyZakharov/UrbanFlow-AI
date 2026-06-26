@@ -283,6 +283,7 @@ export function buildEditorPatch(
   }
 ): EditorPatch {
   const durationTicks = Math.max(1, Math.round(durationSeconds * 4));
+  const manualDurationTicks = 2_147_483_647;
 
   if (kind === "close_road" || kind === "open_road") {
     return {
@@ -299,9 +300,10 @@ export function buildEditorPatch(
       kind: "roadwork",
       target_id: road.id,
       payload: {
-        duration_ticks: durationTicks,
-        duration_seconds: durationSeconds,
-        speed_multiplier: 0.45
+        duration_ticks: manualDurationTicks,
+        duration_seconds: null,
+        manual: true,
+        speed_multiplier: 0.5
       }
     };
   }
@@ -311,13 +313,14 @@ export function buildEditorPatch(
     kind: "accident",
     target_id: road.id,
     payload: {
-      duration_ticks: durationTicks,
-      duration_seconds: durationSeconds,
-      speed_multiplier: 0.2,
+      duration_ticks: manualDurationTicks,
+      duration_seconds: null,
+      manual: true,
+      speed_multiplier: 0.28,
       progress: point?.progress ?? 0.5,
       x: point?.x,
       z: point?.z,
-      radius_m: 35
+      radius_m: 10
     }
   };
   

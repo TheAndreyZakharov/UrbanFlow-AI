@@ -47,6 +47,13 @@ export function SceneSettingsPanel({ settings, onChange }: Props) {
       />
 
       <ToggleRow
+        title="Detailed actor models"
+        description="Off: simple rectangles and circles. On: detailed cars, buses, trams and pedestrians."
+        checked={!settings.simpleActors}
+        onChange={(checked) => updateSetting("simpleActors", !checked)}
+      />
+
+      <ToggleRow
         title="Show buildings"
         description="Show or hide all 3D buildings."
         checked={settings.showBuildings}

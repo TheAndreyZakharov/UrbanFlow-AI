@@ -2,11 +2,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   applyEditorPatch,
   createSimulation,
+  getSimulationState,
   importOsmArea,
   resetSimulation,
   setSimulationMode,
   stepSimulation,
-  updateSimulationSettings
+  updateSimulationSettings,
+  setTrafficLightOverride,
+  type TrafficLightOverride
 } from "./api/client";
 import { AIPanel } from "./components/AIPanel";
 import {
@@ -38,12 +41,13 @@ export function App() {
   const [cityMap, setCityMap] = useState<CityMap | null>(null);
   const [session, setSession] = useState<SimulationSession | null>(null);
   const [state, setState] = useState<SimulationState | null>(null);
-  const [mode, setMode] = useState<SimulationMode>("fixed");
+  const [mode, setMode] = useState<SimulationMode>("rule_based");
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [vehiclesCount, setVehiclesCount] = useState(160);
   const [pedestriansCount, setPedestriansCount] = useState(220);
   const [signalsOnAllIntersections, setSignalsOnAllIntersections] = useState(false);
+  const [trafficLightOverride, setTrafficLightOverrideState] = useState<TrafficLightOverride>("sumo");
   const [status, setStatus] = useState("Open Map, search a place and import real OSM data.");
   const [mapOpen, setMapOpen] = useState(false);
   const [mapMounted, setMapMounted] = useState(false);
@@ -62,7 +66,12 @@ export function App() {
     showSpecialZones: false,
     highlightRoadAccess: false,
     highlightRoadCongestion: false,
-    showGroundZones: false
+    showGroundZones: false,
+    enableShadows: false,
+    highDpr: false,
+    logarithmicDepthBuffer: false,
+    fineGeometryDetails: false,
+    simpleActors: true
   });
   const [editorTool, setEditorTool] = useState<EditorTool>(null);
   const [editorSelectedRoad, setEditorSelectedRoad] = useState<Road | null>(null);
@@ -87,6 +96,9 @@ export function App() {
   const [rightPanelMounted, setRightPanelMounted] = useState(false);
 
   const timerRef = useRef<number | null>(null);
+  const isRunningRef = useRef(false);
+  const stepInFlightRef = useRef(false);
+  const requestSerialRef = useRef(0);
   const drawerUnmountTimerRef = useRef<number | null>(null);
   const mapUnmountTimerRef = useRef<number | null>(null);
   const closeRoadAutomationRef = useRef<number | null>(null);
@@ -95,6 +107,18 @@ export function App() {
   const delayedOpenRoadRefs = useRef<number[]>([]);
   const sessionId = session?.session_id ?? null;
   const selectedMap = useMemo(() => session?.city_map ?? cityMap, [cityMap, session]);
+
+  function stopSimulationLoop() {
+    requestSerialRef.current += 1;
+    isRunningRef.current = false;
+    stepInFlightRef.current = false;
+    setIsRunning(false);
+
+    if (timerRef.current) {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }
 
   function openMap() {
     if (mapUnmountTimerRef.current) {
@@ -156,6 +180,7 @@ export function App() {
   async function handleImportOsm(selectedBbox: BoundingBox) {
     if (isImporting) return;
 
+    stopSimulationLoop();
     setIsImporting(true);
     setMapError(null);
     setBbox(selectedBbox);
@@ -171,10 +196,12 @@ export function App() {
       setStatus(
         `Imported from OSM: ${map.roads.length} roads, ${map.buildings.length} buildings, ${(map.surfaces ?? []).length} surfaces. Creating simulation...`
       );
+      setMode("rule_based");
+      setTrafficLightOverrideState("sumo");
 
       const created = await createSimulation({
         cityMap: map,
-        mode,
+        mode: "rule_based",
         vehiclesCount,
         pedestriansCount,
         randomEventsEnabled: true,
@@ -198,15 +225,47 @@ export function App() {
 
   async function handleStep(steps = speed) {
     if (!sessionId) return;
+
+    const serial = requestSerialRef.current;
     const next = await stepSimulation(sessionId, steps);
+
+    if (serial !== requestSerialRef.current) {
+      return;
+    }
+
     setState(next);
   }
 
   async function handleReset() {
     if (!sessionId) return;
+
+    stopSimulationLoop();
+
+    const serial = requestSerialRef.current;
     const next = await resetSimulation(sessionId);
+
+    if (serial !== requestSerialRef.current) {
+      return;
+    }
+
     setState(next);
     setIsRunning(false);
+  }
+
+  function handlePlayPause() {
+    if (!sessionId) return;
+
+    setIsRunning((current) => {
+      const next = !current;
+      isRunningRef.current = next;
+
+      if (!next && timerRef.current) {
+        window.clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+
+      return next;
+    });
   }
 
   async function handleModeChange(nextMode: SimulationMode) {
@@ -217,18 +276,48 @@ export function App() {
   }
 
   useEffect(() => {
+    isRunningRef.current = isRunning;
+
     if (!isRunning || !sessionId) {
-      if (timerRef.current) window.clearInterval(timerRef.current);
-      timerRef.current = null;
+      if (timerRef.current) {
+        window.clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+
       return;
     }
 
-    timerRef.current = window.setInterval(() => {
-      void handleStep(speed);
-    }, 250);
+    let cancelled = false;
+
+    async function simulationLoop() {
+      if (cancelled || !isRunningRef.current || !sessionId) {
+        return;
+      }
+
+      if (!stepInFlightRef.current) {
+        stepInFlightRef.current = true;
+
+        try {
+          await handleStep(speed);
+        } finally {
+          stepInFlightRef.current = false;
+        }
+      }
+
+      if (!cancelled && isRunningRef.current) {
+        timerRef.current = window.setTimeout(simulationLoop, 110);
+      }
+    }
+
+    timerRef.current = window.setTimeout(simulationLoop, 0);
 
     return () => {
-      if (timerRef.current) window.clearInterval(timerRef.current);
+      cancelled = true;
+
+      if (timerRef.current) {
+        window.clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
     };
   }, [isRunning, sessionId, speed]);
 
@@ -373,13 +462,15 @@ export function App() {
                     vehiclesCount={vehiclesCount}
                     pedestriansCount={pedestriansCount}
                     signalsOnAllIntersections={signalsOnAllIntersections}
+                    trafficLightOverride={trafficLightOverride}
                     onSpeedChange={setSpeed}
-                    onPlayPause={() => setIsRunning((value) => Boolean(sessionId) && !value)}
+                    onPlayPause={handlePlayPause}
                     onReset={() => void handleReset()}
                     onModeChange={(nextMode) => void handleModeChange(nextMode)}
                     onVehiclesCountChange={setVehiclesCount}
                     onPedestriansCountChange={setPedestriansCount}
                     onSignalsOnAllIntersectionsChange={setSignalsOnAllIntersections}
+                    onTrafficLightOverrideChange={(override) => void handleTrafficLightOverrideChange(override)}
                     onApplySimulationSettings={() => void handleApplySimulationSettings()}
                   />
                 </div>
@@ -506,12 +597,34 @@ export function App() {
     </div>
   );
 
+  async function handleTrafficLightOverrideChange(override: TrafficLightOverride) {
+    if (!sessionId) return;
+
+    setTrafficLightOverrideState(override);
+
+    try {
+      const next = await setTrafficLightOverride(sessionId, override);
+      setState(next);
+
+      if (override === "sumo") {
+        setMode("rule_based");
+        setStatus("Traffic lights returned to SUMO automatic control.");
+      } else {
+        setStatus(`Traffic lights forced to ${override} while simulation is running.`);
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown traffic light override error";
+      setStatus(`Traffic light override failed: ${message}`);
+    }
+  }
+
   async function handleApplySimulationSettings() {
     if (!sessionId) {
       setStatus("Generate OSM area first.");
       return;
     }
 
+    stopSimulationLoop();
     setStatus("Updating simulation objects and traffic lights...");
 
     try {
@@ -543,6 +656,8 @@ export function App() {
   ) {
     if (!sessionId || !editorTool) return;
 
+    stopSimulationLoop();
+
     setSceneSettings((current) => ({
       ...current,
       highlightRoadAccess: true
@@ -556,29 +671,47 @@ export function App() {
           : editorAutomation.closeRoads.durationSeconds;
 
     const patch = buildEditorPatch(editorTool, road, durationSeconds, point);
+    const serial = requestSerialRef.current;
 
-    await applyEditorPatch(sessionId, patch);
+    try {
+      await applyEditorPatch(sessionId, patch);
 
-    if (editorTool === "close_road") {
-      const openTimer = window.setTimeout(() => {
-        void applyEditorPatch(sessionId, buildEditorPatch("open_road", road, durationSeconds));
-      }, durationSeconds * 1000);
+      const next = await getSimulationState(sessionId);
 
-      delayedOpenRoadRefs.current.push(openTimer);
+      if (serial !== requestSerialRef.current) {
+        return;
+      }
+
+      setState(next);
+      setStatus(`Editor applied: ${editorTool} on ${road.name ?? road.id}.`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown editor error";
+      setStatus(`Editor action failed: ${message}`);
     }
-
-    const next = await stepSimulation(sessionId, 1);
-    setState(next);
   }
 
   async function handleClearEditorEvent(eventId: string) {
     if (!sessionId) return;
 
-    await applyEditorPatch(sessionId, buildClearEventPatch(eventId));
+    stopSimulationLoop();
 
-    const next = await stepSimulation(sessionId, 1);
-    setState(next);
-    setStatus("Editor event removed.");
+    const serial = requestSerialRef.current;
+
+    try {
+      await applyEditorPatch(sessionId, buildClearEventPatch(eventId));
+
+      const next = await getSimulationState(sessionId);
+
+      if (serial !== requestSerialRef.current) {
+        return;
+      }
+
+      setState(next);
+      setStatus("Editor event removed.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown editor error";
+      setStatus(`Remove editor event failed: ${message}`);
+    }
   }
 
   async function applyRandomEditorPatch(kind: "close_road" | "accident" | "roadwork", durationSeconds: number) {
@@ -597,6 +730,13 @@ export function App() {
     const point = pointOnRoad(road, progress);
     const patch = buildEditorPatch(kind, road, durationSeconds, point);
 
+    patch.payload = {
+      ...patch.payload,
+      duration_ticks: Math.max(1, Math.round(durationSeconds * 4)),
+      duration_seconds: durationSeconds,
+      manual: false
+    };
+
     await applyEditorPatch(sessionId, patch);
 
     if (kind === "close_road") {
@@ -606,8 +746,8 @@ export function App() {
 
       delayedOpenRoadRefs.current.push(openTimer);
     }
-
-    const next = await stepSimulation(sessionId, 1);
+    
+    const next = await getSimulationState(sessionId);
     setState(next);
   }
 

@@ -8,4 +8,5 @@ export type SceneSettings = {
   highDpr: boolean;
   logarithmicDepthBuffer: boolean;
   fineGeometryDetails: boolean;
+  simpleActors: boolean;
 };

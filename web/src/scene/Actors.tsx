@@ -1,3 +1,5 @@
+import { useRef, type ReactNode } from "react";
+import { useFrame } from "@react-three/fiber";
 import type { PedestrianState, VehicleState } from "../types/domain";
 
 const SKIN_COLORS = [
@@ -42,7 +44,7 @@ const RIM_COLOR = "#94a3b8";
 const LIGHT_COLOR = "#f8fafc";
 const TAIL_LIGHT_COLOR = "#ef4444";
 const TAXI_YELLOW = "#facc15";
-const BUS_YELLOW = "#eab308";
+const BUS_BODY_COLOR = "#2563eb";
 
 const TRAM_RED = "#dc2626";
 const TRAM_DARK_RED = "#991b1b";
@@ -53,6 +55,7 @@ type VehicleActorProps = {
   z: number;
   heading: number;
   yOffset?: number;
+  simple?: boolean;
 };
 
 type PedestrianActorProps = {
@@ -61,71 +64,85 @@ type PedestrianActorProps = {
   z: number;
   heading: number;
   bob: number;
+  simple?: boolean;
+  yOffset?: number;
 };
 
-export function VehicleActor({ vehicle, x, z, heading, yOffset = 0 }: VehicleActorProps) {
+export function VehicleActor({ vehicle, x, z, heading, yOffset = 0, simple = false }: VehicleActorProps) {
   const kind = vehicle.kind.toLowerCase();
   const length = Math.max(2.8, vehicle.length_m);
   const width = Math.max(1.4, vehicle.width_m);
-  const color = pickCarColor(vehicle.id);
+  const color = vehicle.color || pickCarColor(vehicle.id);
+
+  if (simple) {
+    return (
+      <SmoothActorRoot x={x} y={0.92 + yOffset} z={z} heading={heading}>
+        <SimpleVehicle
+          length={length}
+          width={width}
+          color={simpleVehicleColor(vehicle, color)}
+        />
+      </SmoothActorRoot>
+    );
+  }
 
   if (kind.includes("bus")) {
     return (
-      <group position={[x, 1.95 + yOffset, z]} rotation={[0, -heading, 0]}>
+      <SmoothActorRoot x={x} y={1.95 + yOffset} z={z} heading={heading}>
         <BusVehicle length={Math.max(length, 8.8)} width={Math.max(width, 2.35)} />
-      </group>
+      </SmoothActorRoot>
     );
   }
 
   if (kind.includes("truck") || kind.includes("lorry")) {
     return (
-      <group position={[x, 1.78 + yOffset, z]} rotation={[0, -heading, 0]}>
+      <SmoothActorRoot x={x} y={1.78 + yOffset} z={z} heading={heading}>
         <TruckVehicle
           length={Math.max(length, 7.6)}
           width={Math.max(width, 2.25)}
           bodyColor={color}
         />
-      </group>
+      </SmoothActorRoot>
     );
   }
 
   if (kind.includes("tram")) {
     return (
-      <group position={[x, 1.86 + yOffset, z]} rotation={[0, -heading, 0]}>
+      <SmoothActorRoot x={x} y={1.86 + yOffset} z={z} heading={heading}>
         <TramVehicle length={Math.max(length, 11.5)} width={Math.max(width, 2.35)} />
-      </group>
+      </SmoothActorRoot>
     );
   }
 
   if (kind.includes("taxi")) {
     return (
-      <group position={[x, 1.34 + yOffset, z]} rotation={[0, -heading, 0]}>
+      <SmoothActorRoot x={x} y={1.34 + yOffset} z={z} heading={heading}>
         <SedanVehicle
           length={Math.max(length, 4.35)}
           width={Math.max(width, 1.78)}
           bodyColor={TAXI_YELLOW}
           taxi
         />
-      </group>
+      </SmoothActorRoot>
     );
   }
 
   if (kind.includes("suv") || kind.includes("jeep")) {
     return (
-      <group position={[x, 1.52 + yOffset, z]} rotation={[0, -heading, 0]}>
+      <SmoothActorRoot x={x} y={1.52 + yOffset} z={z} heading={heading}>
         <SuvVehicle
           length={Math.max(length, 5.05)}
           width={Math.max(width, 2.0)}
           bodyColor={color}
         />
-      </group>
+      </SmoothActorRoot>
     );
   }
 
   const variant = deterministicIndex(vehicle.id, 5);
 
   return (
-    <group position={[x, 1.32 + yOffset, z]} rotation={[0, -heading, 0]}>
+    <SmoothActorRoot x={x} y={1.32 + yOffset} z={z} heading={heading}>
       {variant === 0 && (
         <SedanVehicle
           length={Math.max(length, 4.35)}
@@ -166,8 +183,58 @@ export function VehicleActor({ vehicle, x, z, heading, yOffset = 0 }: VehicleAct
           compact
         />
       )}
-    </group>
+    </SmoothActorRoot>
   );
+}
+
+function SmoothActorRoot({
+  x,
+  y,
+  z,
+  heading,
+  children
+}: {
+  x: number;
+  y: number;
+  z: number;
+  heading: number;
+  children: ReactNode;
+}) {
+  const groupRef = useRef<any>(null);
+  const initializedRef = useRef(false);
+
+  useFrame((_, delta) => {
+    const group = groupRef.current;
+
+    if (!group) {
+      return;
+    }
+
+    const targetRotationY = -heading;
+
+    if (!initializedRef.current) {
+      group.position.set(x, y, z);
+      group.rotation.y = targetRotationY;
+      initializedRef.current = true;
+      return;
+    }
+
+    const positionT = 1 - Math.exp(-delta * 12);
+    const rotationT = 1 - Math.exp(-delta * 16);
+
+    group.position.x += (x - group.position.x) * positionT;
+    group.position.y += (y - group.position.y) * positionT;
+    group.position.z += (z - group.position.z) * positionT;
+
+    const angleDelta = shortestAngleDelta(group.rotation.y, targetRotationY);
+    group.rotation.y += angleDelta * rotationT;
+  });
+
+  return <group ref={groupRef}>{children}</group>;
+}
+
+function shortestAngleDelta(current: number, target: number) {
+  return Math.atan2(Math.sin(target - current), Math.cos(target - current));
 }
 
 function SedanVehicle({
@@ -409,7 +476,7 @@ function BusVehicle({ length, width }: { length: number; width: number }) {
     <group>
       <mesh castShadow renderOrder={40}>
         <boxGeometry args={[length, 1.68, width]} />
-        <meshStandardMaterial color={BUS_YELLOW} roughness={0.58} />
+        <meshStandardMaterial color={BUS_BODY_COLOR} roughness={0.58} />
       </mesh>
 
       <mesh position={[length * 0.43, 0.12, 0]} castShadow renderOrder={41}>
@@ -600,12 +667,64 @@ function VehicleWheels({
   );
 }
 
-export function PedestrianActor({ pedestrian, x, z, heading, bob }: PedestrianActorProps) {
+function SimpleVehicle({
+  length,
+  width,
+  color
+}: {
+  length: number;
+  width: number;
+  color: string;
+}) {
+  return (
+    <group>
+      <mesh castShadow renderOrder={48}>
+        <boxGeometry args={[length, 0.5, width]} />
+        <meshStandardMaterial color={color} roughness={0.72} />
+      </mesh>
+
+      <mesh position={[length * 0.42, 0.03, 0]} renderOrder={49}>
+        <boxGeometry args={[0.18, 0.56, width * 0.72]} />
+        <meshStandardMaterial color="#f8fafc" emissive="#f8fafc" emissiveIntensity={0.18} roughness={0.45} />
+      </mesh>
+    </group>
+  );
+}
+
+function SimplePedestrian({ color }: { color: string }) {
+  return (
+    <mesh castShadow renderOrder={50} rotation={[-Math.PI / 2, 0, 0]}>
+      <circleGeometry args={[0.34, 16]} />
+      <meshStandardMaterial color={color} roughness={0.66} />
+    </mesh>
+  );
+}
+
+function simpleVehicleColor(vehicle: VehicleState, fallbackColor: string) {
+  const kind = vehicle.kind.toLowerCase();
+
+  if (kind.includes("tram")) return "#dc2626";
+  if (kind.includes("bus")) return "#2563eb";
+  if (kind.includes("truck")) return "#64748b";
+  if (kind.includes("taxi")) return TAXI_YELLOW;
+
+  return fallbackColor;
+}
+
+export function PedestrianActor({ pedestrian, x, z, heading, bob, simple = false, yOffset = 0 }: PedestrianActorProps) {
   const skinColor = SKIN_COLORS[deterministicIndex(pedestrian.id, SKIN_COLORS.length)];
   const clothingColor = CLOTHING_COLORS[deterministicIndex(`${pedestrian.id}:clothes`, CLOTHING_COLORS.length)];
 
+  if (simple) {
+    return (
+      <SmoothActorRoot x={x} y={0.42 + yOffset} z={z} heading={heading}>
+        <SimplePedestrian color={skinColor} />
+      </SmoothActorRoot>
+    );
+  }
+
   return (
-    <group position={[x, 0.92 + bob, z]} rotation={[0, -heading, 0]}>
+    <SmoothActorRoot x={x} y={0.92 + yOffset + bob} z={z} heading={heading}>
       <mesh castShadow position={[0, 0.36, 0]} renderOrder={42}>
         <coneGeometry args={[0.32, 0.86, 12]} />
         <meshStandardMaterial color={clothingColor} roughness={0.64} />
@@ -615,7 +734,7 @@ export function PedestrianActor({ pedestrian, x, z, heading, bob }: PedestrianAc
         <sphereGeometry args={[0.24, 12, 12]} />
         <meshStandardMaterial color={skinColor} roughness={0.72} />
       </mesh>
-    </group>
+    </SmoothActorRoot>
   );
 }
 

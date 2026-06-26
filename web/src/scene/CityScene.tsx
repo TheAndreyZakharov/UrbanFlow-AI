@@ -45,7 +45,8 @@ const DEFAULT_SCENE_SETTINGS: SceneSettings = {
   enableShadows: false,
   highDpr: false,
   logarithmicDepthBuffer: false,
-  fineGeometryDetails: false
+  fineGeometryDetails: false,
+  simpleActors: true
 };
 
 const GROUND_Y = -0.28;
@@ -54,6 +55,8 @@ const LAND_ZONE_Y = 0.16;
 const SPECIAL_ZONE_Y = 0.2;
 const ROAD_Y = 0.34;
 const ROAD_MARKING_Y = 0.53;
+const VEHICLE_SURFACE_LIFT = 0.72;
+const PEDESTRIAN_SURFACE_LIFT = 0.38;
 const CROSSING_Y = 0.66;
 const INTERSECTION_Y = 0.62;
 const BUILDING_BASE_Y = 0.26;
@@ -145,7 +148,7 @@ export function CityScene({
             />
             {settings.showBuildings && <Buildings buildings={cityMap.buildings} />}
             <Crossings crossings={cityMap.crossings} roads={cityMap.roads} settings={settings} />
-            <Intersections cityMap={cityMap} />
+            <Intersections cityMap={cityMap} state={state} />
             <RailLines railLines={cityMap.rail_lines ?? []} settings={settings} />
             <TransitStops stops={cityMap.transit_stops ?? []} />
             <EventMarkers events={state?.events ?? []} roads={cityMap.roads} />
@@ -154,8 +157,8 @@ export function CityScene({
 
         {state && cityMap && (
           <group>
-            <Vehicles state={state} />
-            <Pedestrians state={state} />
+            <Vehicles state={state} simpleActors={settings.simpleActors} />
+            <Pedestrians state={state} simpleActors={settings.simpleActors} />
             <Signals cityMap={cityMap} state={state} />
           </group>
         )}
@@ -887,7 +890,7 @@ function BuildingRoof({ building, height }: { building: Building; height: number
   );
 }
 
-function Vehicles({ state }: { state: SimulationState }) {
+function Vehicles({ state, simpleActors }: { state: SimulationState; simpleActors: boolean }) {
   return (
     <group>
       {state.vehicles.map((vehicle) => {
@@ -903,14 +906,15 @@ function Vehicles({ state }: { state: SimulationState }) {
               x={x}
               z={z}
               heading={heading}
-              yOffset={vehicle.elevation_m}
+              yOffset={vehicle.elevation_m + VEHICLE_SURFACE_LIFT}
+              simple={simpleActors}
             />
 
-            {isTunnelVehicle && (
+            {isTunnelVehicle && !simpleActors && (
               <TunnelVehicleGhost
                 x={x}
                 z={z}
-                y={1.32 + vehicle.elevation_m}
+                y={1.32 + vehicle.elevation_m + VEHICLE_SURFACE_LIFT}
                 heading={heading}
                 length={vehicle.length_m}
                 width={vehicle.width_m}
@@ -971,7 +975,7 @@ function TunnelVehicleGhost({
   );
 }
 
-function Pedestrians({ state }: { state: SimulationState }) {
+function Pedestrians({ state, simpleActors }: { state: SimulationState; simpleActors: boolean }) {
   return (
     <group>
       {state.pedestrians.map((pedestrian, index) => (
@@ -982,6 +986,8 @@ function Pedestrians({ state }: { state: SimulationState }) {
           z={pedestrian.z}
           heading={toSceneHeading(pedestrian.heading_rad)}
           bob={Math.sin(state.tick * 0.35 + index) * 0.05}
+          simple={simpleActors}
+          yOffset={PEDESTRIAN_SURFACE_LIFT}
         />
       ))}
     </group>
@@ -995,11 +1001,15 @@ function Signals({ cityMap, state }: { cityMap: CityMap; state: SimulationState 
         const intersection = cityMap.intersections.find((item) => item.id === signal.intersection_id);
         if (!intersection) return null;
 
-        const color = signal.phase.includes("pedestrian")
+        const phase = signal.phase.toLowerCase();
+
+        const color = phase.includes("pedestrian")
           ? "#38bdf8"
-          : signal.phase.includes("green") || signal.phase.includes("ai")
+          : phase.includes("green") || phase.includes("g")
             ? "#22c55e"
-            : "#f97316";
+            : phase.includes("yellow") || phase.includes("y")
+              ? "#facc15"
+              : "#ef4444";
 
         return (
           <group key={signal.id} position={[toSceneX(intersection.x), 3, intersection.z]}>
@@ -1017,6 +1027,29 @@ function Signals({ cityMap, state }: { cityMap: CityMap; state: SimulationState 
       })}
     </group>
   );
+}
+
+
+function intersectionSignalColor(phase: string | undefined, hasRealSignal: boolean) {
+  if (!phase) {
+    return hasRealSignal ? "#22c55e" : "#64748b";
+  }
+
+  const lowered = phase.toLowerCase();
+
+  if (lowered.includes("green") || lowered.includes("g")) {
+    return "#22c55e";
+  }
+
+  if (lowered.includes("yellow") || lowered.includes("y")) {
+    return "#facc15";
+  }
+
+  if (lowered.includes("red") || lowered.includes("r")) {
+    return "#ef4444";
+  }
+
+  return "#38bdf8";
 }
 
 function Crossings({ crossings, roads, settings }: { crossings: Crossing[]; roads: Road[]; settings: SceneSettings }) {
@@ -1056,21 +1089,32 @@ function Crossings({ crossings, roads, settings }: { crossings: Crossing[]; road
   );
 }
 
-function Intersections({ cityMap }: { cityMap: CityMap }) {
+function Intersections({ cityMap, state }: { cityMap: CityMap; state: SimulationState | null }) {
+  const signalByIntersectionId = new Map(
+    (state?.signals ?? []).map((signal) => [signal.intersection_id, signal])
+  );
+
   return (
     <group>
-      {cityMap.intersections.map((intersection) => (
-        <mesh key={intersection.id} position={[toSceneX(intersection.x), INTERSECTION_Y, intersection.z]} renderOrder={23}>
-          <cylinderGeometry args={[3.1, 3.1, 0.26, 24]} />
-          <meshStandardMaterial
-            color={intersection.has_signal ? "#22c55e" : "#64748b"}
-            roughness={0.78}
-            polygonOffset
-            polygonOffsetFactor={-50}
-            polygonOffsetUnits={-50}
-          />
-        </mesh>
-      ))}
+      {cityMap.intersections.map((intersection) => {
+        const signal = signalByIntersectionId.get(intersection.id);
+        const color = intersectionSignalColor(signal?.phase, intersection.has_signal);
+
+        return (
+          <mesh key={intersection.id} position={[toSceneX(intersection.x), INTERSECTION_Y, intersection.z]} renderOrder={23}>
+            <cylinderGeometry args={[3.1, 3.1, 0.26, 24]} />
+            <meshStandardMaterial
+              color={color}
+              emissive={signal ? color : "#000000"}
+              emissiveIntensity={signal ? 0.18 : 0}
+              roughness={0.78}
+              polygonOffset
+              polygonOffsetFactor={-50}
+              polygonOffsetUnits={-50}
+            />
+          </mesh>
+        );
+      })}
     </group>
   );
 }
@@ -1546,8 +1590,8 @@ function buildActiveRoadState(
 ) {
   const result = new Map<string, "closed" | "roadwork" | "forced_open">();
 
-  for (const roadId of closedRoadIds) {
-    result.set(roadId, "closed");
+  for (const roadId of forcedOpenRoadIds) {
+    result.set(roadId, "forced_open");
   }
 
   for (const event of events) {
@@ -1558,8 +1602,8 @@ function buildActiveRoadState(
     }
   }
 
-  for (const roadId of forcedOpenRoadIds) {
-    result.set(roadId, "forced_open");
+  for (const roadId of closedRoadIds) {
+    result.set(roadId, "closed");
   }
 
   return result;

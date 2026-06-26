@@ -1,4 +1,5 @@
 import type { SimulationMode } from "../types/domain";
+import type { TrafficLightOverride } from "../api/client";
 
 type Props = {
   isRunning: boolean;
@@ -8,6 +9,7 @@ type Props = {
   vehiclesCount: number;
   pedestriansCount: number;
   signalsOnAllIntersections: boolean;
+  trafficLightOverride: TrafficLightOverride;
   onSpeedChange: (speed: number) => void;
   onPlayPause: () => void;
   onReset: () => void;
@@ -15,6 +17,7 @@ type Props = {
   onVehiclesCountChange: (count: number) => void;
   onPedestriansCountChange: (count: number) => void;
   onSignalsOnAllIntersectionsChange: (enabled: boolean) => void;
+  onTrafficLightOverrideChange: (override: TrafficLightOverride) => void;
   onApplySimulationSettings: () => void;
 };
 
@@ -26,6 +29,8 @@ export function SimulationControls({
   vehiclesCount,
   pedestriansCount,
   signalsOnAllIntersections,
+  trafficLightOverride,
+  onTrafficLightOverrideChange,
   onSpeedChange,
   onPlayPause,
   onReset,
@@ -38,7 +43,7 @@ export function SimulationControls({
   return (
     <section className="panel-block">
       <h2>Simulation</h2>
-      <p className="muted">Start, pause and tune the active generated city simulation.</p>
+      <p className="muted">Start, pause and tune the SUMO-powered city simulation.</p>
 
       <div className="button-row button-row-two">
         <button disabled={!hasSession} onClick={onPlayPause}>
@@ -103,13 +108,47 @@ export function SimulationControls({
       <button disabled={!hasSession} onClick={onApplySimulationSettings}>
         Apply counts and signals
       </button>
+      <div className="button-row button-row-two">
+        <button
+          disabled={!hasSession}
+          className={trafficLightOverride === "sumo" ? "active" : ""}
+          onClick={() => onTrafficLightOverrideChange("sumo")}
+        >
+          SUMO auto
+        </button>
 
+        <button
+          disabled={!hasSession}
+          className={trafficLightOverride === "red" ? "active" : ""}
+          onClick={() => onTrafficLightOverrideChange("red")}
+        >
+          All red
+        </button>
+      </div>
+
+      <div className="button-row button-row-two">
+        <button
+          disabled={!hasSession}
+          className={trafficLightOverride === "yellow" ? "active" : ""}
+          onClick={() => onTrafficLightOverrideChange("yellow")}
+        >
+          All yellow
+        </button>
+
+        <button
+          disabled={!hasSession}
+          className={trafficLightOverride === "green" ? "active" : ""}
+          onClick={() => onTrafficLightOverrideChange("green")}
+        >
+          All green
+        </button>
+      </div>
       <label>
-        Controller mode
+        Traffic light controller
         <select value={mode} onChange={(event) => onModeChange(event.target.value as SimulationMode)}>
-          <option value="fixed">Fixed timings</option>
-          <option value="rule_based">Rule-based</option>
-          <option value="ai">AI controller</option>
+          <option value="rule_based">SUMO traffic lights</option>
+          <option value="fixed">Manual fixed cycle</option>
+          <option value="ai">AI controller later</option>
         </select>
       </label>
     </section>

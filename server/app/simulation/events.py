@@ -35,11 +35,20 @@ def maybe_generate_random_event(
 
     if kind == "accident":
         duration = rng.randint(80, 180)
-        payload = {"severity": rng.choice(["low", "medium", "high"]), "speed_multiplier": 0.25}
+        payload = {
+            "severity": rng.choice(["low", "medium", "high"]),
+            "speed_multiplier": 0.25,
+            "manual": False,
+            "radius_m": 10,
+        }
 
     elif kind == "roadwork":
         duration = rng.randint(180, 360)
-        payload = {"closed_lanes": 1, "speed_multiplier": 0.45}
+        payload = {
+            "closed_lanes": 1,
+            "speed_multiplier": 0.5,
+            "manual": False,
+        }
 
     else:
         duration = rng.randint(100, 220)

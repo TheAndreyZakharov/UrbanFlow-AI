@@ -13,7 +13,10 @@ def apply_editor_patch(payload: ApplyEditorPatchRequest) -> ApplyEditorPatchResp
     if engine is None:
         raise HTTPException(status_code=404, detail="simulation session not found")
 
-    engine.apply_patch(payload.patch)
+    try:
+        engine.apply_patch(payload.patch)
+    except Exception as error:
+        raise HTTPException(status_code=409, detail=f"editor patch failed: {error}") from error
 
     return ApplyEditorPatchResponse(
         session_id=payload.session_id,

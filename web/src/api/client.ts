@@ -49,6 +49,10 @@ export async function createSimulation(payload: CreateSimulationPayload): Promis
   });
 }
 
+export async function getSimulationState(sessionId: string): Promise<SimulationState> {
+  return request<SimulationState>(`/simulation/${encodeURIComponent(sessionId)}/state`);
+}
+
 export async function updateSimulationSettings(
   sessionId: string,
   payload: UpdateSimulationSettingsPayload
@@ -130,4 +134,15 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   }
 
   return response.json() as Promise<T>;
+}
+
+export type TrafficLightOverride = "sumo" | "red" | "yellow" | "green";
+
+export async function setTrafficLightOverride(
+  sessionId: string,
+  override: TrafficLightOverride
+): Promise<SimulationState> {
+  return request<SimulationState>(`/simulation/${encodeURIComponent(sessionId)}/traffic-light-override/${override}`, {
+    method: "POST"
+  });
 }

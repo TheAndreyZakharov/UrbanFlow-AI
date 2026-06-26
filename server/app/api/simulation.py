@@ -44,17 +44,33 @@ def update_simulation_settings(
 ) -> SimulationStateDto:
     engine = _get_engine_or_404(session_id)
 
-    return engine.update_settings(
-        vehicles_count=payload.vehicles_count,
-        pedestrians_count=payload.pedestrians_count,
-        signals_on_all_intersections=payload.signals_on_all_intersections,
-    )
+    try:
+        return engine.update_settings(
+            vehicles_count=payload.vehicles_count,
+            pedestrians_count=payload.pedestrians_count,
+            signals_on_all_intersections=payload.signals_on_all_intersections,
+        )
+    except Exception as error:
+        raise HTTPException(status_code=409, detail=f"simulation settings failed: {error}") from error
 
 
 @router.post("/{session_id}/step", response_model=SimulationStateDto)
 def step_simulation(session_id: str, payload: StepSimulationRequest) -> SimulationStateDto:
     engine = _get_engine_or_404(session_id)
-    return engine.step(payload.steps)
+
+    try:
+        return engine.step(payload.steps)
+    except Exception as error:
+        raise HTTPException(status_code=409, detail=f"simulation step failed: {error}") from error
+
+
+@router.post("/{session_id}/traffic-light-override/{override}", response_model=SimulationStateDto)
+def set_traffic_light_override(session_id: str, override: str) -> SimulationStateDto:
+    if override not in {"sumo", "red", "yellow", "green"}:
+        raise HTTPException(status_code=400, detail="override must be sumo, red, yellow or green")
+
+    engine = _get_engine_or_404(session_id)
+    return engine.set_traffic_light_override(override)  # type: ignore[arg-type]
 
 
 @router.post("/{session_id}/reset", response_model=SimulationStateDto)

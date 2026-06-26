@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-06-26T01:35:04.099803+03:00 by Eclipse SUMO netconvert 1.27.0
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <type-files value="/Library/Frameworks/EclipseSUMO.framework/Versions/1.27.0/EclipseSUMO/share/sumo/data/typemap/osmNetconvert.typ.xml"/>
+        <osm-files value="data/sumo/session_acc40b86723646dfa3e0df976944295d/map.osm.xml"/>
+    </input>
+
+    <output>
+        <output-file value="data/sumo/session_acc40b86723646dfa3e0df976944295d/map.base.net.xml"/>
+        <ptstop-output value="data/sumo/session_acc40b86723646dfa3e0df976944295d/public_transport.add.xml"/>
+        <ptline-output value="data/sumo/session_acc40b86723646dfa3e0df976944295d/public_transport_lines.xml"/>
+    </output>
+
+    <projection>
+        <proj.utm value="true"/>
+    </projection>
+
+    <processing>
+        <geometry.remove value="true"/>
+        <roundabouts.guess value="true"/>
+    </processing>
+
+    <tls_building>
+        <tls.discard-simple value="false"/>
+        <tls.guess value="true"/>
+        <tls.guess-signals value="true"/>
+        <tls.default-type value="actuated"/>
+    </tls_building>
+
+    <ramp_guessing>
+        <ramps.guess value="true"/>
+    </ramp_guessing>
+
+    <junctions>
+        <junctions.join value="true"/>
+    </junctions>
+
+    <pedestrian>
+        <sidewalks.guess value="true"/>
+        <crossings.guess value="true"/>
+    </pedestrian>
+
+    <formats>
+        <osm.stop-output.length value="20"/>
+        <osm.all-attributes value="true"/>
+    </formats>
+
+    <report>
+        <no-warnings value="true"/>
+    </report>
+
+</netconvertConfiguration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <busStop id="-12986619509" name="Учебный переулок" lane="-31365462#1_0" startPos="32.05" endPos="47.05" friendlyPos="true" lines="208">
+        <access lane="230631729#2_0" pos="703.31" length="217.50" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-12986619513" name="Городская многопрофильная больница № 2" lane="-31365462#1_0" startPos="375.82" endPos="390.82" friendlyPos="true" lines="208"/>
+    <busStop id="-1515967925" name="Солунская улица" lane="-673555993_0" startPos="869.60" endPos="884.60" friendlyPos="true" lines="208 85"/>
+    <busStop id="-258978" name="проспект Энергетиков, угол Магнитогорской улицы" lane="-597717245#0_0" startPos="150.58" endPos="165.58" friendlyPos="true" lines="123"/>
+    <busStop id="-3073013378" name="железнодорожная станция «Удельная»" lane="-673555993_0" startPos="100.45" endPos="115.45" friendlyPos="true" lines="208 85"/>
+    <busStop id="-3073013390" name="Репищева улица" lane="-28208222_0" startPos="45.60" endPos="60.60" friendlyPos="true" lines="208"/>
+    <busStop id="-3074424760" name="станция метро «Удельная»" lane="-458935333#0_0" startPos="284.14" endPos="299.14" friendlyPos="true" lines="208 85">
+        <access lane="142994906_0" pos="0.00" length="478.33" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3181027862" name="Центр имени Алмазова" lane="-673555993_0" startPos="474.61" endPos="489.61" friendlyPos="true" lines="208 85"/>
+    <busStop id="-3181027875" name="Стадион" lane="126565549_0" startPos="442.51" endPos="457.51" friendlyPos="true" lines="208 85"/>
+    <busStop id="-3400447898" name="улица Руднева (Придорожная аллея)" lane="-913797285#0_0" startPos="71.02" endPos="86.02" friendlyPos="true" lines="208 251">
+        <access lane="-680446777#0_0" pos="16.14" length="146.19" friendlyPos="1"/>
+        <access lane="-913797286_0" pos="59.83" length="170.38" friendlyPos="1"/>
+        <access lane="913797285#0_0" pos="50.82" length="6.29" friendlyPos="1"/>
+        <access lane="913797285#1_0" pos="0.00" length="118.18" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3400447900" name="проспект Художников" lane="-179534900#0_0" startPos="49.53" endPos="64.53" friendlyPos="true" lines="251">
+        <access lane="-913797284#1_0" pos="256.86" length="157.57" friendlyPos="1"/>
+        <access lane="913797283_0" pos="254.63" length="6.31" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3434609089" name="Выборгская улица" lane="-1353166327#0_0" startPos="6.46" endPos="21.46" friendlyPos="true" lines="86">
+        <access lane="156398280#2_0" pos="279.08" length="6.67" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2741.84" length="7.10" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3434609091" name="Нейшлотский переулок" lane="776175415_0" startPos="231.02" endPos="246.02" friendlyPos="true" lines="86">
+        <access lane="156398280#2_0" pos="581.63" length="6.75" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2438.99" length="6.89" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3434687931" name="улица Комиссара Смирнова" lane="-128178866#1_0" startPos="9.63" endPos="24.63" friendlyPos="true" lines="86">
+        <access lane="156398280#2_0" pos="0.00" length="72.81" friendlyPos="1"/>
+        <access lane="156398292#2_0" pos="484.35" length="6.28" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="3070.92" length="6.74" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3520380909" name="Придорожная аллея" lane="-680446778#0_0" startPos="32.01" endPos="47.01" friendlyPos="true" lines="208 251">
+        <access lane="154222987#1_0" pos="1865.39" length="117.61" friendlyPos="1"/>
+        <access lane="154225930#1_0" pos="0.00" length="91.90" friendlyPos="1"/>
+        <access lane="871967617_0" pos="45.32" length="21.31" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3520380928" name="улица Есенина" lane="-895243049#0_0" startPos="37.96" endPos="52.96" friendlyPos="true" lines="251">
+        <access lane="154329724_0" pos="140.23" length="314.24" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3533402601" name="улица Прокофьева, угол улицы Композиторов" lane="-85104151#0_0" startPos="93.22" endPos="108.22" friendlyPos="true" lines="86 123 80">
+        <access lane="-1282043622_0" pos="0.00" length="87.68" friendlyPos="1"/>
+        <access lane="1282043622_0" pos="30.02" length="92.43" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-3545265565" name="Глухарская улица, 5" lane="-198287566_0" startPos="261.78" endPos="276.78" friendlyPos="true" lines="85"/>
+    <busStop id="-3551741944" name="улица Шостаковича" lane="-1079101534#0_0" startPos="7.52" endPos="22.52" friendlyPos="true" lines="123 80"/>
+    <busStop id="-3551741978" name="улица Прокофьева" lane="144323566#1_0" startPos="317.49" endPos="332.49" friendlyPos="true" lines="123 80"/>
+    <busStop id="-3551741980" name="улица Симонова" lane="85104147#1_0" startPos="456.71" endPos="471.71" friendlyPos="true" lines="123 80"/>
+    <busStop id="-3564222502" name="Екатерининский проспект" lane="-697624204_0" startPos="8.67" endPos="23.67" friendlyPos="true" lines="123"/>
+    <busStop id="-3564222506" name="Ортопедический центр" lane="-241540522#0_0" startPos="18.95" endPos="33.95" friendlyPos="true" lines="123"/>
+    <busStop id="-3566457912" name="Бестужевская улица, 32" lane="-31371262_1" startPos="18.86" endPos="33.86" friendlyPos="true" lines="123"/>
+    <busStop id="-3569803782" name="Центральная улица" lane="-192501709#1_0" startPos="448.50" endPos="463.50" friendlyPos="true" lines="259"/>
+    <busStop id="-3569803786" name="железнодорожная платформа «Песочная»" lane="-872034842_0" startPos="7.47" endPos="22.47" friendlyPos="true" lines="259"/>
+    <busStop id="-6482395650" name="улица Ольги Форш" lane="-31386755#1_0" startPos="3.06" endPos="18.06" friendlyPos="true" lines="208"/>
+    <busStop id="-7589383958" name="Тимуровская улица, угол улицы Ушинского" lane="-200468550#5_0" startPos="11.78" endPos="26.78" friendlyPos="true" lines="208"/>
+    <busStop id="-7589671751" name="улица Брянцева" lane="-200468550#2_0" startPos="14.84" endPos="29.84" friendlyPos="true" lines="208"/>
+    <busStop id="-7589671754" name="Тимуровская улица, угол Светлановского проспекта" lane="-31386755#4_0" startPos="14.09" endPos="29.09" friendlyPos="true" lines="208"/>
+    <busStop id="-8073005310" name="Планерная улица, 71" lane="-1068757646_0" startPos="350.91" endPos="365.91" friendlyPos="true" lines="85"/>
+    <busStop id="-8128379440" name="проспект Авиаконструкторов" lane="-1204085744#0_0" startPos="17.85" endPos="32.85" friendlyPos="true" lines="85"/>
+    <busStop id="-8321524351" name="улица Есенина, угол Учебного переулка" lane="-1413141070#0_0" startPos="23.99" endPos="38.99" friendlyPos="true" lines="51 208 251">
+        <access lane="144904133#0_0" pos="0.00" length="38.85" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-8321524353" name="проспект Луначарского" lane="-350642227#1_0" startPos="21.77" endPos="36.77" friendlyPos="true" lines="51 251">
+        <access lane="154222995#5_0" pos="303.02" length="94.28" friendlyPos="1"/>
+        <access lane="154229528#1_0" pos="375.14" length="79.66" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-8321524355" name="Сиреневый бульвар" lane="-31364751#1_0" startPos="23.29" endPos="38.29" friendlyPos="true" lines="251"/>
+    <busStop id="-8321524357" name="улица Есенина, угол проспекта Просвещения" lane="-31401559#4_0" startPos="10.77" endPos="25.77" friendlyPos="true" lines="51 251"/>
+    <busStop id="-8321524358" name="Поэтический бульвар" lane="-31401559#1_0" startPos="9.20" endPos="24.20" friendlyPos="true" lines="51 251">
+        <access lane="143010424#2_0" pos="1132.41" length="605.45" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="334.12" length="591.38" friendlyPos="1"/>
+    </busStop>
+    <busStop id="-8750981363" name="Планерная улица" lane="-1204085744#0_0" startPos="315.77" endPos="330.77" friendlyPos="true" lines="85"/>
+    <busStop id="-9297303883" name="Проспект Мечникова, 11" lane="-1185933455#0_0" startPos="45.98" endPos="60.98" friendlyPos="true" lines="123"/>
+    <busStop id="-9893124203" name="Глухарская улица" lane="-198287566_0" startPos="21.86" endPos="36.86" friendlyPos="true" lines="85"/>
+    <busStop id="-9936971671" name="Поликлиника № 117" lane="-406599273#1_0" startPos="72.52" endPos="87.52" friendlyPos="true" lines="123 80">
+        <access lane="-406599272_0" pos="21.22" length="124.68" friendlyPos="1"/>
+        <access lane="406599272_0" pos="0.00" length="124.69" friendlyPos="1"/>
+    </busStop>
+    <busStop id="10066531054" name="Толубеевский проезд" lane="1444814175#1_0" startPos="0.00" endPos="0.10" friendlyPos="true" lines="51"/>
+    <busStop id="10185350596" name="проспект Тореза" lane="990965398#2_0" startPos="42.84" endPos="57.84" friendlyPos="true" lines="51"/>
+    <busStop id="10185350598" name="площадь Мужества" lane="990965398#2_0" startPos="87.21" endPos="102.21" friendlyPos="true"/>
+    <busStop id="10210119170" name="Придорожная аллея" lane="913797283_0" startPos="253.17" endPos="273.17" friendlyPos="true"/>
+    <trainStop id="10548507501" name="Земледельческая улица" lane="769970490#1_1" startPos="472.83" endPos="497.83" friendlyPos="true" lines="20"/>
+    <busStop id="10573495180" name="Новороссийская улица" lane="101549763#1_0" startPos="70.50" endPos="85.50" friendlyPos="true" lines="251"/>
+    <busStop id="10576986083" name="Придорожная аллея" lane="195919185#1_0" startPos="59.52" endPos="74.52" friendlyPos="true" lines="208 251">
+        <access lane="154222987#1_0" pos="1865.39" length="126.32" friendlyPos="1"/>
+        <access lane="154225930#1_0" pos="0.00" length="101.44" friendlyPos="1"/>
+        <access lane="871967617_0" pos="38.84" length="21.33" friendlyPos="1"/>
+    </busStop>
+    <busStop id="10718609198" name="железнодорожная станция «Пискарёвка»" lane="193651037_0" startPos="13.22" endPos="28.22" friendlyPos="true" lines="123 80">
+        <access lane="154234439#1_0" pos="0.00" length="85.04" friendlyPos="1"/>
+        <access lane="199761460#1_0" pos="2248.16" length="61.74" friendlyPos="1"/>
+        <access lane="878716661#0_0" pos="41.18" length="95.69" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="32.09" length="75.71" friendlyPos="1"/>
+    </busStop>
+    <busStop id="10780740891" name="станция метро «Политехническая»" lane="769136676#1_0" startPos="66.68" endPos="81.68" friendlyPos="true"/>
+    <busStop id="10780740893" name="станция метро «Политехническая»" lane="769400946#2_0" startPos="64.67" endPos="79.67" friendlyPos="true"/>
+    <busStop id="10870134697" name="вещевой рынок «Гражданский»" lane="198177506_0" startPos="514.33" endPos="529.33" friendlyPos="true" lines="272"/>
+    <busStop id="10870134702" name="проспект Луначарского" lane="1079108285_0" startPos="21.22" endPos="36.22" friendlyPos="true" lines="272"/>
+    <busStop id="11160222071" name="Социальный фонд" lane="31375389_0" startPos="33.26" endPos="48.26" friendlyPos="true" lines="85"/>
+    <busStop id="11160222073" name="Северный мост" lane="1194297805_0" startPos="56.78" endPos="71.78" friendlyPos="true" lines="270"/>
+    <trainStop id="11182739258" name="Боткинская улица" lane="330243163#1_1" startPos="344.53" endPos="369.53" friendlyPos="true" lines="20"/>
+    <busStop id="1179003314" name="проспект Художников, угол улицы Сикейроса" lane="193597262#1_0" startPos="29.84" endPos="44.84" friendlyPos="true" lines="270 123 80">
+        <access lane="131620418_0" pos="0.00" length="58.58" friendlyPos="1"/>
+        <access lane="230631729#2_0" pos="703.31" length="127.66" friendlyPos="1"/>
+    </busStop>
+    <busStop id="12034821054" name="Большой Сампсониевский проспект" lane="899896418#1_0" startPos="280.15" endPos="295.15" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="817.14" length="483.80" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2203.37" length="470.13" friendlyPos="1"/>
+    </busStop>
+    <busStop id="12211906067" name="Северный проспект, угол улицы Вавиловых" lane="194972638#0_0" startPos="109.32" endPos="124.32" friendlyPos="true" lines="270">
+        <access lane="194972639#1_0" pos="58.97" length="179.93" friendlyPos="1"/>
+        <access lane="822525113#0_0" pos="0.00" length="195.76" friendlyPos="1"/>
+        <access lane="822525113#1_0" pos="0.00" length="270.39" friendlyPos="1"/>
+    </busStop>
+    <busStop id="12211906068" name="Северный проспект, 65" lane="194972638#1_0" startPos="0.11" endPos="15.11" friendlyPos="true" lines="270"/>
+    <busStop id="1260727504" name="Репищева улица" lane="126808210_0" startPos="6.24" endPos="21.24" friendlyPos="true" lines="208"/>
+    <busStop id="12986619511" name="Городская многопрофильная больница № 2" lane="31365462#1_0" startPos="372.00" endPos="387.00" friendlyPos="true" lines="208"/>
+    <busStop id="13004840943" name="Светлановский проспект, угол Северного проспекта" lane="1047320310#1_0" startPos="23.39" endPos="38.39" friendlyPos="true" lines="51"/>
+    <busStop id="13004840944" name="Светлановский проспект, угол Северного проспекта" lane="198267161_0" startPos="59.27" endPos="74.27" friendlyPos="true" lines="51"/>
+    <busStop id="13158402567" name="станция метро «Ладожская»" lane="984064376_0" startPos="10.40" endPos="25.40" friendlyPos="true"/>
+    <busStop id="13158402568" name="станция метро «Ладожская»" lane="984064376_0" startPos="81.29" endPos="96.29" friendlyPos="true"/>
+    <busStop id="13158402569" name="станция метро «Ладожская»" lane="984064376_0" startPos="143.57" endPos="158.57" friendlyPos="true"/>
+    <busStop id="1387831244" name="Комендантский проспект, угол Шуваловского проспекта" lane="124801369#1_0" startPos="28.59" endPos="43.59" friendlyPos="true" lines="85">
+        <access lane="1451315287_0" pos="0.00" length="120.46" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1396341832" name="улица Софьи Ковалевской" lane="154232027#7_1" startPos="137.12" endPos="162.12" friendlyPos="true" lines="9"/>
+    <trainStop id="1448608892" name="станция метро «Лесная»" lane="157157014#1_1" startPos="394.49" endPos="419.49" friendlyPos="true" lines="20"/>
+    <trainStop id="1448608896" name="Лесной проспект" lane="157157014#1_1" startPos="38.65" endPos="63.65" friendlyPos="true" lines="20"/>
+    <busStop id="1456606423" name="Меншиковский проспект" lane="758110582_0" startPos="73.37" endPos="88.37" friendlyPos="true" lines="123 80">
+        <access lane="199761460#1_0" pos="1416.62" length="684.09" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="862.96" length="697.09" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1459626938" name="проспект Науки" lane="878716661#1_1" startPos="2228.05" endPos="2253.05" friendlyPos="true" lines="9"/>
+    <busStop id="1460613487" name="площадь Военных Медиков" lane="1341600583#1_0" startPos="334.01" endPos="349.01" friendlyPos="true" lines="86">
+        <access lane="157157014#1_0" pos="3550.00" length="530.38" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1564817467" name="проспект Луначарского" lane="143210210#1_1" startPos="861.95" endPos="886.95" friendlyPos="true" lines="21 20 9"/>
+    <trainStop id="1564817468" name="проспект Луначарского" lane="143010424#2_1" startPos="1428.49" endPos="1453.49" friendlyPos="true" lines="21"/>
+    <trainStop id="1564817470" name="станция метро «Проспект Просвещения»" lane="143010424#2_1" startPos="347.06" endPos="372.06" friendlyPos="true" lines="21"/>
+    <trainStop id="1564817486" name="улица Асафьева" lane="143010425#2_1" startPos="336.24" endPos="361.24" friendlyPos="true" lines="21"/>
+    <trainStop id="1564817487" name="улица Асафьева" lane="143010424#2_1" startPos="1047.41" endPos="1072.41" friendlyPos="true" lines="21"/>
+    <trainStop id="1564817490" name="станция метро «Проспект Просвещения»" lane="143010425#2_1" startPos="978.37" endPos="1003.37" friendlyPos="true" lines="21"/>
+    <trainStop id="1566701607" name="набережная Чёрной речки" lane="781386894_1" startPos="3464.04" endPos="3489.04" friendlyPos="true" lines="21"/>
+    <trainStop id="1566791612" name="Большой Сампсониевский проспект" lane="781386894_1" startPos="5099.93" endPos="5124.93" friendlyPos="true" lines="21"/>
+    <trainStop id="1566791627" name="Торжковский рынок" lane="781386894_1" startPos="4153.70" endPos="4178.70" friendlyPos="true" lines="21"/>
+    <trainStop id="1566791631" name="проспект Пархоменко" lane="142986932#0_1" startPos="496.58" endPos="521.58" friendlyPos="true" lines="21 20"/>
+    <trainStop id="1566791650" name="железнодорожная станция «Ланская»" lane="781386894_1" startPos="4792.16" endPos="4817.16" friendlyPos="true" lines="21"/>
+    <busStop id="1566844185" name="проспект Пархоменко" lane="769970514#1_0" startPos="11.59" endPos="26.59" friendlyPos="true" lines="86">
+        <access lane="142982042#5_0" pos="495.72" length="15.41" friendlyPos="1"/>
+        <access lane="142986932#0_0" pos="570.03" length="0.65" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1567006945" name="Дрезденская улица" lane="187230874#1_0" startPos="55.13" endPos="70.13" friendlyPos="true" lines="86">
+        <access lane="1183496174#1_0" pos="416.23" length="13.03" friendlyPos="1"/>
+        <access lane="142994346#2_0" pos="1019.71" length="0.81" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1567006947" name="Енотаевская улица" lane="142994346#2_1" startPos="1361.44" endPos="1386.44" friendlyPos="true" lines="21 20"/>
+    <trainStop id="1567006959" name="Манчестерская улица" lane="142994346#2_1" startPos="687.62" endPos="712.62" friendlyPos="true" lines="21 20"/>
+    <busStop id="1567006961" name="Манчестерская улица" lane="161777264#1_0" startPos="10.91" endPos="25.91" friendlyPos="true" lines="86">
+        <access lane="1183496174#1_0" pos="682.67" length="12.29" friendlyPos="1"/>
+        <access lane="142994346#2_0" pos="753.28" length="1.51" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1567006962" name="Удельный парк" lane="142994346#2_1" startPos="71.76" endPos="96.76" friendlyPos="true" lines="21 20"/>
+    <busStop id="1567006964" name="Удельный парк" lane="769970522#3_0" startPos="16.82" endPos="31.82" friendlyPos="true" lines="86">
+        <access lane="1183496174#1_0" pos="1304.56" length="13.78" friendlyPos="1"/>
+        <access lane="142982042#5_0" pos="0.00" length="197.54" friendlyPos="1"/>
+        <access lane="142986932#0_0" pos="1065.71" length="197.08" friendlyPos="1"/>
+        <access lane="142994346#2_0" pos="131.38" length="0.03" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1567056881" name="Елецкая улица" lane="187230874#3_0" startPos="82.14" endPos="97.14" friendlyPos="true" lines="86">
+        <access lane="1183496172#0_0" pos="0.00" length="52.26" friendlyPos="1"/>
+        <access lane="1183496173#2_0" pos="0.20" length="59.88" friendlyPos="1"/>
+        <access lane="1183496174#0_0" pos="0.00" length="50.62" friendlyPos="1"/>
+        <access lane="142994912#0_0" pos="29.99" length="0.81" friendlyPos="1"/>
+        <access lane="706489492#10_0" pos="83.96" length="13.10" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1567056885" name="Рашетова улица" lane="142994912#2_1" startPos="214.24" endPos="239.24" friendlyPos="true" lines="21 20 9"/>
+    <busStop id="1567210080" name="Олонецкая улица" lane="194972656#1_1" startPos="255.17" endPos="270.17" friendlyPos="true" lines="208 86 85"/>
+    <trainStop id="1567210099" name="Олонецкая улица" lane="142994912#2_1" startPos="536.26" endPos="561.26" friendlyPos="true" lines="21 20 9"/>
+    <trainStop id="1567210114" name="Поклонная гора" lane="142994912#8_1" startPos="135.61" endPos="160.61" friendlyPos="true" lines="21 20 9"/>
+    <busStop id="1567210131" name="Поклонная гора" lane="327576191#2_0" startPos="1.35" endPos="16.35" friendlyPos="true" lines="208 86 85">
+        <access lane="131620419#9_0" pos="9.15" length="10.21" friendlyPos="1"/>
+        <access lane="131620461#4_0" pos="0.20" length="18.83" friendlyPos="1"/>
+        <access lane="131620461#5_0" pos="0.20" length="18.51" friendlyPos="1"/>
+        <access lane="131620461#6_0" pos="0.00" length="19.07" friendlyPos="1"/>
+        <access lane="142994912#9_0" pos="8.75" length="7.42" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1567210134" name="Поклонная гора" lane="706489492#2_1" startPos="137.44" endPos="162.44" friendlyPos="true" lines="20 9 21"/>
+    <busStop id="1567210136" name="улица Есенина, угол улицы Сикейроса" lane="1112134939#1_0" startPos="20.69" endPos="35.69" friendlyPos="true" lines="208 270 123 80">
+        <access lane="-229843824#1_0" pos="18.02" length="42.91" friendlyPos="1"/>
+        <access lane="131620421#6_0" pos="57.77" length="45.36" friendlyPos="1"/>
+        <access lane="131620421#7_0" pos="18.03" length="20.88" friendlyPos="1"/>
+        <access lane="144919194#1_0" pos="123.22" length="38.75" friendlyPos="1"/>
+        <access lane="82827665#1_0" pos="58.65" length="29.00" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1567210154" name="Рашетова улица" lane="194972656#1_1" startPos="10.82" endPos="25.82" friendlyPos="true" lines="208 86 85"/>
+    <busStop id="1567210171" name="улица Сикейроса, угол проспекта Энгельса" lane="1112134922#1_0" startPos="1.19" endPos="16.19" friendlyPos="true" lines="208 272 270 123 80">
+        <access lane="-82829498#1_0" pos="0.31" length="21.85" friendlyPos="1"/>
+        <access lane="-82829498#2_0" pos="63.41" length="27.23" friendlyPos="1"/>
+        <access lane="131620419#17_0" pos="8.70" length="8.57" friendlyPos="1"/>
+        <access lane="131620430#3_0" pos="7.87" length="19.55" friendlyPos="1"/>
+        <access lane="82829498#1_0" pos="0.00" length="26.38" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1567256712" name="станция метро «Озерки»" lane="1079110793#1_0" startPos="30.77" endPos="45.77" friendlyPos="true" lines="270 86 123 80">
+        <access lane="131620457#3_0" pos="24.55" length="86.53" friendlyPos="1"/>
+        <access lane="143210210#1_0" pos="72.44" length="11.15" friendlyPos="1"/>
+        <access lane="154229527#0_0" pos="828.73" length="24.96" friendlyPos="1"/>
+        <access lane="380470383_0" pos="98.27" length="99.04" friendlyPos="1"/>
+        <access lane="84898479#1_0" pos="0.00" length="114.30" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1567256741" name="станция метро «Озерки»" lane="143210210#1_1" startPos="91.74" endPos="116.74" friendlyPos="true" lines="21 20 9"/>
+    <busStop id="1568718438" name="станция метро «Озерки»" lane="1085753086#1_0" startPos="45.98" endPos="60.98" friendlyPos="true" lines="272 270 123 80 86 85">
+        <access lane="131620457#3_0" pos="24.55" length="107.67" friendlyPos="1"/>
+        <access lane="143210210#1_0" pos="71.92" length="24.95" friendlyPos="1"/>
+        <access lane="154229527#0_0" pos="829.24" length="11.14" friendlyPos="1"/>
+        <access lane="154229527#1_0" pos="0.00" length="120.40" friendlyPos="1"/>
+        <access lane="380470383_0" pos="98.27" length="113.84" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1568718443" name="станция метро «Озерки»" lane="154229527#0_1" startPos="840.26" endPos="865.26" friendlyPos="true" lines="20 9 21"/>
+    <busStop id="1568718451" name="станция метро «Озерки»" lane="759797002_0" startPos="22.83" endPos="37.83" friendlyPos="true" lines="259 85">
+        <access lane="-101085459#3_0" pos="0.00" length="188.00" friendlyPos="1"/>
+        <access lane="101085301#1_0" pos="140.57" length="55.56" friendlyPos="1"/>
+        <access lane="101085352_0" pos="31.97" length="193.62" friendlyPos="1"/>
+        <access lane="101085459#3_0" pos="7.14" length="185.22" friendlyPos="1"/>
+        <access lane="101085476_0" pos="141.02" length="48.73" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1568835869" name="Олонецкая улица" lane="773805391#1_1" startPos="14.22" endPos="29.22" friendlyPos="true" lines="208 86 85"/>
+    <trainStop id="1568835871" name="Олонецкая улица" lane="706489492#6_1" startPos="609.10" endPos="634.10" friendlyPos="true" lines="20 9 21"/>
+    <trainStop id="1568835873" name="Елецкая улица" lane="706489492#10_1" startPos="25.85" endPos="50.85" friendlyPos="true" lines="20 9 21"/>
+    <busStop id="1568835874" name="Поклонная гора" lane="142997518#1_0" startPos="14.32" endPos="29.32" friendlyPos="true" lines="208 86 85">
+        <access lane="101085369#1_0" pos="9.13" length="24.17" friendlyPos="1"/>
+        <access lane="131620420#4_0" pos="35.72" length="15.60" friendlyPos="1"/>
+        <access lane="131620420#5_0" pos="0.00" length="25.68" friendlyPos="1"/>
+        <access lane="414530643_0" pos="1.19" length="25.45" friendlyPos="1"/>
+        <access lane="706489492#3_0" pos="21.55" length="11.94" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1568835876" name="Рашетова улица" lane="949609183#1_0" startPos="17.60" endPos="32.60" friendlyPos="true" lines="208 86 85">
+        <access lane="142994912#2_0" pos="222.57" length="14.53" friendlyPos="1"/>
+        <access lane="194972656#1_0" pos="0.00" length="70.22" friendlyPos="1"/>
+        <access lane="706489492#7_0" pos="350.37" length="0.71" friendlyPos="1"/>
+        <access lane="773805391#1_0" pos="305.84" length="67.17" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1568835880" name="Рашетова улица" lane="706489492#7_1" startPos="262.13" endPos="287.13" friendlyPos="true" lines="20 9 21"/>
+    <busStop id="1568857745" name="Дрезденская улица" lane="773805382#1_0" startPos="152.97" endPos="167.97" friendlyPos="true" lines="86">
+        <access lane="1183496174#1_0" pos="408.96" length="0.60" friendlyPos="1"/>
+        <access lane="142994346#2_0" pos="1026.99" length="13.25" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1568857747" name="Манчестерская улица" lane="1499844366#1_0" startPos="14.22" endPos="29.22" friendlyPos="true" lines="86">
+        <access lane="1183496174#1_0" pos="744.42" length="0.17" friendlyPos="1"/>
+        <access lane="142994346#2_0" pos="691.51" length="13.64" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1568857753" name="Манчестерская улица" lane="1183496174#1_1" startPos="674.52" endPos="699.52" friendlyPos="true" lines="20 21"/>
+    <trainStop id="1568857759" name="Удельный парк" lane="1183496174#1_1" startPos="1251.20" endPos="1276.20" friendlyPos="true" lines="20 21"/>
+    <busStop id="1568857770" name="Удельный парк" lane="552045023#1_0" startPos="5.97" endPos="20.97" friendlyPos="true" lines="86">
+        <access lane="1183496174#1_0" pos="1342.61" length="0.11" friendlyPos="1"/>
+        <access lane="142982042#5_0" pos="0.00" length="139.98" friendlyPos="1"/>
+        <access lane="142986932#0_0" pos="1065.71" length="140.69" friendlyPos="1"/>
+        <access lane="142994346#2_0" pos="93.33" length="13.93" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1568857773" name="Енотаевская улица" lane="1189402238#1_0" startPos="25.19" endPos="40.19" friendlyPos="true" lines="86">
+        <access lane="1183496172#1_0" pos="1.32" length="110.52" friendlyPos="1"/>
+        <access lane="1183496173#1_0" pos="0.00" length="110.05" friendlyPos="1"/>
+        <access lane="1183496174#1_0" pos="68.03" length="0.86" friendlyPos="1"/>
+        <access lane="142994346#2_0" pos="1367.92" length="13.06" friendlyPos="1"/>
+        <access lane="142994906_0" pos="6.58" length="96.94" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1568937307" name="набережная Чёрной речки" lane="142986938#1_1" startPos="1678.50" endPos="1703.50" friendlyPos="true" lines="21"/>
+    <trainStop id="1568937309" name="Новосибирская улица" lane="142986938#1_1" startPos="1303.53" endPos="1328.53" friendlyPos="true" lines="21"/>
+    <busStop id="1568937311" name="Торжковский рынок" lane="142986938#1_1" startPos="884.60" endPos="909.60" friendlyPos="true" lines="21"/>
+    <busStop id="1568937313" name="проспект Пархоменко" lane="769970510#1_0" startPos="9.38" endPos="24.38" friendlyPos="true" lines="86">
+        <access lane="142982042#5_0" pos="551.20" length="1.81" friendlyPos="1"/>
+        <access lane="142986932#0_0" pos="514.48" length="15.47" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="1568937315" name="проспект Пархоменко" lane="142982042#5_1" startPos="488.43" endPos="513.43" friendlyPos="true" lines="20 21"/>
+    <trainStop id="1568937316" name="железнодорожная станция «Ланская»" lane="142986938#1_1" startPos="59.12" endPos="84.12" friendlyPos="true" lines="21"/>
+    <busStop id="1572125390" name="проспект Художников, угол проспекта Просвещения" lane="89939218#1_0" startPos="30.28" endPos="45.28" friendlyPos="true" lines="208"/>
+    <busStop id="1586068612" name="станция метро «Ладожская»" lane="365249853#1_0" startPos="31.64" endPos="46.64" friendlyPos="true" lines="123">
+        <access lane="1159852780#0_0" pos="0.00" length="80.25" friendlyPos="1"/>
+        <access lane="1159852780#1_0" pos="0.00" length="114.99" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1586327328" name="станция метро «Ладожская»" lane="41290859_0" startPos="103.40" endPos="118.40" friendlyPos="true" lines="123"/>
+    <trainStop id="1618034850" name="станция метро «Удельная»" lane="142994906_1" startPos="0.00" endPos="9.15" friendlyPos="true" lines="9"/>
+    <busStop id="1624727378" name="станция метро «Ладожская»" lane="984064376_0" startPos="121.28" endPos="136.28" friendlyPos="true"/>
+    <trainStop id="1667842717" name="Светлановский проспект" lane="154217752#1_1" startPos="150.93" endPos="175.93" friendlyPos="true" lines="9"/>
+    <trainStop id="1667850943" name="парк «Сосновка»" lane="154217764#1_1" startPos="698.93" endPos="723.93" friendlyPos="true" lines="9"/>
+    <trainStop id="1667850970" name="парк «Сосновка»" lane="154223001#3_1" startPos="456.85" endPos="481.85" friendlyPos="true" lines="9"/>
+    <trainStop id="1667851036" name="улица Академика Байкова" lane="154217764#3_1" startPos="449.49" endPos="474.49" friendlyPos="true" lines="9"/>
+    <trainStop id="1667851043" name="улица Академика Байкова" lane="154223001#2_1" startPos="225.82" endPos="250.82" friendlyPos="true" lines="9"/>
+    <trainStop id="1667861027" name="проспект Культуры" lane="154229521#5_1" startPos="346.24" endPos="371.24" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667907617" name="проспект Энгельса" lane="154222995#5_1" startPos="626.85" endPos="651.85" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667907673" name="проспект Художников" lane="154222995#2_1" startPos="311.91" endPos="336.91" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667907675" name="проспект Художников" lane="154229521#1_1" startPos="383.04" endPos="408.04" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667907703" name="Детская музыкальная школа" lane="154222995#4_1" startPos="391.99" endPos="416.99" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667907704" name="Детская музыкальная школа" lane="154229528#1_1" startPos="653.97" endPos="678.97" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667907711" name="улица Есенина" lane="154222995#5_1" startPos="257.92" endPos="282.92" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667909528" name="улица Есенина" lane="154229528#1_1" startPos="333.47" endPos="358.47" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667909541" name="улица Руднева" lane="154229521#4_1" startPos="352.60" endPos="377.60" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667909543" name="улица Руднева" lane="154222995#0_1" startPos="348.21" endPos="373.21" friendlyPos="true" lines="20 9"/>
+    <trainStop id="1667947124" name="проспект Науки" lane="199761460#1_1" startPos="43.88" endPos="68.88" friendlyPos="true" lines="9"/>
+    <trainStop id="1667947140" name="проспект Мечникова" lane="154234439#1_1" startPos="35.49" endPos="60.49" friendlyPos="true" lines="9"/>
+    <trainStop id="1667947162" name="проспект Непокорённых" lane="199761460#1_1" startPos="1420.64" endPos="1445.64" friendlyPos="true" lines="9"/>
+    <trainStop id="1667947206" name="улица Верности" lane="199761460#1_1" startPos="642.64" endPos="667.64" friendlyPos="true" lines="9"/>
+    <trainStop id="1667947209" name="улица Верности" lane="878716661#1_1" startPos="1640.93" endPos="1665.93" friendlyPos="true" lines="9"/>
+    <trainStop id="1667968764" name="станция метро «Академическая»" lane="154232027#7_1" startPos="822.05" endPos="847.05" friendlyPos="true" lines="9"/>
+    <trainStop id="1667968768" name="станция метро «Академическая»" lane="154217753#6_1" startPos="421.62" endPos="446.62" friendlyPos="true" lines="9"/>
+    <trainStop id="1667968773" name="улица Обручевых" lane="154232027#14_1" startPos="483.74" endPos="508.74" friendlyPos="true" lines="9"/>
+    <trainStop id="1667968795" name="улица Обручевых" lane="768738669#1_1" startPos="756.07" endPos="781.07" friendlyPos="true" lines="9"/>
+    <trainStop id="1669451617" name="улица Оскаленко" lane="781386894_1" startPos="1839.56" endPos="1864.56" friendlyPos="true" lines="21"/>
+    <trainStop id="1669454151" name="станция метро «Чёрная речка»" lane="142986938#1_1" startPos="2144.95" endPos="2169.95" friendlyPos="true" lines="21"/>
+    <trainStop id="1683477216" name="проспект Науки, 10" lane="768738669#1_1" startPos="1288.40" endPos="1313.40" friendlyPos="true" lines="9"/>
+    <trainStop id="1683495667" name="улица Софьи Ковалевской" lane="154217753#6_1" startPos="1093.67" endPos="1118.67" friendlyPos="true" lines="9"/>
+    <trainStop id="1686550559" name="улица Комиссара Смирнова" lane="156398292#2_1" startPos="473.26" endPos="498.26" friendlyPos="true" lines="20"/>
+    <trainStop id="1686550563" name="улица Комиссара Смирнова" lane="157157014#1_1" startPos="2971.12" endPos="2996.12" friendlyPos="true" lines="20"/>
+    <trainStop id="1686550576" name="Нейшлотский переулок" lane="156398280#2_1" startPos="497.63" endPos="522.63" friendlyPos="true" lines="20"/>
+    <trainStop id="1686550577" name="Нейшлотский переулок" lane="157157014#1_1" startPos="2429.67" endPos="2454.67" friendlyPos="true" lines="20"/>
+    <trainStop id="1693776212" name="станция метро «Лесная»" lane="156398280#2_1" startPos="2630.89" endPos="2655.89" friendlyPos="true" lines="20"/>
+    <trainStop id="1693776215" name="1-й Муринский проспект" lane="156398280#2_1" startPos="2977.86" endPos="3002.86" friendlyPos="true" lines="20"/>
+    <trainStop id="1727753141" name="Стародеревенская улица" lane="781386894_1" startPos="0.00" endPos="25.00" friendlyPos="true" lines="21"/>
+    <trainStop id="1727753169" name="Стародеревенская улица" lane="142986938#1_1" startPos="5150.81" endPos="5175.81" friendlyPos="true" lines="21"/>
+    <trainStop id="1728127717" name="проспект Науки" lane="154223001#6_1" startPos="110.61" endPos="135.61" friendlyPos="true"/>
+    <trainStop id="1728137193" name="Придорожная аллея" lane="154329724_1" startPos="58.63" endPos="83.63" friendlyPos="true" lines="21"/>
+    <trainStop id="1728137196" name="улица Шостаковича" lane="143010425#2_1" startPos="1437.31" endPos="1462.31" friendlyPos="true" lines="21"/>
+    <trainStop id="1728137198" name="улица Шостаковича" lane="143010424#1_1" startPos="28.46" endPos="53.46" friendlyPos="true" lines="21"/>
+    <trainStop id="1728154137" name="Сердобольская улица" lane="157157030#1_1" startPos="1034.53" endPos="1059.53" friendlyPos="true" lines="20"/>
+    <trainStop id="1728158343" name="Большой Сампсониевский проспект" lane="157157030#1_1" startPos="320.18" endPos="345.18" friendlyPos="true" lines="20"/>
+    <trainStop id="1728158349" name="1-й Муринский проспект" lane="142986933#4_1" startPos="18.72" endPos="43.72" friendlyPos="true" lines="20"/>
+    <trainStop id="1728183652" name="улица Александра Матросова" lane="156398280#2_1" startPos="2150.85" endPos="2175.85" friendlyPos="true" lines="20"/>
+    <trainStop id="1728186283" name="Литовская улица" lane="156398280#2_1" startPos="1557.87" endPos="1582.87" friendlyPos="true" lines="20"/>
+    <trainStop id="1728189206" name="станция метро «Выборгская»" lane="157157014#1_1" startPos="2079.17" endPos="2104.17" friendlyPos="true" lines="20"/>
+    <trainStop id="1728189213" name="станция метро «Выборгская»" lane="156398280#2_1" startPos="923.67" endPos="948.67" friendlyPos="true" lines="20"/>
+    <trainStop id="1728214361" name="Боткинская улица" lane="157157014#1_1" startPos="3522.77" endPos="3547.77" friendlyPos="true" lines="20"/>
+    <trainStop id="1728214364" name="Финляндский вокзал" lane="330243163#1_1" startPos="149.84" endPos="174.84" friendlyPos="true" lines="20"/>
+    <trainStop id="1833974123" name="Литовская улица" lane="157157014#1_1" startPos="1378.78" endPos="1403.78" friendlyPos="true" lines="20"/>
+    <busStop id="1902669378" name="станция метро «Проспект Просвещения»" lane="179839023#1_0" startPos="29.41" endPos="44.41" friendlyPos="true">
+        <access lane="143010424#2_0" pos="497.68" length="8.41" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="968.64" length="21.88" friendlyPos="1"/>
+    </busStop>
+    <busStop id="1902669380" name="проспект Энгельса, угол улицы Михаила Дудина" lane="571674185_0" startPos="17.91" endPos="32.91" friendlyPos="true" lines="51"/>
+    <trainStop id="2097549244" name="проспект Науки" lane="768738669#1_1" startPos="74.24" endPos="99.24" friendlyPos="true" lines="9"/>
+    <trainStop id="2097549245" name="Тихорецкий проспект" lane="154232027#14_1" startPos="1275.66" endPos="1300.66" friendlyPos="true" lines="9"/>
+    <trainStop id="2097549247" name="проспект Науки, 73" lane="154232027#1_1" startPos="242.70" endPos="267.70" friendlyPos="true" lines="9"/>
+    <trainStop id="2097549541" name="улица Карпинского" lane="154232027#2_1" startPos="446.88" endPos="471.88" friendlyPos="true" lines="9"/>
+    <trainStop id="2097549542" name="улица Карпинского" lane="154217753#15_1" startPos="172.83" endPos="197.83" friendlyPos="true" lines="9"/>
+    <busStop id="2226240634" name="площадь Сикорского" lane="122317589_1" startPos="29.04" endPos="44.04" friendlyPos="true" lines="85"/>
+    <trainStop id="2514789656" name="ЦПКиО" lane="781386894_1" startPos="625.64" endPos="650.64" friendlyPos="true" lines="21"/>
+    <trainStop id="2514789657" name="ЦПКиО" lane="142986938#1_1" startPos="4430.00" endPos="4455.00" friendlyPos="true" lines="21"/>
+    <trainStop id="2521966457" name="станция метро «Чёрная речка»" lane="781386894_1" startPos="3133.35" endPos="3158.35" friendlyPos="true" lines="21"/>
+    <trainStop id="2521970928" name="Серебряков переулок" lane="781386894_1" startPos="1406.10" endPos="1431.10" friendlyPos="true" lines="21"/>
+    <trainStop id="2521970932" name="Серебряков переулок" lane="142986938#1_1" startPos="3646.07" endPos="3671.07" friendlyPos="true" lines="21"/>
+    <trainStop id="2521970938" name="улица Академика Шиманского" lane="781386894_1" startPos="2371.86" endPos="2396.86" friendlyPos="true" lines="21"/>
+    <trainStop id="2521970941" name="улица Оскаленко" lane="142986938#1_1" startPos="3230.94" endPos="3255.94" friendlyPos="true" lines="21"/>
+    <trainStop id="2521972886" name="улица Покрышева" lane="781386894_1" startPos="1082.23" endPos="1107.23" friendlyPos="true" lines="21"/>
+    <trainStop id="2521972887" name="улица Покрышева" lane="142986938#1_1" startPos="3978.73" endPos="4003.73" friendlyPos="true" lines="21"/>
+    <busStop id="2946610392" name="станция метро «Проспект Просвещения»" lane="265574285#1_0" startPos="77.56" endPos="92.56" friendlyPos="true" lines="259">
+        <access lane="143010424#2_0" pos="431.88" length="149.72" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="1035.55" length="163.21" friendlyPos="1"/>
+    </busStop>
+    <busStop id="2972473023" name="станция метро «Площадь Ленина»" lane="1109755811_0" startPos="60.62" endPos="75.62" friendlyPos="true" lines="86">
+        <access lane="156398292#1_0" pos="22.72" length="155.10" friendlyPos="1"/>
+        <access lane="156398292#2_0" pos="102.56" length="14.10" friendlyPos="1"/>
+        <access lane="156411584#6_0" pos="0.00" length="154.77" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="3447.06" length="1.43" friendlyPos="1"/>
+        <access lane="330243163#1_0" pos="385.35" length="179.91" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="297685767" name="проспект Мечникова" lane="878716661#0_1" startPos="0.00" endPos="25.00" friendlyPos="true" lines="9"/>
+    <busStop id="3056919459" name="Объединение «Русские самоцветы»" lane="597707301_0" startPos="91.40" endPos="106.40" friendlyPos="true" lines="123"/>
+    <busStop id="3056919461" name="Объединение «Русские самоцветы»" lane="132387624_0" startPos="209.68" endPos="224.68" friendlyPos="true" lines="123"/>
+    <busStop id="3058584983" name="Вербная улица" lane="343513742#1_0" startPos="9.35" endPos="24.35" friendlyPos="true" lines="208"/>
+    <busStop id="3058584985" name="Байконурская улица" lane="83689326_0" startPos="21.73" endPos="36.73" friendlyPos="true" lines="208 85">
+        <access lane="1436571875_0" pos="54.71" length="49.10" friendlyPos="1"/>
+        <access lane="1436571878_0" pos="44.48" length="31.83" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3058584987" name="Байконурская улица" lane="1436571877_0" startPos="6.57" endPos="21.57" friendlyPos="true" lines="208 85">
+        <access lane="1436571875_0" pos="21.82" length="32.34" friendlyPos="1"/>
+        <access lane="1436571878_0" pos="92.75" length="27.07" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3058584991" name="Коломяжский проспект, угол Парашютной улицы" lane="625666065_0" startPos="17.12" endPos="32.12" friendlyPos="true" lines="208 85"/>
+    <busStop id="3058584992" name="Серебристый бульвар" lane="192292873#1_0" startPos="6.15" endPos="21.15" friendlyPos="true" lines="208 85"/>
+    <busStop id="3058584995" name="Серебристый бульвар" lane="625663519#1_0" startPos="17.92" endPos="32.92" friendlyPos="true" lines="208 85"/>
+    <busStop id="3058638346" name="Светлановский проспект" lane="772987368#1_0" startPos="18.33" endPos="33.33" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3060887718" name="станция метро «Выборгская»" lane="847806646#1_0" startPos="359.27" endPos="374.27" friendlyPos="true">
+        <access lane="156398280#2_0" pos="997.81" length="72.08" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2022.15" length="57.11" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3060887720" name="Гренадерская улица" lane="899896418#1_0" startPos="39.13" endPos="54.13" friendlyPos="true">
+        <access lane="156398280#2_0" pos="844.91" length="125.74" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2176.02" length="112.12" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3066602815" name="проспект Энергетиков, 46" lane="31400681#2_0" startPos="6.92" endPos="21.92" friendlyPos="true" lines="123"/>
+    <busStop id="3066602819" name="улица Стасовой" lane="901368151_0" startPos="13.26" endPos="28.26" friendlyPos="true" lines="123"/>
+    <busStop id="3066602824" name="шоссе Революции" lane="1203813561_0" startPos="15.93" endPos="30.93" friendlyPos="true" lines="123"/>
+    <busStop id="3066602825" name="проспект Энергетиков, 46" lane="31377846#2_0" startPos="7.23" endPos="22.23" friendlyPos="true" lines="123"/>
+    <busStop id="3071914455" name="Замшина улица" lane="184011342#1_0" startPos="17.34" endPos="32.34" friendlyPos="true" lines="123"/>
+    <busStop id="3071914457" name="железнодорожная станция «Пискарёвка»" lane="414848004_0" startPos="59.23" endPos="74.23" friendlyPos="true" lines="123">
+        <access lane="154234439#1_0" pos="0.00" length="117.78" friendlyPos="1"/>
+        <access lane="199761460#1_0" pos="2224.51" length="77.64" friendlyPos="1"/>
+        <access lane="878716661#0_0" pos="41.18" length="127.97" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="58.87" length="91.32" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3071914463" name="Бестужевская улица" lane="193651034#1_0" startPos="14.29" endPos="29.29" friendlyPos="true" lines="123"/>
+    <busStop id="3071914479" name="Замшина улица" lane="31397765#1_0" startPos="10.32" endPos="25.32" friendlyPos="true" lines="123"/>
+    <busStop id="3073013376" name="улица Аккуратова, угол Афонской улицы" lane="126565549_0" startPos="927.53" endPos="942.53" friendlyPos="true" lines="208 85"/>
+    <busStop id="3073013381" name="железнодорожная станция «Удельная»" lane="32705758_0" startPos="21.66" endPos="36.66" friendlyPos="true" lines="208 85"/>
+    <busStop id="3073013389" name="Вербная улица" lane="31397172#1_0" startPos="17.16" endPos="32.16" friendlyPos="true" lines="208"/>
+    <busStop id="3073013393" name="улица Щербакова" lane="31397172#1_0" startPos="375.92" endPos="390.92" friendlyPos="true" lines="208">
+        <access lane="267362155_0" pos="0.00" length="169.47" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3073013394" name="улица Щербакова" lane="333582205#1_0" startPos="10.32" endPos="25.32" friendlyPos="true" lines="208">
+        <access lane="-28208222_0" pos="326.54" length="133.86" friendlyPos="1"/>
+        <access lane="267362155_0" pos="0.00" length="79.08" friendlyPos="1"/>
+        <access lane="80243458_0" pos="0.00" length="133.88" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3074424761" name="станция метро «Удельная»" lane="102861793_0" startPos="164.81" endPos="179.81" friendlyPos="true" lines="208 85">
+        <access lane="142994906_0" pos="0.00" length="552.26" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3076124786" name="проспект Непокорённых, 6" lane="31366034#1_0" startPos="11.70" endPos="26.70" friendlyPos="true" lines="123 80"/>
+    <busStop id="3076124787" name="проспект Непокорённых, угол Гражданского проспекта" lane="245831211#0_0" startPos="17.55" endPos="32.55" friendlyPos="true" lines="123 80"/>
+    <busStop id="3076124789" name="проспект Непокорённых, станция метро «Площадь Мужества»" lane="31366034#0_0" startPos="0.00" endPos="15.00" friendlyPos="true" lines="123 80"/>
+    <busStop id="3076124790" name="проспект Непокорённых, 6" lane="245831211#1_0" startPos="15.60" endPos="30.60" friendlyPos="true" lines="123 80"/>
+    <busStop id="3076124791" name="проспект Непокорённых, станция метро «Площадь Мужества»" lane="245831211#1_0" startPos="339.49" endPos="354.49" friendlyPos="true" lines="123 80"/>
+    <busStop id="3076229178" name="Гражданский проспект, угол Северного проспекта" lane="31398253_0" startPos="100.17" endPos="115.17" friendlyPos="true" lines="270"/>
+    <busStop id="3076229185" name="Гражданский проспект" lane="770344813#0_0" startPos="30.14" endPos="45.14" friendlyPos="true"/>
+    <busStop id="3076229194" name="проспект Просвещения, угол улицы Ушинского" lane="144529123#1_0" startPos="1.88" endPos="16.88" friendlyPos="true" lines="208"/>
+    <busStop id="3076229197" name="Тимуровская улица" lane="195870630#1_0" startPos="2.82" endPos="17.82" friendlyPos="true" lines="208"/>
+    <busStop id="3076229204" name="улица Ушинского" lane="194972652#1_0" startPos="20.93" endPos="35.93" friendlyPos="true" lines="272"/>
+    <busStop id="3076229205" name="улица Ушинского, угол Суздальского проспекта" lane="195870630#1_0" startPos="328.16" endPos="343.16" friendlyPos="true"/>
+    <busStop id="3076229207" name="Тимуровская улица" lane="144529123#1_0" startPos="472.88" endPos="487.88" friendlyPos="true"/>
+    <busStop id="3076247688" name="проспект Культуры" lane="1187709720#1_0" startPos="488.68" endPos="503.68" friendlyPos="true" lines="208"/>
+    <busStop id="3076247691" name="проспект Культуры" lane="680446780#1_0" startPos="19.20" endPos="34.20" friendlyPos="true" lines="208"/>
+    <busStop id="3076247693" name="Суздальский проспект, угол улицы Демьяна Бедного" lane="1187709720#1_0" startPos="29.31" endPos="44.31" friendlyPos="true" lines="208"/>
+    <busStop id="3394925571" name="Центр имени Алмазова" lane="126565549_0" startPos="698.04" endPos="713.04" friendlyPos="true" lines="208 85"/>
+    <busStop id="3400369540" name="станция метро «Гражданский проспект»" lane="1047314586#1_0" startPos="10.38" endPos="25.38" friendlyPos="true" lines="208"/>
+    <busStop id="3401287615" name="проспект Художников" lane="913797284#1_0" startPos="11.21" endPos="26.21" friendlyPos="true" lines="208 251">
+        <access lane="-913797284#1_0" pos="238.23" length="6.30" friendlyPos="1"/>
+        <access lane="913797283_0" pos="311.64" length="100.09" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3401287617" name="улица Есенина" lane="183882334#1_0" startPos="12.34" endPos="27.34" friendlyPos="true" lines="251"/>
+    <busStop id="3403203945" name="Пискарёвское мемориальное кладбище" lane="1187708816#1_0" startPos="16.55" endPos="31.55" friendlyPos="true" lines="123 80"/>
+    <busStop id="3403203946" name="Печорская улица" lane="1187708819_0" startPos="17.73" endPos="32.73" friendlyPos="true" lines="123 80"/>
+    <busStop id="3403203959" name="проспект Непокорённых, угол улицы Бутлерова" lane="1187708822#1_0" startPos="41.54" endPos="56.54" friendlyPos="true" lines="123 80"/>
+    <busStop id="3403203962" name="Печорская улица" lane="197935141#2_0" startPos="8.24" endPos="23.24" friendlyPos="true" lines="123 80"/>
+    <busStop id="3434609088" name="Нейшлотский переулок" lane="329343280#0_0" startPos="195.62" endPos="210.62" friendlyPos="true">
+        <access lane="156398280#2_0" pos="509.67" length="6.76" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2511.02" length="7.20" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3434609090" name="улица Комиссара Смирнова" lane="392854384#1_0" startPos="7.61" endPos="22.61" friendlyPos="true" lines="86">
+        <access lane="156398280#2_0" pos="18.94" length="629.47" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2999.92" length="615.90" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3496889366" name="станция метро «Выборгская»" lane="1055514790_0" startPos="91.20" endPos="106.20" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="1105.58" length="4.42" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="1914.68" length="18.09" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3496889367" name="улица Александра Матросова" lane="600788402#1_0" startPos="15.71" endPos="30.71" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="2237.07" length="7.49" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="781.93" length="21.15" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3496914231" name="улица Александра Матросова" lane="135546695#0_0" startPos="232.34" endPos="247.34" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="2241.83" length="19.63" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="777.17" length="5.97" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3496914232" name="станция метро «Лесная»" lane="1084608754_0" startPos="23.04" endPos="38.04" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="2532.66" length="22.06" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="486.07" length="8.78" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3520380906" name="Придорожная аллея, угол проспекта Художников" lane="179534901#1_0" startPos="44.48" endPos="59.48" friendlyPos="true" lines="208">
+        <access lane="-913797284#1_0" pos="256.86" length="117.39" friendlyPos="1"/>
+        <access lane="913797283_0" pos="311.64" length="97.32" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3520380909" name="Придорожная аллея" lane="195919185#1_0" startPos="65.92" endPos="80.92" friendlyPos="true" lines="208">
+        <access lane="154222987#1_0" pos="1865.39" length="117.61" friendlyPos="1"/>
+        <access lane="154225930#1_0" pos="0.00" length="91.90" friendlyPos="1"/>
+        <access lane="871967617_0" pos="45.32" length="21.31" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3520380911" name="улица Демьяна Бедного, угол Тимуровской улицы" lane="1253435111#1_0" startPos="8.60" endPos="23.60" friendlyPos="true" lines="208"/>
+    <busStop id="3520380914" name="Суздальский проспект, угол улицы Демьяна Бедного" lane="1253435112#1_0" startPos="58.47" endPos="73.47" friendlyPos="true" lines="208"/>
+    <busStop id="3520380916" name="Придорожная аллея" lane="179534902#1_0" startPos="260.64" endPos="275.64" friendlyPos="true">
+        <access lane="154329724_0" pos="140.23" length="303.79" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3520380919" name="проспект Художников, угол Сиреневого бульвара" lane="1116321906#1_0" startPos="8.27" endPos="23.27" friendlyPos="true" lines="208"/>
+    <busStop id="3520380920" name="улица Руднева (Придорожная аллея)" lane="680446777#1_0" startPos="11.11" endPos="26.11" friendlyPos="true" lines="208 251">
+        <access lane="-680446777#0_0" pos="0.00" length="28.62" friendlyPos="1"/>
+        <access lane="-913797286_0" pos="41.22" length="6.30" friendlyPos="1"/>
+        <access lane="913797285#0_0" pos="129.34" length="80.64" friendlyPos="1"/>
+        <access lane="913797285#1_0" pos="15.70" length="56.97" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3520380926" name="Сиреневый бульвар" lane="179534902#1_0" startPos="7.86" endPos="22.86" friendlyPos="true" lines="251"/>
+    <busStop id="3521144475" name="Светлановский проспект, 75" lane="138017160#2_0" startPos="16.26" endPos="31.26" friendlyPos="true" lines="51"/>
+    <busStop id="3521144476" name="Светлановский проспект, 75" lane="138017159#2_0" startPos="2.03" endPos="17.03" friendlyPos="true" lines="51"/>
+    <busStop id="3521144480" name="Светлановский проспект, угол проспекта Луначарского" lane="1116327655#1_0" startPos="19.77" endPos="34.77" friendlyPos="true"/>
+    <busStop id="3521144485" name="улица Академика Байкова" lane="138017160#1_0" startPos="68.13" endPos="83.13" friendlyPos="true" lines="51"/>
+    <busStop id="3521144486" name="улица Академика Байкова" lane="138017159#2_0" startPos="431.06" endPos="446.06" friendlyPos="true" lines="51"/>
+    <busStop id="3521144488" name="проспект Луначарского, 86" lane="198276029#2_0" startPos="6.89" endPos="21.89" friendlyPos="true" lines="272"/>
+    <busStop id="3521144489" name="станция метро «Политехническая»" lane="769400946#2_0" startPos="37.94" endPos="52.94" friendlyPos="true" lines="51"/>
+    <busStop id="3521144492" name="проспект Луначарского, угол улицы Демьяна Бедного" lane="198276029#1_0" startPos="20.02" endPos="35.02" friendlyPos="true" lines="272"/>
+    <busStop id="3521144897" name="Сад Бенуа" lane="138017157#1_0" startPos="56.89" endPos="71.89" friendlyPos="true" lines="51">
+        <access lane="154217752#1_0" pos="244.18" length="185.36" friendlyPos="1"/>
+        <access lane="154217764#1_0" pos="49.36" length="146.34" friendlyPos="1"/>
+        <access lane="154223001#4_0" pos="673.49" length="160.49" friendlyPos="1"/>
+        <access lane="154223001#6_0" pos="0.00" length="196.48" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3521148949" name="Военная академия связи" lane="1120199334#1_0" startPos="2.22" endPos="17.22" friendlyPos="true" lines="51">
+        <access lane="154232027#14_0" pos="1309.13" length="578.28" friendlyPos="1"/>
+        <access lane="768738669#1_0" pos="6.82" length="563.27" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3521155166" name="Тихорецкий проспект, угол проспекта Науки" lane="1120199343#1_0" startPos="64.37" endPos="79.37" friendlyPos="true" lines="51">
+        <access lane="154217752#1_0" pos="74.43" length="2.53" friendlyPos="1"/>
+        <access lane="154223001#6_0" pos="169.44" length="18.47" friendlyPos="1"/>
+        <access lane="154232027#14_0" pos="1318.64" length="115.95" friendlyPos="1"/>
+        <access lane="768738669#1_0" pos="0.00" length="129.44" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3521764969" name="Военная академия связи" lane="1120199336_0" startPos="149.59" endPos="164.59" friendlyPos="true" lines="51"/>
+    <busStop id="3533402603" name="Выборгское шоссе, угол дороги в Каменку" lane="518679359#1_0" startPos="103.18" endPos="118.18" friendlyPos="true" lines="259"/>
+    <busStop id="3533402605" name="Парголово, Выборгское шоссе, 373" lane="233612219_0" startPos="190.53" endPos="205.53" friendlyPos="true" lines="259"/>
+    <busStop id="3533402606" name="Парголово, улица Шишкина" lane="638056139#1_0" startPos="36.35" endPos="51.35" friendlyPos="true" lines="259"/>
+    <busStop id="3533402607" name="проспект Просвещения, угол улицы Композиторов" lane="144324898#1_0" startPos="13.95" endPos="28.95" friendlyPos="true" lines="259 123 80"/>
+    <busStop id="3533402613" name="Выборгское шоссе, угол улицы Жени Егоровой" lane="949614119_0" startPos="73.62" endPos="88.62" friendlyPos="true" lines="259"/>
+    <busStop id="3533402615" name="улица Композиторов, угол проспекта Просвещения" lane="1280826081#1_0" startPos="11.95" endPos="26.95" friendlyPos="true" lines="86"/>
+    <busStop id="3533402618" name="улица Композиторов, 29" lane="672478012#1_0" startPos="8.14" endPos="23.14" friendlyPos="true" lines="86"/>
+    <busStop id="3533402624" name="улица Жени Егоровой" lane="878160379_0" startPos="0.00" endPos="5.52" friendlyPos="true" lines="123 80 86">
+        <access lane="-1282043622_0" pos="30.02" length="9.06" friendlyPos="1"/>
+        <access lane="1282043622_0" pos="0.00" length="9.06" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3533402628" name="Парголово, улица Ломоносова" lane="638056139#2_0" startPos="0.31" endPos="15.31" friendlyPos="true" lines="259"/>
+    <busStop id="3533402630" name="проспект Просвещения, угол улицы Симонова" lane="85104149#1_0" startPos="15.90" endPos="30.90" friendlyPos="true" lines="123 80"/>
+    <busStop id="3533402634" name="Шуваловский парк" lane="518679359#1_0" startPos="794.12" endPos="809.12" friendlyPos="true" lines="259"/>
+    <busStop id="3533402645" name="Парголово, Заводская улица" lane="518679359#1_0" startPos="443.01" endPos="458.01" friendlyPos="true" lines="259"/>
+    <busStop id="3533402647" name="Парголово, Выборгское шоссе, 499" lane="1315581489_0" startPos="4.30" endPos="19.30" friendlyPos="true" lines="259"/>
+    <busStop id="3533402649" name="улица Жени Егоровой" lane="172531668#1_0" startPos="14.23" endPos="29.23" friendlyPos="true" lines="86 123 80">
+        <access lane="-1282043622_0" pos="30.02" length="242.81" friendlyPos="1"/>
+        <access lane="1282043622_0" pos="0.00" length="238.03" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3533402665" name="Парголово, школа № 474" lane="233612221#1_0" startPos="2.59" endPos="17.59" friendlyPos="true" lines="259"/>
+    <busStop id="3533402668" name="проспект Просвещения, угол улицы Симонова" lane="144323565#1_0" startPos="18.44" endPos="33.44" friendlyPos="true" lines="259"/>
+    <busStop id="3533402671" name="улица Композиторов, угол улицы Прокофьева" lane="672478016#1_0" startPos="9.04" endPos="24.04" friendlyPos="true" lines="86">
+        <access lane="-1282043622_0" pos="0.00" length="273.87" friendlyPos="1"/>
+        <access lane="1282043622_0" pos="30.02" length="278.49" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3533402672" name="улица Композиторов, 29" lane="672478016#2_0" startPos="8.47" endPos="23.47" friendlyPos="true" lines="86"/>
+    <busStop id="3545265556" name="Глухарская улица, 5" lane="198287559#1_0" startPos="267.37" endPos="282.37" friendlyPos="true" lines="85"/>
+    <busStop id="3545265558" name="проспект Авиаконструкторов, угол Глухарской улицы" lane="1223740471#1_0" startPos="8.25" endPos="23.25" friendlyPos="true" lines="85">
+        <access lane="-198287566_0" pos="512.24" length="60.77" friendlyPos="1"/>
+        <access lane="198287559#1_0" pos="0.00" length="65.12" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3545265559" name="Глухарская улица, угол проспекта Авиаконструкторов" lane="198287559#1_0" startPos="2.90" endPos="17.90" friendlyPos="true" lines="85"/>
+    <busStop id="3545265561" name="проспект Авиаконструкторов, угол Шуваловского проспекта" lane="1223740473_0" startPos="6.63" endPos="21.63" friendlyPos="true" lines="85"/>
+    <busStop id="3545265562" name="проспект Авиаконструкторов, 49" lane="122788402#1_0" startPos="87.29" endPos="102.29" friendlyPos="true" lines="85"/>
+    <busStop id="3545265563" name="проспект Авиаконструкторов, 49" lane="236070080#1_0" startPos="26.81" endPos="41.81" friendlyPos="true" lines="85"/>
+    <busStop id="3545265566" name="Шуваловский проспект, угол Комендантского проспекта" lane="4462640#1_0" startPos="16.38" endPos="31.38" friendlyPos="true" lines="85">
+        <access lane="1451315287_0" pos="32.36" length="146.74" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3549031389" name="проспект Королёва, угол Долгоозёрной улицы" lane="124801384#1_0" startPos="21.67" endPos="36.67" friendlyPos="true" lines="85">
+        <access lane="326520773_0" pos="0.00" length="125.23" friendlyPos="1"/>
+        <access lane="500039596_0" pos="0.00" length="153.93" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3549037193" name="площадь Сикорского" lane="162596303_0" startPos="100.20" endPos="115.20" friendlyPos="true" lines="85">
+        <access lane="122317589_0" pos="0.00" length="151.50" friendlyPos="1"/>
+        <access lane="212817661_0" pos="48.25" length="180.27" friendlyPos="1"/>
+        <access lane="215528256_0" pos="0.00" length="41.77" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3549037194" name="улица Шаврова" lane="187421139#1_0" startPos="10.27" endPos="25.27" friendlyPos="true" lines="85"/>
+    <busStop id="3549037201" name="Ольховая улица, по проспекту Королёва" lane="212817658_0" startPos="27.57" endPos="42.57" friendlyPos="true" lines="85"/>
+    <busStop id="3549037203" name="улица Маршала Новикова" lane="198287608#1_0" startPos="19.77" endPos="34.77" friendlyPos="true" lines="85">
+        <access lane="215528256_0" pos="0.00" length="235.61" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741945" name="улица Шостаковича" lane="144323566#1_0" startPos="5.93" endPos="20.93" friendlyPos="true" lines="123 80"/>
+    <busStop id="3551741946" name="улица Хошимина" lane="672477990#1_0" startPos="20.58" endPos="35.58" friendlyPos="true" lines="123 80 86"/>
+    <busStop id="3551741947" name="Северный проспект" lane="135604191#1_0" startPos="10.37" endPos="25.37" friendlyPos="true" lines="123 80">
+        <access lane="1001250765#1_0" pos="0.00" length="35.00" friendlyPos="1"/>
+        <access lane="106982932#1_0" pos="16.25" length="31.62" friendlyPos="1"/>
+        <access lane="1336423743_0" pos="17.86" length="13.34" friendlyPos="1"/>
+        <access lane="82827667#1_0" pos="1.82" length="32.42" friendlyPos="1"/>
+        <access lane="82827667#2_0" pos="0.00" length="31.93" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741950" name="улица Композиторов, угол проспекта Просвещения" lane="777969610#1_0" startPos="2.99" endPos="17.99" friendlyPos="true" lines="123 80 86"/>
+    <busStop id="3551741954" name="улица Прокофьева, угол улицы Композиторов" lane="85104147#1_0" startPos="113.18" endPos="128.18" friendlyPos="true" lines="123 80"/>
+    <busStop id="3551741955" name="Северный проспект, 5" lane="91669147#2_0" startPos="0.98" endPos="15.98" friendlyPos="true" lines="123 80">
+        <access lane="-82826037#0_0" pos="12.23" length="253.97" friendlyPos="1"/>
+        <access lane="106982932#0_0" pos="71.38" length="54.71" friendlyPos="1"/>
+        <access lane="133669713#3_0" pos="49.42" length="259.72" friendlyPos="1"/>
+        <access lane="265773571_0" pos="272.11" length="70.94" friendlyPos="1"/>
+        <access lane="82826037#0_0" pos="0.00" length="250.76" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741956" name="Северный проспект, 5" lane="135604191#3_0" startPos="12.53" endPos="27.53" friendlyPos="true" lines="123 80">
+        <access lane="-82826037#0_0" pos="12.23" length="300.00" friendlyPos="1"/>
+        <access lane="-82826037#1_0" pos="126.74" length="319.68" friendlyPos="1"/>
+        <access lane="106982932#0_0" pos="42.33" length="32.61" friendlyPos="1"/>
+        <access lane="265773571_0" pos="301.07" length="93.46" friendlyPos="1"/>
+        <access lane="82826037#0_0" pos="0.00" length="296.58" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741962" name="Северный проспект, угол проспекта Художников" lane="91669147#1_0" startPos="7.18" endPos="22.18" friendlyPos="true" lines="123 80">
+        <access lane="265773571_0" pos="746.54" length="73.50" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741966" name="проспект Художников" lane="31385638#1_0" startPos="62.25" endPos="77.25" friendlyPos="true" lines="270 123 80">
+        <access lane="265773571_0" pos="746.54" length="103.47" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741970" name="проспект Энгельса, угол проспекта Луначарского" lane="866119134#1_0" startPos="7.17" endPos="22.17" friendlyPos="true" lines="259 270 123 80 86 85">
+        <access lane="143010425#0_0" pos="0.00" length="68.01" friendlyPos="1"/>
+        <access lane="143210210#1_0" pos="873.58" length="24.95" friendlyPos="1"/>
+        <access lane="154229527#0_0" pos="27.58" length="10.77" friendlyPos="1"/>
+        <access lane="154229528#0_0" pos="0.00" length="68.59" friendlyPos="1"/>
+        <access lane="154229529#2_0" pos="0.20" length="69.44" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741971" name="проспект Просвещения, угол улицы Симонова" lane="406599273#1_0" startPos="9.86" endPos="24.86" friendlyPos="true" lines="123 80">
+        <access lane="-406599272_0" pos="21.22" length="237.39" friendlyPos="1"/>
+        <access lane="406599272_0" pos="0.00" length="237.39" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741975" name="улица Есенина, угол улицы Сикейроса" lane="1342053723#1_0" startPos="4.11" endPos="19.11" friendlyPos="true" lines="270 123 80">
+        <access lane="1193885142#0_0" pos="0.00" length="30.56" friendlyPos="1"/>
+        <access lane="1193885143#2_0" pos="5.32" length="26.34" friendlyPos="1"/>
+        <access lane="131620418_0" pos="780.25" length="20.40" friendlyPos="1"/>
+        <access lane="131620433#0_0" pos="0.20" length="29.30" friendlyPos="1"/>
+        <access lane="131620433#2_0" pos="0.00" length="26.76" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741977" name="улица Композиторов" lane="193652268#1_0" startPos="21.54" endPos="36.54" friendlyPos="true" lines="123 80 86 85">
+        <access lane="143210210#1_0" pos="865.45" length="596.84" friendlyPos="1"/>
+        <access lane="154229527#0_0" pos="35.58" length="582.66" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741979" name="улица Сикейроса, школа" lane="1112134934#2_0" startPos="6.46" endPos="21.46" friendlyPos="true" lines="270 123 80">
+        <access lane="131620418_0" pos="314.38" length="29.80" friendlyPos="1"/>
+        <access lane="230631729#2_0" pos="397.28" length="21.66" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741984" name="улица Сикейроса" lane="1112134934#1_0" startPos="10.68" endPos="25.68" friendlyPos="true" lines="270 123 80">
+        <access lane="131620418_0" pos="30.70" length="29.04" friendlyPos="1"/>
+        <access lane="230631729#2_0" pos="680.70" length="22.08" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741986" name="улица Сикейроса, школа" lane="1112134940#1_0" startPos="3.68" endPos="18.68" friendlyPos="true" lines="270 123 80">
+        <access lane="131620418_0" pos="289.35" length="21.03" friendlyPos="1"/>
+        <access lane="230631729#2_0" pos="422.12" length="30.04" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551741987" name="улица Сикейроса, поликлиника" lane="1342053721_1" startPos="18.16" endPos="33.16" friendlyPos="true" lines="270 123 80"/>
+    <busStop id="3551741988" name="Манчестерская улица" lane="363106851_0" startPos="27.35" endPos="42.35" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3551742198" name="проспект Луначарского, угол улицы Композиторов" lane="672536885#1_0" startPos="9.80" endPos="24.80" friendlyPos="true" lines="86 123 80"/>
+    <busStop id="3551742199" name="улица Асафьева" lane="672477990#4_0" startPos="11.35" endPos="26.35" friendlyPos="true" lines="123 80 86"/>
+    <busStop id="3551742200" name="улица Есенина" lane="1112129147#1_0" startPos="13.11" endPos="28.11" friendlyPos="true" lines="51 251 123 80">
+        <access lane="101530844#0_0" pos="0.00" length="66.20" friendlyPos="1"/>
+        <access lane="131606284_0" pos="35.36" length="29.73" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551742201" name="улица Асафьева" lane="672535036#1_0" startPos="17.46" endPos="32.46" friendlyPos="true" lines="86 123 80"/>
+    <busStop id="3551742203" name="улица Есенина" lane="1112129160#1_0" startPos="15.78" endPos="30.78" friendlyPos="true" lines="51 251 123 80">
+        <access lane="131606284_0" pos="592.92" length="17.53" friendlyPos="1"/>
+        <access lane="1336423740#0_0" pos="7.42" length="26.04" friendlyPos="1"/>
+        <access lane="1336423740#1_0" pos="0.00" length="33.97" friendlyPos="1"/>
+        <access lane="221613768#2_0" pos="4.51" length="34.91" friendlyPos="1"/>
+        <access lane="780532957#1_0" pos="0.20" length="38.87" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3551742204" name="улица Композиторов, угол улицы Хошимина" lane="777969612#1_0" startPos="11.71" endPos="26.71" friendlyPos="true" lines="86 123 80"/>
+    <busStop id="3551770957" name="Пискарёвское мемориальное кладбище" lane="1187708814#1_0" startPos="19.59" endPos="34.59" friendlyPos="true" lines="123 80"/>
+    <busStop id="3551770960" name="улица Бутлерова" lane="1187708824#1_0" startPos="45.17" endPos="60.17" friendlyPos="true" lines="123 80"/>
+    <busStop id="3551770961" name="проспект Непокорённых, угол Гражданского проспекта" lane="794189719#1_0" startPos="58.85" endPos="73.85" friendlyPos="true" lines="123 80"/>
+    <busStop id="3556820107" name="проспект Энгельса, угол проспекта Луначарского" lane="1434975481#1_0" startPos="35.44" endPos="50.44" friendlyPos="true" lines="86 123 80">
+        <access lane="143010421#1_0" pos="0.00" length="126.51" friendlyPos="1"/>
+        <access lane="143010424#2_0" pos="1466.31" length="124.01" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="0.00" length="137.77" friendlyPos="1"/>
+        <access lane="154229527#0_0" pos="0.00" length="137.94" friendlyPos="1"/>
+        <access lane="154229529#2_0" pos="0.00" length="132.35" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3564222501" name="проспект Энергетиков, 72" lane="899313146#2_0" startPos="0.41" endPos="15.41" friendlyPos="true" lines="123"/>
+    <busStop id="3564222504" name="Партизанская улица" lane="830745401#1_0" startPos="42.60" endPos="57.60" friendlyPos="true" lines="123"/>
+    <busStop id="3564222505" name="Якорная улица" lane="1116087967#1_0" startPos="16.46" endPos="31.46" friendlyPos="true" lines="123"/>
+    <busStop id="3564222507" name="Ортопедический центр" lane="241540522#1_0" startPos="4.76" endPos="19.76" friendlyPos="true" lines="123"/>
+    <busStop id="3564222508" name="проспект Энергетиков, 32" lane="31385820#5_0" startPos="7.90" endPos="22.90" friendlyPos="true" lines="123"/>
+    <busStop id="3564222509" name="Большая Пороховская улица" lane="31371804#1_0" startPos="77.20" endPos="92.20" friendlyPos="true" lines="123"/>
+    <busStop id="3564222510" name="Проспект Энергетиков, 27" lane="31385820#3_0" startPos="10.07" endPos="25.07" friendlyPos="true" lines="123"/>
+    <busStop id="3564222511" name="Партизанская улица" lane="31371804#1_0" startPos="483.37" endPos="498.37" friendlyPos="true" lines="123"/>
+    <busStop id="3564222512" name="проспект Энергетиков, 72" lane="31367834#2_0" startPos="5.55" endPos="20.55" friendlyPos="true" lines="123"/>
+    <busStop id="3564222514" name="Екатерининский проспект" lane="901368150_0" startPos="53.06" endPos="68.06" friendlyPos="true" lines="123"/>
+    <busStop id="3564222515" name="улица Стасовой" lane="194457243#1_0" startPos="7.51" endPos="22.51" friendlyPos="true" lines="123"/>
+    <busStop id="3564222516" name="Якорная улица" lane="334416501_0" startPos="23.88" endPos="38.88" friendlyPos="true" lines="123"/>
+    <busStop id="3564222517" name="Проспект Энергетиков, 27" lane="172347907#4_0" startPos="4.04" endPos="19.04" friendlyPos="true" lines="123"/>
+    <busStop id="3564222518" name="шоссе Революции" lane="172347907#0_0" startPos="12.30" endPos="27.30" friendlyPos="true" lines="123"/>
+    <busStop id="3566457911" name="Пискарёвский проспект" lane="241540524#2_0" startPos="3.69" endPos="18.69" friendlyPos="true" lines="123"/>
+    <busStop id="3566457913" name="Пискарёвский проспект" lane="241540525#2_0" startPos="0.00" endPos="15.00" friendlyPos="true" lines="123"/>
+    <busStop id="3566536393" name="Бестужевская улица, угол Замшиной улицы" lane="406220324#1_0" startPos="19.35" endPos="34.35" friendlyPos="true" lines="123">
+        <access lane="-31371262_0" pos="36.47" length="244.11" friendlyPos="1"/>
+        <access lane="31371262_0" pos="0.00" length="244.09" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3569803759" name="Выборгское шоссе, угол Песочного шоссе" lane="234098788#1_0" startPos="118.33" endPos="133.33" friendlyPos="true" lines="259"/>
+    <busStop id="3569803771" name="Центральная улица" lane="192501709#1_0" startPos="435.99" endPos="450.99" friendlyPos="true"/>
+    <busStop id="3569803783" name="Ленинградская улица" lane="192501709#1_0" startPos="35.73" endPos="50.73" friendlyPos="true"/>
+    <busStop id="3569803785" name="железнодорожная платформа «Песочная»" lane="173484565_1" startPos="77.50" endPos="92.50" friendlyPos="true"/>
+    <busStop id="3588248392" name="2-й километр" lane="192501708_0" startPos="1016.72" endPos="1031.72" friendlyPos="true" lines="259"/>
+    <busStop id="3588248394" name="1-й километр" lane="192501708_0" startPos="2509.04" endPos="2524.04" friendlyPos="true"/>
+    <busStop id="3588248396" name="исследовательский центр онкологии им. Н.Н. Петрова" lane="54657045#1_1" startPos="10.04" endPos="25.04" friendlyPos="true" lines="259"/>
+    <busStop id="3588248397" name="Ленинградская улица, 61" lane="31375691#1_1" startPos="16.77" endPos="31.77" friendlyPos="true" lines="259"/>
+    <busStop id="3588248398" name="исследовательский центр онкологии им. Н.Н. Петрова" lane="54657045#1_1" startPos="33.33" endPos="48.33" friendlyPos="true"/>
+    <busStop id="3588248400" name="Ленинградская улица, 70" lane="54657045#1_1" startPos="636.00" endPos="651.00" friendlyPos="true"/>
+    <busStop id="3588248401" name="1-й километр" lane="192501708_0" startPos="2404.97" endPos="2419.97" friendlyPos="true" lines="259"/>
+    <busStop id="3588248403" name="Ленинградская улица, 70" lane="54657045#1_1" startPos="578.40" endPos="593.40" friendlyPos="true" lines="259"/>
+    <busStop id="3588248405" name="2-й километр" lane="192501708_0" startPos="926.70" endPos="941.70" friendlyPos="true"/>
+    <busStop id="3588248410" name="СНТ «Парковая Роща»" lane="192501708_0" startPos="2201.37" endPos="2216.37" friendlyPos="true"/>
+    <busStop id="3588248413" name="Ленинградская улица, 119" lane="192501708_0" startPos="308.39" endPos="323.39" friendlyPos="true"/>
+    <busStop id="3588248415" name="ЖСК «Модуль»" lane="192501708_0" startPos="1434.15" endPos="1449.15" friendlyPos="true" lines="259"/>
+    <busStop id="3588248417" name="ЖСК «Модуль»" lane="192501708_0" startPos="1324.86" endPos="1339.86" friendlyPos="true"/>
+    <busStop id="3588248424" name="Ленинградская улица, 119" lane="192501708_0" startPos="354.12" endPos="369.12" friendlyPos="true" lines="259"/>
+    <busStop id="3588248427" name="Советская улица" lane="192501707#1_1" startPos="32.91" endPos="47.91" friendlyPos="true" lines="259"/>
+    <busStop id="3588248430" name="СНТ «Парковая Роща»" lane="192501708_0" startPos="2270.28" endPos="2285.28" friendlyPos="true" lines="259"/>
+    <busStop id="3588248431" name="Ленинградская улица, 61" lane="31375691#0_1" startPos="255.19" endPos="270.19" friendlyPos="true"/>
+    <busStop id="3643574414" name="улица Шаврова" lane="326367069#1_0" startPos="217.27" endPos="232.27" friendlyPos="true" lines="85"/>
+    <busStop id="3643574419" name="Комендантский проспект, 34" lane="144840213#2_0" startPos="11.85" endPos="26.85" friendlyPos="true" lines="85"/>
+    <busStop id="3643574422" name="Шуваловский проспект, угол Планерной улицы" lane="1205880890#1_0" startPos="18.23" endPos="33.23" friendlyPos="true" lines="85"/>
+    <busStop id="3643574423" name="Долгоозёрная улица, угол проспекта Королёва" lane="326520773_1" startPos="9.12" endPos="24.12" friendlyPos="true" lines="85"/>
+    <busStop id="3643574424" name="Долгоозёрная улица" lane="1442048747_0" startPos="0.00" endPos="15.00" friendlyPos="true" lines="85"/>
+    <busStop id="3643574425" name="Долгоозёрная улица" lane="198287569#1_0" startPos="18.04" endPos="33.04" friendlyPos="true" lines="85">
+        <access lane="-1468106093_0" pos="83.22" length="145.20" friendlyPos="1"/>
+        <access lane="1468106094_0" pos="0.00" length="145.22" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3643574426" name="улица Шаврова (Комендантский проспект)" lane="144840213#1_0" startPos="4.12" endPos="19.12" friendlyPos="true" lines="85"/>
+    <busStop id="3643574427" name="Комендантский проспект, 34" lane="198287574#2_0" startPos="19.71" endPos="34.71" friendlyPos="true" lines="85"/>
+    <busStop id="3673058584" name="Институтский проспект" lane="126388266#1_0" startPos="14.37" endPos="29.37" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673058585" name="Институтский проспект" lane="363103043#1_0" startPos="13.84" endPos="28.84" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673058586" name="площадь Мужества" lane="990965398#2_0" startPos="33.83" endPos="48.83" friendlyPos="true" lines="251 123 80"/>
+    <busStop id="3673058587" name="площадь Мужества" lane="126388266#2_0" startPos="343.18" endPos="358.18" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673058588" name="проспект Тореза, 21" lane="126388266#2_0" startPos="20.27" endPos="35.27" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673058589" name="проспект Тореза, 21" lane="4458592#1_0" startPos="14.88" endPos="29.88" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673058590" name="Светлановский проспект" lane="1442701063#1_0" startPos="327.95" endPos="342.95" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673088986" name="Манчестерская улица" lane="138017888#1_0" startPos="12.74" endPos="27.74" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673088987" name="улица Есенина (проспект Тореза)" lane="1188143943_0" startPos="56.55" endPos="71.55" friendlyPos="true" lines="51 251 123 80">
+        <access lane="101530844#0_0" pos="0.00" length="133.36" friendlyPos="1"/>
+        <access lane="131606284_0" pos="1.51" length="127.63" friendlyPos="1"/>
+    </busStop>
+    <busStop id="3673088988" name="проспект Тореза, 82" lane="1435057083#1_0" startPos="3.59" endPos="18.59" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673088989" name="проспект Тореза, 82" lane="138017888#2_0" startPos="6.11" endPos="21.11" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673088990" name="Рашетова улица" lane="608206947#1_0" startPos="97.52" endPos="112.52" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3673088991" name="Рашетова улица" lane="1188143945#1_0" startPos="94.56" endPos="109.56" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="3919709582" name="Шуваловский проспект, Политехнический колледж" lane="152255394#1_0" startPos="40.48" endPos="55.48" friendlyPos="true" lines="85"/>
+    <trainStop id="4132368207" name="улица Академика Шиманского" lane="142986938#1_1" startPos="2685.39" endPos="2710.39" friendlyPos="true" lines="21"/>
+    <busStop id="4220424777" name="улица Фёдора Абрамова, угол улицы Меркурьева" lane="422300265#1_0" startPos="20.04" endPos="35.04" friendlyPos="true" lines="51"/>
+    <busStop id="4279080380" name="Выборгское шоссе, угол Приозерского шоссе" lane="234098790#1_0" startPos="35.36" endPos="50.36" friendlyPos="true" lines="259"/>
+    <trainStop id="448040265" name="проспект Луначарского" lane="154225930#1_1" startPos="1834.44" endPos="1859.44" friendlyPos="true" lines="20"/>
+    <busStop id="4670047885" name="проспект Художников, угол Поэтического бульвара" lane="230685372#1_0" startPos="12.79" endPos="27.79" friendlyPos="true" lines="208"/>
+    <busStop id="4670048092" name="проспект Художников, угол Сиреневого бульвара" lane="1116321908#1_0" startPos="27.48" endPos="42.48" friendlyPos="true" lines="208"/>
+    <busStop id="4670048096" name="проспект Просвещения" lane="31370573#1_0" startPos="9.97" endPos="24.97" friendlyPos="true" lines="208"/>
+    <busStop id="4818146259" name="станция метро «Выборгская»" lane="193846456_0" startPos="48.46" endPos="63.46" friendlyPos="true" lines="251 86">
+        <access lane="156398280#2_0" pos="936.14" length="24.85" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2084.25" length="10.88" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="4929539087" name="Новосибирская улица" lane="781386894_1" startPos="3717.76" endPos="3742.76" friendlyPos="true" lines="21"/>
+    <trainStop id="4929539088" name="Омская улица" lane="142986938#1_1" startPos="565.08" endPos="590.08" friendlyPos="true" lines="21"/>
+    <trainStop id="4929539089" name="улица Комсомола" lane="156411584#7_1" startPos="208.95" endPos="233.95" friendlyPos="true" lines="20"/>
+    <busStop id="5823242601" name="Северная площадь" lane="183892202_0" startPos="0.00" endPos="15.00" friendlyPos="true" lines="270"/>
+    <busStop id="5999042357" name="Суздальский проспект (Светлановский проспект)" lane="88987114_0" startPos="0.00" endPos="15.00" friendlyPos="true" lines="51"/>
+    <busStop id="5999042360" name="Суздальский проспект" lane="172851576_0" startPos="181.87" endPos="201.87" friendlyPos="true" lines="51"/>
+    <busStop id="6265569526" name="Гражданский проспект" lane="144526045#1_0" startPos="24.20" endPos="39.20" friendlyPos="true" lines="272"/>
+    <trainStop id="6448726472" name="проспект Культуры, 26" lane="154222987#1_1" startPos="1546.77" endPos="1571.77" friendlyPos="true" lines="20"/>
+    <trainStop id="6448726473" name="проспект Культуры, 26" lane="154225930#1_1" startPos="328.04" endPos="353.04" friendlyPos="true" lines="20"/>
+    <trainStop id="6448730140" name="проспект Просвещения" lane="154225930#1_1" startPos="749.54" endPos="774.54" friendlyPos="true" lines="20"/>
+    <trainStop id="6477586401" name="проспект Культуры" lane="871967617_1" startPos="0.00" endPos="25.00" friendlyPos="true" lines="20"/>
+    <busStop id="6482395651" name="улица Ольги Форш" lane="31386755#4_0" startPos="10.44" endPos="25.44" friendlyPos="true" lines="208"/>
+    <busStop id="6582662444" name="Тимуровская улица" lane="636111163#1_0" startPos="13.84" endPos="28.84" friendlyPos="true" lines="51"/>
+    <busStop id="6582662445" name="Тимуровская улица" lane="195870606#1_0" startPos="7.37" endPos="22.37" friendlyPos="true" lines="51"/>
+    <busStop id="6606427558" name="Заречная улица, угол Толубеевского проезда" lane="725963244#1_0" startPos="32.87" endPos="47.87" friendlyPos="true" lines="51">
+        <access lane="1428304980_0" pos="244.02" length="185.88" friendlyPos="1"/>
+        <access lane="703479972_0" pos="0.00" length="183.68" friendlyPos="1"/>
+    </busStop>
+    <busStop id="6704164100" name="станция метро «Парнас»" lane="948836658#1_0" startPos="37.62" endPos="52.62" friendlyPos="true" lines="51"/>
+    <busStop id="6751118605" name="проспект Авиаконструкторов" lane="326367069#1_0" startPos="14.33" endPos="29.33" friendlyPos="true" lines="85"/>
+    <busStop id="6806447804" name="Заречная улица, 42" lane="725963246#1_0" startPos="23.17" endPos="38.17" friendlyPos="true" lines="51">
+        <access lane="1428304980_0" pos="0.00" length="6.68" friendlyPos="1"/>
+        <access lane="703479972_0" pos="232.27" length="37.77" friendlyPos="1"/>
+    </busStop>
+    <busStop id="7080654061" name="Меншиковский проспект" lane="497264116_0" startPos="10.23" endPos="25.23" friendlyPos="true" lines="123 80">
+        <access lane="199761460#1_0" pos="1442.72" length="695.82" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="835.54" length="708.74" friendlyPos="1"/>
+    </busStop>
+    <busStop id="7176906245" name="Сад Бенуа" lane="1120199342#1_0" startPos="45.34" endPos="60.34" friendlyPos="true" lines="51">
+        <access lane="154217752#1_0" pos="149.81" length="17.39" friendlyPos="1"/>
+        <access lane="154217764#1_0" pos="0.00" length="177.71" friendlyPos="1"/>
+        <access lane="154223001#4_0" pos="723.32" length="177.76" friendlyPos="1"/>
+        <access lane="154223001#6_0" pos="94.58" length="2.17" friendlyPos="1"/>
+        <access lane="154232027#14_0" pos="1318.64" length="230.16" friendlyPos="1"/>
+    </busStop>
+    <busStop id="7176906279" name="Военная академия связи" lane="1120199336_0" startPos="37.33" endPos="57.33" friendlyPos="true"/>
+    <busStop id="7179749876" name="станция метро «Политехническая»" lane="769136676#1_0" startPos="11.75" endPos="26.75" friendlyPos="true" lines="51"/>
+    <busStop id="7187766663" name="Лесной проспект" lane="769943999#1_0" startPos="4.67" endPos="19.67" friendlyPos="true" lines="251">
+        <access lane="142986933#4_0" pos="356.03" length="56.36" friendlyPos="1"/>
+        <access lane="156398280#2_0" pos="2987.60" length="23.07" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="30.72" length="9.56" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="0.00" length="64.75" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="7295099058" name="Горохов переулок" lane="142986938#1_1" startPos="4868.29" endPos="4893.29" friendlyPos="true" lines="21"/>
+    <trainStop id="7295099059" name="Сердобольская улица" lane="769970490#1_1" startPos="94.85" endPos="119.85" friendlyPos="true" lines="20"/>
+    <trainStop id="7295162919" name="Карельский переулок" lane="781386894_1" startPos="2813.83" endPos="2838.83" friendlyPos="true" lines="21"/>
+    <busStop id="7494453363" name="Северный проспект, угол улицы Вавиловых" lane="1194228388_1" startPos="28.43" endPos="43.43" friendlyPos="true" lines="270"/>
+    <busStop id="7513378647" name="Елизаветинская больница" lane="194972641#1_0" startPos="38.17" endPos="53.17" friendlyPos="true" lines="270"/>
+    <busStop id="7589383960" name="улица Брянцева" lane="200468550#5_0" startPos="6.84" endPos="21.84" friendlyPos="true" lines="208"/>
+    <busStop id="7589671753" name="Светлановский проспект" lane="200468550#1_0" startPos="29.06" endPos="44.06" friendlyPos="true" lines="208"/>
+    <busStop id="7589671755" name="улица Демьяна Бедного, угол Тимуровской улицы" lane="31386755#1_0" startPos="4.90" endPos="19.90" friendlyPos="true" lines="208"/>
+    <busStop id="7591551328" name="проспект Просвещения" lane="751158629#1_0" startPos="23.33" endPos="38.33" friendlyPos="true" lines="51"/>
+    <busStop id="7591551329" name="проспект Просвещения" lane="181344172#1_0" startPos="13.58" endPos="28.58" friendlyPos="true" lines="51"/>
+    <busStop id="7591953669" name="проспект Луначарского" lane="1116327655#1_0" startPos="11.15" endPos="31.15" friendlyPos="true" lines="51"/>
+    <busStop id="7591953671" name="проспект Луначарского" lane="195909894#1_0" startPos="11.80" endPos="26.80" friendlyPos="true" lines="51"/>
+    <busStop id="7591953673" name="Учительская улица" lane="751161303#1_0" startPos="21.64" endPos="36.64" friendlyPos="true" lines="51"/>
+    <busStop id="7591953674" name="Учительская улица" lane="195870608#1_0" startPos="18.96" endPos="33.96" friendlyPos="true" lines="51"/>
+    <trainStop id="7602118904" name="проспект Науки, 73" lane="154217753#15_1" startPos="704.25" endPos="729.25" friendlyPos="true" lines="9"/>
+    <busStop id="7602205652" name="железнодорожная станция «Ручьи»" lane="888726500_1" startPos="0.00" endPos="1.57" friendlyPos="true" lines="272"/>
+    <busStop id="7602319398" name="Суздальский проспект, угол улицы Ушинского" lane="1444815459_0" startPos="19.11" endPos="34.11" friendlyPos="true" lines="208"/>
+    <busStop id="7602319401" name="Гражданский проспект, угол Суздальского проспекта" lane="1079121638#1_0" startPos="66.72" endPos="81.72" friendlyPos="true" lines="208"/>
+    <busStop id="7602319406" name="Совмещённый трамвайно-троллейбусный парк" lane="770355213_0" startPos="26.00" endPos="41.00" friendlyPos="true" lines="208"/>
+    <busStop id="7604638441" name="Пискарёвский проспект, 50" lane="406220332_0" startPos="108.92" endPos="123.92" friendlyPos="true" lines="123">
+        <access lane="199761460#1_0" pos="1666.94" length="47.38" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="612.65" length="60.49" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="7625386753" name="проспект Науки, 10" lane="154232027#7_1" startPos="1314.86" endPos="1339.86" friendlyPos="true" lines="9"/>
+    <busStop id="7680118644" name="Светлановский проспект" lane="200468561#1_0" startPos="21.12" endPos="36.12" friendlyPos="true" lines="272"/>
+    <busStop id="8072597810" name="Ольховая улица" lane="124801384#1_0" startPos="371.18" endPos="386.18" friendlyPos="true" lines="85"/>
+    <busStop id="8073005305" name="проспект Луначарского, угол Выборгского шоссе" lane="198287623#0_0" startPos="68.51" endPos="83.51" friendlyPos="true" lines="85">
+        <access lane="101085301#0_0" pos="0.00" length="252.99" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8073005306" name="Парашютная улица, угол улицы Маршала Новикова" lane="198287597#1_0" startPos="12.54" endPos="27.54" friendlyPos="true" lines="85"/>
+    <busStop id="8073005307" name="Ольховая улица" lane="680443619#3_0" startPos="12.13" endPos="27.13" friendlyPos="true" lines="85"/>
+    <busStop id="8073005308" name="улица Маршала Новикова" lane="680443619#1_0" startPos="16.23" endPos="31.23" friendlyPos="true" lines="85"/>
+    <busStop id="8073025146" name="Ольховая улица" lane="680443616#2_0" startPos="26.60" endPos="41.60" friendlyPos="true" lines="85"/>
+    <busStop id="8073025147" name="улица Маршала Новикова" lane="680443616#0_0" startPos="40.78" endPos="55.78" friendlyPos="true" lines="85"/>
+    <busStop id="8073025148" name="Парашютная улица, угол Репищевой улицы" lane="235869931#1_0" startPos="19.60" endPos="34.60" friendlyPos="true" lines="85">
+        <access lane="1335070470_0" pos="27.49" length="294.16" friendlyPos="1"/>
+        <access lane="1436571875_0" pos="0.00" length="216.38" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8074270344" name="Долгоозёрная улица" lane="1442048750_0" startPos="47.49" endPos="62.49" friendlyPos="true"/>
+    <trainStop id="8121643408" name="проспект Культуры, 11" lane="154222987#1_1" startPos="529.86" endPos="554.86" friendlyPos="true" lines="20"/>
+    <trainStop id="8121643409" name="проспект Культуры, 11" lane="154225930#1_1" startPos="1314.59" endPos="1339.59" friendlyPos="true" lines="20"/>
+    <trainStop id="8121643413" name="проспект Просвещения" lane="154222987#1_1" startPos="987.87" endPos="1012.87" friendlyPos="true" lines="20"/>
+    <trainStop id="8121654124" name="Придорожная аллея" lane="154222987#1_1" startPos="1840.39" endPos="1865.39" friendlyPos="true" lines="20"/>
+    <busStop id="8144776850" name="железнодорожная станция «Пискарёвка»" lane="193651037_0" startPos="41.21" endPos="56.21" friendlyPos="true">
+        <access lane="154234439#1_0" pos="0.00" length="116.56" friendlyPos="1"/>
+        <access lane="199761460#1_0" pos="2217.27" length="51.95" friendlyPos="1"/>
+        <access lane="878716661#0_0" pos="41.18" length="124.42" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="65.91" length="65.50" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8144776853" name="железнодорожная станция «Пискарёвка»" lane="414848004_0" startPos="96.06" endPos="111.06" friendlyPos="true">
+        <access lane="154234439#1_0" pos="0.00" length="90.54" friendlyPos="1"/>
+        <access lane="199761460#1_0" pos="2272.47" length="87.13" friendlyPos="1"/>
+        <access lane="878716661#0_0" pos="41.18" length="103.68" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="8.09" length="100.32" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8145735137" name="Пионерский парк" lane="1185929004_1" startPos="65.18" endPos="80.18" friendlyPos="true" lines="123"/>
+    <busStop id="8170375608" name="улица Смолячкова" lane="1137118489#1_0" startPos="52.25" endPos="67.25" friendlyPos="true" lines="86">
+        <access lane="1474654410_0" pos="43.10" length="155.29" friendlyPos="1"/>
+        <access lane="1474654412_0" pos="0.00" length="154.79" friendlyPos="1"/>
+        <access lane="156398280#2_0" pos="1053.15" length="631.18" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="1972.27" length="616.52" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170375609" name="улица Смолячкова" lane="1474654413#0_0" startPos="71.30" endPos="86.30" friendlyPos="true" lines="86">
+        <access lane="1474654410_0" pos="43.10" length="122.86" friendlyPos="1"/>
+        <access lane="1474654412_0" pos="0.00" length="123.75" friendlyPos="1"/>
+        <access lane="156398280#2_0" pos="1074.56" length="638.61" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="1950.90" length="624.34" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170375610" name="Гельсингфорсская улица" lane="734615696#0_0" startPos="191.87" endPos="206.87" friendlyPos="true" lines="86">
+        <access lane="156398280#2_0" pos="1472.01" length="551.52" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="1549.85" length="537.58" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170375611" name="Гельсингфорсская улица" lane="734615689#1_0" startPos="24.81" endPos="39.81" friendlyPos="true" lines="86">
+        <access lane="156398280#2_0" pos="1487.69" length="558.52" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="1534.16" length="544.59" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170375612" name="Литовская улица" lane="734615697#7_0" startPos="31.46" endPos="46.46" friendlyPos="true" lines="86"/>
+    <busStop id="8170375613" name="улица Александра Матросова" lane="734615697#4_0" startPos="20.12" endPos="35.12" friendlyPos="true" lines="86"/>
+    <busStop id="8170375614" name="улица Александра Матросова" lane="734615696#9_0" startPos="36.65" endPos="51.65" friendlyPos="true" lines="86"/>
+    <busStop id="8170375615" name="Большой Сампсониевский проспект, 70" lane="734615697#1_0" startPos="334.65" endPos="349.65" friendlyPos="true" lines="86"/>
+    <busStop id="8170375616" name="Кантемировская улица" lane="541363201#1_0" startPos="58.77" endPos="73.77" friendlyPos="true" lines="86"/>
+    <busStop id="8170392917" name="Кантемировская улица" lane="541363202_0" startPos="338.17" endPos="353.17" friendlyPos="true" lines="86"/>
+    <busStop id="8170392918" name="1-й Муринский проспект" lane="541363201#1_0" startPos="355.15" endPos="370.15" friendlyPos="true" lines="86">
+        <access lane="142986933#4_0" pos="4.27" length="86.46" friendlyPos="1"/>
+        <access lane="142986938#1_0" pos="171.97" length="1167.80" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="360.72" length="100.88" friendlyPos="1"/>
+        <access lane="769970490#1_0" pos="745.40" length="100.32" friendlyPos="1"/>
+        <access lane="781386894_0" pos="4969.22" length="1154.00" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170392919" name="1-й Муринский проспект" lane="541363202_0" startPos="4.26" endPos="19.26" friendlyPos="true" lines="86">
+        <access lane="142986933#4_0" pos="0.00" length="37.22" friendlyPos="1"/>
+        <access lane="142986938#1_0" pos="167.99" length="1114.73" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="365.82" length="51.37" friendlyPos="1"/>
+        <access lane="769970490#1_0" pos="745.40" length="47.06" friendlyPos="1"/>
+        <access lane="781386894_0" pos="4973.12" length="1100.92" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170392920" name="Земледельческая улица" lane="769976514#3_0" startPos="17.85" endPos="32.85" friendlyPos="true" lines="86">
+        <access lane="142986933#4_0" pos="0.00" length="306.72" friendlyPos="1"/>
+        <access lane="142986938#1_0" pos="136.16" length="786.95" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="563.13" length="12.54" friendlyPos="1"/>
+        <access lane="769970490#1_0" pos="550.34" length="1.23" friendlyPos="1"/>
+        <access lane="781386894_0" pos="5003.83" length="773.14" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170392921" name="Земледельческая улица" lane="1081279272#1_0" startPos="11.37" endPos="26.37" friendlyPos="true" lines="86">
+        <access lane="142986938#1_0" pos="110.56" length="696.74" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="628.12" length="1.02" friendlyPos="1"/>
+        <access lane="769970490#1_0" pos="485.52" length="12.77" friendlyPos="1"/>
+        <access lane="781386894_0" pos="5029.43" length="682.94" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170392922" name="Сердобольская улица" lane="1090534174_0" startPos="63.30" endPos="78.30" friendlyPos="true" lines="86">
+        <access lane="142986937#1_0" pos="0.00" length="177.10" friendlyPos="1"/>
+        <access lane="142986938#1_0" pos="16.95" length="159.97" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="998.68" length="15.14" friendlyPos="1"/>
+        <access lane="769970490#1_0" pos="115.95" length="1.07" friendlyPos="1"/>
+        <access lane="781386894_0" pos="5124.32" length="146.17" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170394911" name="Сердобольская улица" lane="1081279272#1_0" startPos="404.01" endPos="419.01" friendlyPos="true" lines="86">
+        <access lane="142986937#1_0" pos="0.00" length="143.54" friendlyPos="1"/>
+        <access lane="142986938#1_0" pos="10.03" length="132.97" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="1021.26" length="1.26" friendlyPos="1"/>
+        <access lane="769970490#1_0" pos="93.46" length="12.92" friendlyPos="1"/>
+        <access lane="781386894_0" pos="5133.14" length="118.78" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8170394913" name="Литовская улица" lane="734615696#6_0" startPos="18.79" endPos="33.79" friendlyPos="true" lines="86"/>
+    <busStop id="8170394914" name="Нейшлотский переулок" lane="392854385#1_0" startPos="8.44" endPos="23.44" friendlyPos="true" lines="86">
+        <access lane="156398280#2_0" pos="567.68" length="624.87" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="2454.03" length="611.15" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="8174459943" name="проспект Луначарского" lane="154217764#6_1" startPos="394.60" endPos="419.60" friendlyPos="true" lines="9"/>
+    <trainStop id="8174459944" name="проспект Науки, 30" lane="154232027#5_1" startPos="173.55" endPos="198.55" friendlyPos="true" lines="9"/>
+    <trainStop id="8174459945" name="проспект Науки, 30" lane="154217753#13_1" startPos="237.99" endPos="262.99" friendlyPos="true" lines="9"/>
+    <busStop id="8319334794" name="железнодорожная станция «Пискарёвка»" lane="1353325029_0" startPos="170.93" endPos="185.93" friendlyPos="true" lines="80"/>
+    <busStop id="8319334796" name="Меншиковский проспект" lane="346569138_0" startPos="170.70" endPos="185.70" friendlyPos="true" lines="80">
+        <access lane="-346569140_0" pos="45.68" length="258.20" friendlyPos="1"/>
+        <access lane="199761460#1_0" pos="1649.89" length="624.13" friendlyPos="1"/>
+        <access lane="346569140_0" pos="0.00" length="258.09" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="632.23" length="637.27" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8319334801" name="больница имени С.П. Боткина (по требованию)" lane="1394017318_0" startPos="402.15" endPos="417.15" friendlyPos="true" lines="80">
+        <access lane="199761460#1_0" pos="2023.61" length="76.12" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="256.23" length="64.38" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8319334802" name="больница имени С.П. Боткина" lane="1394017318_0" startPos="402.36" endPos="417.36" friendlyPos="true" lines="80">
+        <access lane="199761460#1_0" pos="2023.84" length="69.33" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="256.05" length="57.59" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8319334809" name="автобусная станция «Пискарёвка»" lane="1394017318_0" startPos="30.55" endPos="45.55" friendlyPos="true" lines="80">
+        <access lane="199761460#1_0" pos="2105.53" length="219.50" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="173.26" length="232.37" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8319582575" name="проспект Луначарского, 78" lane="691806453#1_0" startPos="22.67" endPos="37.67" friendlyPos="true" lines="272"/>
+    <busStop id="8319582577" name="проспект Культуры по проспекту Луначарского" lane="1083351854_0" startPos="8.02" endPos="23.02" friendlyPos="true" lines="272">
+        <access lane="154217764#6_0" pos="430.77" length="135.42" friendlyPos="1"/>
+        <access lane="154222985#1_0" pos="0.00" length="149.79" friendlyPos="1"/>
+        <access lane="154222987#1_0" pos="21.72" length="139.31" friendlyPos="1"/>
+        <access lane="154222991#1_0" pos="0.00" length="155.34" friendlyPos="1"/>
+        <access lane="154225930#1_0" pos="1871.23" length="154.44" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8319582578" name="улица Руднева" lane="300063700#3_0" startPos="19.42" endPos="34.42" friendlyPos="true" lines="272">
+        <access lane="154222995#0_0" pos="347.25" length="23.31" friendlyPos="1"/>
+        <access lane="154222995#1_0" pos="0.00" length="46.61" friendlyPos="1"/>
+        <access lane="154229521#4_0" pos="380.78" length="41.84" friendlyPos="1"/>
+        <access lane="154229521#5_0" pos="26.73" length="10.28" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8319582579" name="проспект Луначарского" lane="300063700#1_0" startPos="3.34" endPos="18.34" friendlyPos="true" lines="272">
+        <access lane="154222995#2_0" pos="324.40" length="23.74" friendlyPos="1"/>
+        <access lane="154222995#4_0" pos="0.00" length="97.63" friendlyPos="1"/>
+        <access lane="154229521#1_0" pos="417.04" length="95.22" friendlyPos="1"/>
+        <access lane="154229521#3_0" pos="25.28" length="9.86" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8319582580" name="Поэтический Бульвар" lane="230685373#1_0" startPos="9.27" endPos="24.27" friendlyPos="true" lines="208"/>
+    <busStop id="8319582581" name="проспект Художников, угол проспекта Луначарского" lane="31369237#1_0" startPos="12.50" endPos="27.50" friendlyPos="true" lines="208">
+        <access lane="154222995#2_0" pos="349.68" length="77.71" friendlyPos="1"/>
+        <access lane="154222995#4_0" pos="0.00" length="87.99" friendlyPos="1"/>
+        <access lane="154229521#1_0" pos="417.04" length="100.12" friendlyPos="1"/>
+        <access lane="154229521#3_0" pos="0.00" length="91.40" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8321524348" name="улица Сикейроса" lane="1112129142#2_0" startPos="6.18" endPos="21.18" friendlyPos="true" lines="51 251">
+        <access lane="131620436#0_0" pos="0.20" length="29.22" friendlyPos="1"/>
+        <access lane="131620436#1_0" pos="0.20" length="24.83" friendlyPos="1"/>
+        <access lane="131620436#2_0" pos="0.00" length="25.38" friendlyPos="1"/>
+        <access lane="131620459#0_0" pos="0.20" length="30.44" friendlyPos="1"/>
+        <access lane="131620459#1_0" pos="10.19" length="21.38" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8321524350" name="улица Есенина, угол Учебного переулка" lane="350642227#1_0" startPos="11.25" endPos="26.25" friendlyPos="true" lines="51 251 272">
+        <access lane="144904133#0_0" pos="0.00" length="164.54" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8321524356" name="улица Есенина, угол проспекта Просвещения" lane="31364751#1_0" startPos="4.41" endPos="19.41" friendlyPos="true" lines="251"/>
+    <busStop id="8321524361" name="Поэтический бульвар" lane="31401559#4_0" startPos="12.25" endPos="27.25" friendlyPos="true" lines="51 251">
+        <access lane="143010424#2_0" pos="1063.44" length="608.59" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="404.36" length="594.66" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8321524368" name="проспект Луначарского" lane="31401559#1_0" startPos="15.29" endPos="30.29" friendlyPos="true" lines="51 251">
+        <access lane="143010424#2_0" pos="1449.90" length="591.33" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="16.43" length="577.51" friendlyPos="1"/>
+        <access lane="154222995#5_0" pos="303.15" length="67.85" friendlyPos="1"/>
+        <access lane="154229528#1_0" pos="375.15" length="82.48" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8321524369" name="улица Сикейроса" lane="31386230#1_0" startPos="32.45" endPos="47.45" friendlyPos="true" lines="51 208 251 272">
+        <access lane="1280363856_0" pos="4.87" length="15.64" friendlyPos="1"/>
+        <access lane="1280363865#2_0" pos="2.16" length="25.25" friendlyPos="1"/>
+        <access lane="144904133#0_0" pos="397.41" length="21.38" friendlyPos="1"/>
+        <access lane="145466562#0_0" pos="30.65" length="14.61" friendlyPos="1"/>
+        <access lane="145466562#1_0" pos="1.84" length="10.40" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8321524370" name="Северный проспект" lane="1112129143#1_0" startPos="10.42" endPos="25.42" friendlyPos="true" lines="51 251">
+        <access lane="1001250764_0" pos="7.59" length="31.59" friendlyPos="1"/>
+        <access lane="131243222#1_0" pos="18.13" length="22.10" friendlyPos="1"/>
+        <access lane="131243222#2_0" pos="0.00" length="30.30" friendlyPos="1"/>
+        <access lane="131620459#5_0" pos="108.39" length="31.82" friendlyPos="1"/>
+        <access lane="484913795_0" pos="4.36" length="30.93" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8321524371" name="станция метро «Площадь Мужества»" lane="770390574#1_0" startPos="5.98" endPos="20.98" friendlyPos="true" lines="51"/>
+    <busStop id="8321524372" name="станция метро «Площадь Мужества»" lane="769400948#2_0" startPos="11.45" endPos="26.45" friendlyPos="true" lines="51"/>
+    <busStop id="8322158842" name="станция метро «Проспект Просвещения»" lane="31380253#1_0" startPos="20.53" endPos="35.53" friendlyPos="true" lines="51">
+        <access lane="143010424#2_0" pos="431.79" length="110.33" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="1033.78" length="96.83" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8323272384" name="станция метро «Парнас»" lane="895417348#1_0" startPos="30.24" endPos="45.24" friendlyPos="true" lines="51"/>
+    <busStop id="8323272389" name="улица Фёдора Абрамова, 18" lane="1428304990#1_0" startPos="34.39" endPos="49.39" friendlyPos="true" lines="51"/>
+    <busStop id="8323272391" name="улица Фёдора Абрамова" lane="1268134135#2_0" startPos="35.92" endPos="50.92" friendlyPos="true" lines="51"/>
+    <busStop id="8323272392" name="Заречная улица" lane="1428304984#1_0" startPos="35.63" endPos="50.63" friendlyPos="true" lines="51"/>
+    <busStop id="8323272393" name="Заречная улица, 42" lane="725963247#1_0" startPos="37.94" endPos="52.94" friendlyPos="true" lines="51">
+        <access lane="1428304980_0" pos="0.00" length="131.84" friendlyPos="1"/>
+        <access lane="703479972_0" pos="232.27" length="160.35" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8323434513" name="проспект Просвещения, угол улицы Есенина" lane="172397906#1_0" startPos="11.70" endPos="26.70" friendlyPos="true" lines="51"/>
+    <busStop id="8325792068" name="проспект Художников, угол улицы Сикейроса" lane="193597261#1_0" startPos="11.43" endPos="26.43" friendlyPos="true" lines="208">
+        <access lane="131620418_0" pos="7.39" length="107.28" friendlyPos="1"/>
+        <access lane="230631729#2_0" pos="703.31" length="71.32" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8325792071" name="улица Сантьяго-де-Куба" lane="355879373#1_0" startPos="20.42" endPos="35.42" friendlyPos="true" lines="270"/>
+    <busStop id="8325792072" name="Северный проспект, угол Тихорецкого проспекта" lane="88743480#1_0" startPos="22.92" endPos="37.92" friendlyPos="true" lines="270">
+        <access lane="154217764#5_0" pos="2.02" length="109.40" friendlyPos="1"/>
+        <access lane="154217764#6_0" pos="0.00" length="109.71" friendlyPos="1"/>
+        <access lane="154222985#1_0" pos="429.85" length="95.76" friendlyPos="1"/>
+        <access lane="154223001#1_0" pos="0.00" length="95.40" friendlyPos="1"/>
+        <access lane="154223001#2_0" pos="0.00" length="102.51" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8325792075" name="улица Сантьяго-де-Куба" lane="360038454#1_0" startPos="13.65" endPos="28.65" friendlyPos="true" lines="270"/>
+    <busStop id="8325792076" name="Северный проспект" lane="91669149#1_0" startPos="19.27" endPos="34.27" friendlyPos="true" lines="270">
+        <access lane="265773571_0" pos="746.54" length="181.92" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8325792077" name="проспект Художников, угол проспекта Луначарского" lane="88759699#2_0" startPos="21.77" endPos="36.77" friendlyPos="true" lines="208">
+        <access lane="154222995#2_0" pos="349.68" length="107.59" friendlyPos="1"/>
+        <access lane="154222995#4_0" pos="0.00" length="99.31" friendlyPos="1"/>
+        <access lane="154229521#1_0" pos="417.04" length="85.77" friendlyPos="1"/>
+        <access lane="154229521#3_0" pos="0.00" length="95.04" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8325792080" name="улица Есенина" lane="327467578#1_0" startPos="4.84" endPos="19.84" friendlyPos="true" lines="272">
+        <access lane="154222995#5_0" pos="269.05" length="24.02" friendlyPos="1"/>
+        <access lane="154229528#1_0" pos="409.27" length="9.46" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8328726551" name="улица Фёдора Абрамова, угол улицы Николая Рубцова" lane="292491700#1_0" startPos="25.49" endPos="40.49" friendlyPos="true" lines="51"/>
+    <busStop id="8328726553" name="улица Фёдора Абрамова, 18" lane="387305084#1_0" startPos="35.92" endPos="50.92" friendlyPos="true" lines="51"/>
+    <busStop id="8328726555" name="улица Фёдора Абрамова, угол улицы Николая Рубцова" lane="1428305006#1_0" startPos="32.96" endPos="47.96" friendlyPos="true" lines="51"/>
+    <busStop id="8328726558" name="улица Михаила Дудина, угол проспекта Энгельса" lane="171213139#1_0" startPos="10.16" endPos="25.16" friendlyPos="true" lines="51"/>
+    <busStop id="8328726560" name="улица Шостаковича" lane="439920802#1_0" startPos="4.10" endPos="19.10" friendlyPos="true" lines="51">
+        <access lane="143010424#1_0" pos="53.46" length="20.90" friendlyPos="1"/>
+        <access lane="143010424#2_0" pos="11.52" length="11.05" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="1454.80" length="24.85" friendlyPos="1"/>
+        <access lane="143029975#1_0" pos="0.00" length="30.47" friendlyPos="1"/>
+        <access lane="154329724_0" pos="823.14" length="140.07" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8328726562" name="улица Шостаковича" lane="766848766#1_0" startPos="30.13" endPos="45.13" friendlyPos="true" lines="51">
+        <access lane="143010424#1_0" pos="15.60" length="35.29" friendlyPos="1"/>
+        <access lane="143010424#2_0" pos="0.00" length="67.26" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="1466.28" length="61.04" friendlyPos="1"/>
+        <access lane="143029975#1_0" pos="37.80" length="21.57" friendlyPos="1"/>
+        <access lane="143029975#2_0" pos="0.00" length="68.67" friendlyPos="1"/>
+    </busStop>
+    <busStop id="8328726563" name="станция метро «Проспект Просвещения»" lane="143013959#1_0" startPos="21.40" endPos="36.40" friendlyPos="true" lines="51">
+        <access lane="143010424#2_0" pos="351.23" length="25.23" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="1115.27" length="11.43" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="8511707878" name="Чёрная речка" lane="494161391_0" startPos="1774.84" endPos="1974.84" friendlyPos="true">
+        <access lane="142986938#1_0" pos="1947.43" length="111.81" friendlyPos="1"/>
+        <access lane="781386894_0" pos="3188.19" length="125.21" friendlyPos="1"/>
+    </trainStop>
+    <trainStop id="8511707879" name="Чёрная речка" lane="494161390_0" startPos="9843.76" endPos="10043.76" friendlyPos="true">
+        <access lane="142986938#1_0" pos="1965.09" length="107.38" friendlyPos="1"/>
+        <access lane="781386894_0" pos="3170.53" length="120.91" friendlyPos="1"/>
+    </trainStop>
+    <trainStop id="8511707880" name="Пионерская" lane="494161391_0" startPos="3714.03" endPos="3914.03" friendlyPos="true"/>
+    <trainStop id="8511707881" name="Пионерская" lane="494161390_0" startPos="7906.87" endPos="8106.87" friendlyPos="true"/>
+    <trainStop id="8511707882" name="Удельная" lane="494161391_0" startPos="5762.92" endPos="5962.92" friendlyPos="true">
+        <access lane="142994906_0" pos="0.00" length="316.54" friendlyPos="1"/>
+        <access lane="142994912#2_0" pos="0.00" length="308.53" friendlyPos="1"/>
+        <access lane="706489492#7_0" pos="572.92" length="294.97" friendlyPos="1"/>
+    </trainStop>
+    <trainStop id="8511707883" name="Удельная" lane="494161390_0" startPos="5840.42" endPos="6040.42" friendlyPos="true">
+        <access lane="142994906_0" pos="0.00" length="339.89" friendlyPos="1"/>
+        <access lane="142994912#2_0" pos="0.00" length="319.51" friendlyPos="1"/>
+        <access lane="706489492#7_0" pos="572.92" length="305.79" friendlyPos="1"/>
+    </trainStop>
+    <trainStop id="8511707884" name="Озерки" lane="494161391_0" startPos="7914.62" endPos="8114.62" friendlyPos="true">
+        <access lane="-134238697_0" pos="17.65" length="18.22" friendlyPos="1"/>
+        <access lane="784543369#1_0" pos="7.23" length="13.49" friendlyPos="1"/>
+        <access lane="784543369#2_0" pos="0.00" length="11.98" friendlyPos="1"/>
+        <access lane="784543381_0" pos="0.00" length="4.73" friendlyPos="1"/>
+        <access lane="784543382_0" pos="0.00" length="16.66" friendlyPos="1"/>
+    </trainStop>
+    <trainStop id="8511707885" name="Озерки" lane="494161390_0" startPos="3747.47" endPos="3947.47" friendlyPos="true">
+        <access lane="-134238697_0" pos="17.65" length="36.76" friendlyPos="1"/>
+        <access lane="231966861_0" pos="38.82" length="5.20" friendlyPos="1"/>
+        <access lane="42298022#2_0" pos="11.49" length="33.91" friendlyPos="1"/>
+        <access lane="784543381_0" pos="0.00" length="31.69" friendlyPos="1"/>
+        <access lane="784543382_0" pos="0.00" length="22.40" friendlyPos="1"/>
+    </trainStop>
+    <trainStop id="8511707886" name="Проспект Просвещения" lane="494161391_0" startPos="9639.42" endPos="9839.42" friendlyPos="true">
+        <access lane="143010424#2_0" pos="812.24" length="60.18" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="654.22" length="44.70" friendlyPos="1"/>
+    </trainStop>
+    <trainStop id="8511707887" name="Проспект Просвещения" lane="494161390_0" startPos="2019.15" endPos="2219.15" friendlyPos="true">
+        <access lane="143010424#2_0" pos="813.07" length="38.79" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="653.33" length="23.31" friendlyPos="1"/>
+    </trainStop>
+    <busStop id="8747731429" name="Шуваловский проспект, угол Планерной улицы" lane="1205880888_0" startPos="0.52" endPos="15.52" friendlyPos="true" lines="85"/>
+    <trainStop id="892407381" name="проспект Непокорённых" lane="878716661#1_1" startPos="867.93" endPos="892.93" friendlyPos="true" lines="9"/>
+    <busStop id="9046289452" name="улица Карбышева, 10" lane="1145224505_0" startPos="18.52" endPos="33.52" friendlyPos="true" lines="251"/>
+    <busStop id="9046289453" name="Политехническая улица, угол Новороссийской улицы" lane="769650402#2_0" startPos="23.60" endPos="38.60" friendlyPos="true" lines="251"/>
+    <busStop id="9098947414" name="Станция метро «Ладожская»" lane="984064376_0" startPos="0.00" endPos="15.00" friendlyPos="true" lines="123"/>
+    <busStop id="9160286787" name="Рентгенорадиологический институт" lane="318564987#0_1" startPos="49.42" endPos="64.42" friendlyPos="true" lines="259"/>
+    <busStop id="9166051759" name="Меншиковский проспект" lane="346569138_0" startPos="35.75" endPos="50.75" friendlyPos="true">
+        <access lane="199761460#1_0" pos="1505.22" length="625.61" friendlyPos="1"/>
+        <access lane="878716661#1_0" pos="772.94" length="638.15" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9197326363" name="улица Фёдора Абрамова, угол улицы Меркурьева" lane="1428305012_0" startPos="48.99" endPos="63.99" friendlyPos="true" lines="51"/>
+    <busStop id="9230390431" name="станция метро «Лесная»" lane="131643090_0" startPos="47.78" endPos="62.78" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="2643.17" length="8.16" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="375.48" length="21.63" friendlyPos="1"/>
+    </busStop>
+    <trainStop id="965442922" name="улица Александра Матросова" lane="157157014#1_1" startPos="781.11" endPos="806.11" friendlyPos="true" lines="20"/>
+    <busStop id="9693547079" name="проспект Тореза, 96" lane="608206947#1_0" startPos="490.73" endPos="505.73" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="9693547081" name="проспект Тореза, 96" lane="138017888#2_0" startPos="315.78" endPos="330.78" friendlyPos="true" lines="51 251 123 80"/>
+    <busStop id="9695434785" name="улица Руставели, 37" lane="172396502#1_0" startPos="10.48" endPos="25.48" friendlyPos="true" lines="272"/>
+    <busStop id="9695491021" name="проспект Просвещения, угол Выборгского шоссе" lane="1066359938#2_0" startPos="29.42" endPos="44.42" friendlyPos="true" lines="259"/>
+    <busStop id="9701246158" name="Онкологический центр имени Н.П. Напалкова" lane="318564987#0_1" startPos="345.66" endPos="360.66" friendlyPos="true" lines="259"/>
+    <busStop id="9701246162" name="Речная улица" lane="165270999_0" startPos="136.42" endPos="151.42" friendlyPos="true" lines="259"/>
+    <busStop id="9701246166" name="Железнодорожная станция Дибуны" lane="59862393_0" startPos="0.00" endPos="15.00" friendlyPos="true" lines="259"/>
+    <busStop id="9707881149" name="Елизаветинская больница" lane="200468551#2_0" startPos="7.52" endPos="22.52" friendlyPos="true" lines="270"/>
+    <busStop id="9709879865" name="проспект Энергетиков, угол Магнитогорской улицы" lane="172351018#1_0" startPos="159.55" endPos="174.55" friendlyPos="true" lines="123"/>
+    <busStop id="9714607486" name="улица Карбышева, 7" lane="101549763#1_0" startPos="402.62" endPos="417.62" friendlyPos="true" lines="251"/>
+    <busStop id="9714607487" name="железнодорожная станция «Кушелевка»" lane="997557399#1_0" startPos="310.22" endPos="325.22" friendlyPos="true" lines="251"/>
+    <trainStop id="9756302379" name="проспект Луначарского, 68" lane="154222995#1_1" startPos="355.80" endPos="380.80" friendlyPos="true" lines="20 9"/>
+    <trainStop id="9756302380" name="проспект Луначарского, 68" lane="154229521#3_1" startPos="324.62" endPos="349.62" friendlyPos="true" lines="20 9"/>
+    <busStop id="9792721774" name="Литовская улица" lane="1055514790_0" startPos="510.93" endPos="525.93" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="1524.86" length="2.09" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="1496.80" length="16.00" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9792721776" name="Литовская улица" lane="223469887#1_0" startPos="63.22" endPos="78.22" friendlyPos="true" lines="251">
+        <access lane="156398280#2_0" pos="1590.21" length="14.71" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="1431.37" length="0.79" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9892207296" name="проспект Луначарского, 68" lane="300063700#2_0" startPos="10.86" endPos="25.86" friendlyPos="true" lines="272">
+        <access lane="154222995#1_0" pos="362.81" length="23.48" friendlyPos="1"/>
+        <access lane="154222995#2_0" pos="0.00" length="36.11" friendlyPos="1"/>
+        <access lane="154229521#3_0" pos="349.62" length="29.25" friendlyPos="1"/>
+        <access lane="154229521#4_0" pos="18.04" length="9.94" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9892249702" name="Тихорецкий проспект" lane="88749511#4_0" startPos="11.48" endPos="26.48" friendlyPos="true" lines="270">
+        <access lane="154217764#4_0" pos="254.38" length="82.18" friendlyPos="1"/>
+        <access lane="154217764#5_0" pos="0.00" length="85.02" friendlyPos="1"/>
+        <access lane="154217764#6_0" pos="0.00" length="91.31" friendlyPos="1"/>
+        <access lane="154223001#1_0" pos="2.64" length="98.65" friendlyPos="1"/>
+        <access lane="154223001#2_0" pos="0.43" length="96.24" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9893307490" name="станция метро «Удельная»" lane="102861793_0" startPos="281.26" endPos="296.26" friendlyPos="true">
+        <access lane="142994906_0" pos="0.00" length="401.37" friendlyPos="1"/>
+        <access lane="706489492#7_0" pos="572.92" length="360.96" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9899616874" name="Поликлиника № 117" lane="1188143939_0" startPos="21.60" endPos="36.60" friendlyPos="true" lines="123 80">
+        <access lane="-406599272_0" pos="0.00" length="48.56" friendlyPos="1"/>
+        <access lane="406599272_0" pos="21.22" length="48.55" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9899967402" name="улица Асафьева" lane="146940699#1_0" startPos="8.24" endPos="23.24" friendlyPos="true" lines="259">
+        <access lane="143010424#2_0" pos="1123.34" length="11.38" friendlyPos="1"/>
+        <access lane="143010425#2_0" pos="342.97" length="25.46" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9902496897" name="проспект Луначарского, 60" lane="327467578#2_0" startPos="11.15" endPos="26.15" friendlyPos="true" lines="272">
+        <access lane="154222995#4_0" pos="398.51" length="22.76" friendlyPos="1"/>
+        <access lane="154222995#5_0" pos="0.00" length="36.11" friendlyPos="1"/>
+        <access lane="154229521#1_0" pos="18.47" length="8.32" friendlyPos="1"/>
+        <access lane="154229528#1_0" pos="678.97" length="29.38" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9909914581" name="улица Черкасова" lane="144529099#1_0" startPos="28.99" endPos="43.99" friendlyPos="true" lines="272"/>
+    <busStop id="9926530778" name="Репищева улица" lane="172372870#1_0" startPos="8.20" endPos="23.20" friendlyPos="true">
+        <access lane="1335070470_0" pos="27.49" length="223.93" friendlyPos="1"/>
+        <access lane="1436571875_0" pos="0.00" length="130.35" friendlyPos="1"/>
+        <access lane="1436571878_0" pos="92.75" length="161.82" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9948727711" name="проспект Энгельса" lane="1112134939#4_0" startPos="1.92" endPos="16.92" friendlyPos="true" lines="208 270 123 80">
+        <access lane="131620421#1_0" pos="26.95" length="27.23" friendlyPos="1"/>
+        <access lane="131620421#2_0" pos="5.59" length="21.96" friendlyPos="1"/>
+        <access lane="221613769_0" pos="5.74" length="24.36" friendlyPos="1"/>
+        <access lane="764170863#1_0" pos="0.20" length="18.43" friendlyPos="1"/>
+        <access lane="764170863#2_0" pos="0.00" length="19.46" friendlyPos="1"/>
+    </busStop>
+    <busStop id="9980025886" name="проспект Непокорённых" lane="769650402#2_0" startPos="358.76" endPos="373.76" friendlyPos="true" lines="251"/>
+    <busStop id="9980040315" name="1-й Муринский проспект" lane="131643090_0" startPos="346.37" endPos="361.37" friendlyPos="true" lines="251">
+        <access lane="142986933#4_0" pos="356.03" length="130.13" friendlyPos="1"/>
+        <access lane="156398280#2_0" pos="2941.63" length="7.46" friendlyPos="1"/>
+        <access lane="157157014#1_0" pos="76.73" length="20.97" friendlyPos="1"/>
+        <access lane="157157030#1_0" pos="0.00" length="134.60" friendlyPos="1"/>
+    </busStop>
+</additional>
