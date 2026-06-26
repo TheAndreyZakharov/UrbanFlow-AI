@@ -9,24 +9,53 @@
 *.log
 
 # node
-node_modules
-dist
-build
-.vite
+node_modules/
+dist/
+build/
+.vite/
 
 # python
-__pycache__
+__pycache__/
 *.pyc
-.venv
-.pytest_cache
-.ruff_cache
-.mypy_cache
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 
-# data / models
+# SUMO generated files
+server/routes.rou.xml
+server/data/
+data/sumo/
+
+# data folders
 data/*
 !data/.gitkeep
+!data/models/
+!data/models/.gitkeep
+!data/models/tls_osm_only/
+!data/models/tls_osm_only/.gitkeep
+!data/models/tls_all_intersections/
+!data/models/tls_all_intersections/.gitkeep
+!data/osm/
+!data/osm/.gitkeep
+!data/runs/
+!data/runs/.gitkeep
+!data/sessions/
+!data/sessions/.gitkeep
 
-# AI artifacts
+# generated AI artifacts
+data/models/**/*.zip
+data/models/**/*.onnx
+data/models/**/*.pt
+data/models/**/*.pth
+data/models/**/*.pkl
+data/models/**/*.json
+data/runs/*
+!data/runs/.gitkeep
+data/sessions/*
+!data/sessions/.gitkeep
+
+# AI artifacts anywhere
 *.pt
 *.pth
 *.ckpt
