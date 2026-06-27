@@ -21,6 +21,7 @@ from app.schemas.simulation import (
 )
 from app.simulation.controllers import SignalController
 from app.simulation.events import TrafficEvent, maybe_generate_random_event
+from app.simulation.ai_tls_controller import UrbanFlowTlsController
 from app.simulation.metrics import build_intersection_load, build_metrics, build_road_load
 from app.simulation.sumo_scenario import build_sumo_scenario, ensure_sumo_python_tools, sumo_environment
 
@@ -67,6 +68,7 @@ class SumoSimulationEngine:
     closed_road_ids: set[str] = field(default_factory=set)
     forced_open_road_ids: set[str] = field(default_factory=set)
     signal_controller: SignalController = field(default_factory=SignalController)
+    urbanflow_tls_controller: UrbanFlowTlsController = field(default_factory=UrbanFlowTlsController)
 
     _rng: random.Random = field(init=False)
     _sumo_config_path: Path = field(init=False)
@@ -139,6 +141,7 @@ class SumoSimulationEngine:
             self._traffic_light_program_ids = {}
             self._traffic_light_override_active = False
             self._traffic_light_override = "sumo"
+            self.urbanflow_tls_controller.reset()
             self._public_transport_lines = []
             self._public_transport_spawn_index = 0
             self._closed_sumo_edges_by_road_id = {}
@@ -219,6 +222,9 @@ class SumoSimulationEngine:
             self.mode = mode
             self._traffic_light_override = "sumo"
             self._restore_sumo_traffic_lights()
+
+            if mode == "ai":
+                self.urbanflow_tls_controller.reset()
 
             return self._state_unlocked()
 
@@ -535,6 +541,7 @@ class SumoSimulationEngine:
             return
 
         if self.mode == "ai":
+            self.urbanflow_tls_controller.apply(self._conn, self.tick)
             return
 
         try:

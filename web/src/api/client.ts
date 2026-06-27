@@ -4,7 +4,12 @@ import type {
   EditorPatch,
   SimulationMode,
   SimulationSession,
-  SimulationState
+  SimulationState,
+  SavedTrainingModel,
+  TrainingCurriculum,
+  TrainingJob,
+  TrainingModelFormat,
+  TrainingSignalScope
 } from "../types/domain";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
@@ -144,5 +149,76 @@ export async function setTrafficLightOverride(
 ): Promise<SimulationState> {
   return request<SimulationState>(`/simulation/${encodeURIComponent(sessionId)}/traffic-light-override/${override}`, {
     method: "POST"
+  });
+}
+
+type StartTrainingPayload = {
+  sessionId: string;
+  signalScope: TrainingSignalScope;
+  curriculum: TrainingCurriculum;
+};
+
+export async function startTraining(payload: StartTrainingPayload): Promise<TrainingJob> {
+  return request<TrainingJob>("/training/start", {
+    method: "POST",
+    body: JSON.stringify({
+      session_id: payload.sessionId,
+      signal_scope: payload.signalScope,
+      curriculum: payload.curriculum
+    })
+  });
+}
+
+export async function stopTraining(jobId: string): Promise<TrainingJob> {
+  return request<TrainingJob>(`/training/${encodeURIComponent(jobId)}/stop`, {
+    method: "POST"
+  });
+}
+
+export async function getTrainingJob(jobId: string): Promise<TrainingJob> {
+  return request<TrainingJob>(`/training/${encodeURIComponent(jobId)}`);
+}
+
+export async function getTrainingJobForSession(sessionId: string): Promise<TrainingJob | null> {
+  return request<TrainingJob | null>(`/training/session/${encodeURIComponent(sessionId)}`);
+}
+
+type SaveTrainingModelPayload = {
+  jobId: string;
+  label: string;
+  notes: string;
+};
+
+export async function saveTrainingModel(payload: SaveTrainingModelPayload): Promise<SavedTrainingModel> {
+  return request<SavedTrainingModel>(`/training/${encodeURIComponent(payload.jobId)}/save-model`, {
+    method: "POST",
+    body: JSON.stringify({
+      label: payload.label,
+      notes: payload.notes
+    })
+  });
+}
+
+type ExportTrainingModelPayload = {
+  jobId: string;
+  format: TrainingModelFormat;
+};
+
+export async function exportTrainingModel(payload: ExportTrainingModelPayload): Promise<SavedTrainingModel> {
+  return request<SavedTrainingModel>(`/training/${encodeURIComponent(payload.jobId)}/export-model`, {
+    method: "POST",
+    body: JSON.stringify({
+      format: payload.format
+    })
+  });
+}
+
+export async function listTrainingModels(): Promise<SavedTrainingModel[]> {
+  return request<SavedTrainingModel[]>("/training/models/list");
+}
+
+export async function deleteTrainingModel(modelId: string): Promise<void> {
+  await request(`/training/models/${encodeURIComponent(modelId)}`, {
+    method: "DELETE"
   });
 }

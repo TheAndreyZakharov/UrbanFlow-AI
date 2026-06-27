@@ -5,6 +5,7 @@ from app.api.editor import router as editor_router
 from app.api.health import router as health_router
 from app.api.osm import router as osm_router
 from app.api.simulation import router as simulation_router
+from app.api.training import router as training_router
 
 
 def create_app() -> FastAPI:
@@ -29,6 +30,7 @@ def create_app() -> FastAPI:
     app.include_router(osm_router, prefix="/osm", tags=["osm"])
     app.include_router(simulation_router, prefix="/simulation", tags=["simulation"])
     app.include_router(editor_router, prefix="/editor", tags=["editor"])
+    app.include_router(training_router, prefix="/training", tags=["training"])
 
     return app
 

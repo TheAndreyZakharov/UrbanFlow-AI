@@ -1,4 +1,4 @@
-type TabIcon = "map" | "simulation" | "editor" | "settings" | "metrics";
+type TabIcon = "map" | "simulation" | "editor" | "settings" | "metrics" | "training";
 
 type Props = {
   label: string;
@@ -68,6 +68,18 @@ function Icon({ type }: { type: TabIcon }) {
     );
   }
 
+  if (type === "training") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 18c4-8 8-8 16-12" />
+        <path d="M5 6h5v5H5z" />
+        <path d="M14 13h5v5h-5z" />
+        <path d="M10 8h4" />
+        <path d="M16 10v3" />
+      </svg>
+    );
+  }
+  
   if (type === "settings") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">

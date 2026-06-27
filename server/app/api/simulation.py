@@ -14,15 +14,18 @@ router = APIRouter()
 
 @router.post("/create", response_model=SimulationSessionDto)
 def create_simulation(payload: CreateSimulationRequest) -> SimulationSessionDto:
-    engine = session_store.create(
-        city_map=payload.city_map,
-        mode=payload.mode,
-        vehicles_count=payload.vehicles_count,
-        pedestrians_count=payload.pedestrians_count,
-        random_events_enabled=payload.random_events_enabled,
-        seed=payload.seed,
-        signals_on_all_intersections=payload.signals_on_all_intersections,
-    )
+    try:
+        engine = session_store.create(
+            city_map=payload.city_map,
+            mode=payload.mode,
+            vehicles_count=payload.vehicles_count,
+            pedestrians_count=payload.pedestrians_count,
+            random_events_enabled=payload.random_events_enabled,
+            seed=payload.seed,
+            signals_on_all_intersections=payload.signals_on_all_intersections,
+        )
+    except Exception as error:
+        raise HTTPException(status_code=409, detail=f"simulation create failed: {error}") from error
 
     return SimulationSessionDto(
         session_id=engine.session_id,
@@ -76,7 +79,11 @@ def set_traffic_light_override(session_id: str, override: str) -> SimulationStat
 @router.post("/{session_id}/reset", response_model=SimulationStateDto)
 def reset_simulation(session_id: str) -> SimulationStateDto:
     engine = _get_engine_or_404(session_id)
-    return engine.reset()
+
+    try:
+        return engine.reset()
+    except Exception as error:
+        raise HTTPException(status_code=409, detail=f"simulation reset failed: {error}") from error
 
 
 @router.post("/{session_id}/mode/{mode}", response_model=SimulationStateDto)

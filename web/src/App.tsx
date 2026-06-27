@@ -9,6 +9,13 @@ import {
   stepSimulation,
   updateSimulationSettings,
   setTrafficLightOverride,
+  startTraining,
+  stopTraining,
+  getTrainingJob,
+  saveTrainingModel,
+  exportTrainingModel,
+  listTrainingModels,
+  deleteTrainingModel,
   type TrafficLightOverride
 } from "./api/client";
 import { AIPanel } from "./components/AIPanel";
@@ -24,6 +31,8 @@ import { MapSelector } from "./components/MapSelector";
 import { MetricsPanel } from "./components/MetricsPanel";
 import { SideTab } from "./components/SideTab";
 import { SimulationControls } from "./components/SimulationControls";
+import { TrainingPanel } from "./components/TrainingPanel";
+import { ModelRegistryPanel } from "./components/ModelRegistryPanel";
 import { CityScene } from "./scene/CityScene";
 import { SceneSettingsPanel } from "./components/SceneSettingsPanel";
 import type { SceneSettings } from "./types/scene";
@@ -33,7 +42,13 @@ import type {
   Road,
   SimulationMode,
   SimulationSession,
-  SimulationState
+  SavedTrainingModel,
+  SimulationState,
+  TrainingCurriculum,
+  TrainingJob,
+  TrainingMetricPoint,
+  TrainingModelFormat,
+  TrainingSignalScope
 } from "./types/domain";
 
 export function App() {
@@ -61,6 +76,20 @@ export function App() {
   const [simulationPanelOpen, setSimulationPanelOpen] = useState(false);
   const [editorPanelOpen, setEditorPanelOpen] = useState(false);
   const [settingsPanelOpen, setSettingsPanelOpen] = useState(false);
+  const [trainingPanelOpen, setTrainingPanelOpen] = useState(false);
+  const [trainingSignalScope, setTrainingSignalScope] = useState<TrainingSignalScope>("osm_only");
+  const [trainingJob, setTrainingJob] = useState<TrainingJob | null>(null);
+  const [trainingBusy, setTrainingBusy] = useState(false);
+  const [savedModels, setSavedModels] = useState<SavedTrainingModel[]>([]);
+  const [metricHistory, setMetricHistory] = useState<TrainingMetricPoint[]>([]);
+  const [trainingCurriculum, setTrainingCurriculum] = useState<TrainingCurriculum>({
+    start_vehicles: 60,
+    max_vehicles: 800,
+    vehicle_step: 80,
+    steps_per_level: 900,
+    pedestrians_count: 220,
+    random_events_enabled: true
+  });
   const [sceneSettings, setSceneSettings] = useState<SceneSettings>({
     showBuildings: false,
     showSpecialZones: false,
@@ -107,6 +136,26 @@ export function App() {
   const delayedOpenRoadRefs = useRef<number[]>([]);
   const sessionId = session?.session_id ?? null;
   const selectedMap = useMemo(() => session?.city_map ?? cityMap, [cityMap, session]);
+  function applyState(next: SimulationState) {
+    setState(next);
+
+    setMetricHistory((current) => {
+      const point: TrainingMetricPoint = {
+        tick: next.tick,
+        speed: next.metrics.average_speed_mps,
+        wait: next.metrics.average_vehicle_wait_time,
+        congestion: next.metrics.congestion_score,
+        stopped: next.metrics.stopped_vehicles,
+        vehicles: next.metrics.active_vehicles,
+        pedestrians: next.metrics.active_pedestrians,
+        reward: trainingJob?.latest_reward ?? null
+      };
+
+      const updated = [...current, point];
+
+      return updated.slice(-240);
+    });
+  }
 
   function stopSimulationLoop() {
     requestSerialRef.current += 1;
@@ -192,6 +241,10 @@ export function App() {
       setCityMap(map);
       setSession(null);
       setState(null);
+      setTrainingJob(null);
+      setSavedModels([]);
+      setMetricHistory([]);
+      setTrainingSignalScope(signalsOnAllIntersections ? "all_intersections" : "osm_only");
 
       setStatus(
         `Imported from OSM: ${map.roads.length} roads, ${map.buildings.length} buildings, ${(map.surfaces ?? []).length} surfaces. Creating simulation...`
@@ -210,8 +263,9 @@ export function App() {
       });
 
       setSession(created);
-      setState(created.state);
+      applyState(created.state);
       setStatus("Selected OSM area generated and simulation created.");
+      void refreshSavedModels();
       closeMap();
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown OSM import error";
@@ -233,7 +287,7 @@ export function App() {
       return;
     }
 
-    setState(next);
+    applyState(next);
   }
 
   async function handleReset() {
@@ -248,7 +302,8 @@ export function App() {
       return;
     }
 
-    setState(next);
+    applyState(next);
+    setMetricHistory([]);
     setIsRunning(false);
   }
 
@@ -270,9 +325,15 @@ export function App() {
 
   async function handleModeChange(nextMode: SimulationMode) {
     setMode(nextMode);
+
+    if (nextMode !== "ai") {
+      setTrainingJob(null);
+    }
+
     if (!sessionId) return;
+
     const next = await setSimulationMode(sessionId, nextMode);
-    setState(next);
+    applyState(next);
   }
 
   useEffect(() => {
@@ -374,6 +435,45 @@ export function App() {
   }, [sessionId, selectedMap, editorAutomation]);
 
   useEffect(() => {
+    if (!trainingJob || trainingJob.status !== "running") {
+      return;
+    }
+
+    let cancelled = false;
+
+    const timer = window.setInterval(() => {
+      void (async () => {
+        try {
+          const next = await getTrainingJob(trainingJob.id);
+
+          if (cancelled) {
+            return;
+          }
+
+          setTrainingJob(next);
+        } catch {
+          if (!cancelled) {
+            setTrainingJob((current) =>
+              current
+                ? {
+                    ...current,
+                    status: "failed",
+                    message: "Training status polling failed."
+                  }
+                : current
+            );
+          }
+        }
+      })();
+    }, 1200);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [trainingJob?.id, trainingJob?.status]);
+
+  useEffect(() => {
     return () => {
       if (drawerUnmountTimerRef.current) {
         window.clearTimeout(drawerUnmountTimerRef.current);
@@ -469,7 +569,10 @@ export function App() {
                     onModeChange={(nextMode) => void handleModeChange(nextMode)}
                     onVehiclesCountChange={setVehiclesCount}
                     onPedestriansCountChange={setPedestriansCount}
-                    onSignalsOnAllIntersectionsChange={setSignalsOnAllIntersections}
+                    onSignalsOnAllIntersectionsChange={(enabled) => {
+                      setSignalsOnAllIntersections(enabled);
+                      setTrainingSignalScope(enabled ? "all_intersections" : "osm_only");
+                    }}
                     onTrafficLightOverrideChange={(override) => void handleTrafficLightOverrideChange(override)}
                     onApplySimulationSettings={() => void handleApplySimulationSettings()}
                   />
@@ -539,6 +642,44 @@ export function App() {
                 </div>
               </div>
             </div>
+
+            <div className={["dock-section", trainingPanelOpen ? "dock-section-open" : ""].join(" ")}>
+              <SideTab
+                label="Training"
+                icon="training"
+                active={trainingPanelOpen}
+                expanded={trainingPanelOpen}
+                onClick={() => setTrainingPanelOpen((value) => !value)}
+              />
+
+              <div className="dock-panel-clip" aria-hidden={!trainingPanelOpen}>
+                <div className="dock-panel">
+                  <button
+                    className="round-close round-close-right"
+                    type="button"
+                    onClick={() => setTrainingPanelOpen(false)}
+                    aria-label="Close training panel"
+                  >
+                    ‹
+                  </button>
+
+                  <TrainingPanel
+                    hasSession={Boolean(sessionId)}
+                    signalScope={trainingSignalScope}
+                    curriculum={trainingCurriculum}
+                    job={trainingJob}
+                    isBusy={trainingBusy}
+                    onSignalScopeChange={setTrainingSignalScope}
+                    onCurriculumChange={setTrainingCurriculum}
+                    onStartTraining={() => void handleStartTraining()}
+                    onStopTraining={() => void handleStopTraining()}
+                    onSaveModel={() => void handleSaveTrainingModel()}
+                    onExportModel={(format) => void handleExportTrainingModel(format)}
+                  />
+                </div>
+              </div>
+            </div>
+
           </aside>
 
           <div className="right-dock-tab-wrap">
@@ -589,8 +730,26 @@ export function App() {
           </button>
 
           <div className="metrics-drawer-content">
-            <MetricsPanel state={state} cityMap={selectedMap} />
-            <AIPanel state={state} />
+            <MetricsPanel
+              state={state}
+              cityMap={selectedMap}
+              trainingJob={trainingJob}
+              metricHistory={metricHistory}
+            />
+
+            <AIPanel
+              state={state}
+              trainingJob={trainingJob}
+              metricHistory={metricHistory}
+            />
+
+            <ModelRegistryPanel
+              job={trainingJob}
+              models={savedModels}
+              isBusy={trainingBusy}
+              onRefresh={() => void refreshSavedModels()}
+              onDeleteModel={(modelId) => void handleDeleteTrainingModel(modelId)}
+            />
           </div>
         </aside>
       )}
@@ -634,7 +793,8 @@ export function App() {
         signalsOnAllIntersections
       });
 
-      setState(next);
+      applyState(next);
+      setMetricHistory([]);
       setStatus(
         `Simulation updated: ${vehiclesCount} vehicles, ${pedestriansCount} pedestrians, ${
           signalsOnAllIntersections ? "signals on all intersections" : "OSM signals only"
@@ -682,7 +842,7 @@ export function App() {
         return;
       }
 
-      setState(next);
+      applyState(next);
       setStatus(`Editor applied: ${editorTool} on ${road.name ?? road.id}.`);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown editor error";
@@ -706,7 +866,7 @@ export function App() {
         return;
       }
 
-      setState(next);
+      applyState(next);
       setStatus("Editor event removed.");
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown editor error";
@@ -748,7 +908,7 @@ export function App() {
     }
     
     const next = await getSimulationState(sessionId);
-    setState(next);
+    applyState(next);
   }
 
   function pointOnRoad(road: Road, progress: number) {
@@ -775,5 +935,158 @@ export function App() {
       z: start.z + (end.z - start.z) * segmentProgress
     };
   }
+
+  async function handleStartTraining() {
+    if (!sessionId) {
+      setStatus("Generate OSM area first.");
+      return;
+    }
+
+    stopSimulationLoop();
+    setTrainingBusy(true);
+    setStatus("Preparing UrbanFlow AI training on this zone...");
+
+    try {
+      const job = await startTraining({
+        sessionId,
+        signalScope: trainingSignalScope,
+        curriculum: trainingCurriculum
+      });
+
+      setTrainingJob(job);
+      setMode("ai");
+      setTrafficLightOverrideState("sumo");
+      setSignalsOnAllIntersections(trainingSignalScope === "all_intersections");
+      setVehiclesCount(trainingCurriculum.start_vehicles);
+      setPedestriansCount(trainingCurriculum.pedestrians_count);
+
+      const next = await getSimulationState(sessionId);
+      applyState(next);
+      setMetricHistory([]);
+      void refreshSavedModels();
+
+      requestSerialRef.current += 1;
+      isRunningRef.current = true;
+      setIsRunning(true);
+
+      setStatus(
+        `UrbanFlow AI training running visually: ${
+          trainingSignalScope === "all_intersections" ? "all intersections" : "OSM traffic lights only"
+        }.`
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown training error";
+      setStatus(`Training start failed: ${message}`);
+    } finally {
+      setTrainingBusy(false);
+    }
+  }
+  
+  async function handleStopTraining() {
+    if (!trainingJob) return;
+
+    setTrainingBusy(true);
+    setStatus("Stopping UrbanFlow AI training...");
+
+    try {
+      const stopped = await stopTraining(trainingJob.id);
+      setTrainingJob(stopped);
+      stopSimulationLoop();
+
+      if (sessionId) {
+        const next = await getSimulationState(sessionId);
+        applyState(next);
+      }
+
+      setStatus("UrbanFlow AI training stopped.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown training error";
+      setStatus(`Training stop failed: ${message}`);
+    } finally {
+      setTrainingBusy(false);
+    }
+  }
+
+  async function refreshSavedModels() {
+    try {
+      const models = await listTrainingModels();
+      setSavedModels(models);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown model registry error";
+      setStatus(`Model registry refresh failed: ${message}`);
+    }
+  }
+
+  async function handleSaveTrainingModel() {
+    if (!trainingJob) return;
+
+    setTrainingBusy(true);
+    setStatus("Saving trained UrbanFlow AI model...");
+
+    try {
+      const saved = await saveTrainingModel({
+        jobId: trainingJob.id,
+        label: `UrbanFlow ${trainingJob.signal_scope} ${new Date().toLocaleString()}`,
+        notes: `Saved from job ${trainingJob.id}`
+      });
+
+      await refreshSavedModels();
+
+      const nextJob = await getTrainingJob(trainingJob.id);
+      setTrainingJob(nextJob);
+
+      setStatus(`Model saved: ${saved.label}`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown save model error";
+      setStatus(`Save model failed: ${message}`);
+    } finally {
+      setTrainingBusy(false);
+    }
+  }
+
+  async function handleExportTrainingModel(format: TrainingModelFormat) {
+    if (!trainingJob) return;
+
+    setTrainingBusy(true);
+    setStatus(`Exporting UrbanFlow AI model as ${format}...`);
+
+    try {
+      const exported = await exportTrainingModel({
+        jobId: trainingJob.id,
+        format
+      });
+
+      await refreshSavedModels();
+
+      setStatus(`Model export ready: ${exported.path}`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown export model error";
+      setStatus(`Export model failed: ${message}`);
+    } finally {
+      setTrainingBusy(false);
+    }
+  }
+
+  async function handleDeleteTrainingModel(modelId: string) {
+    setTrainingBusy(true);
+    setStatus("Deleting saved model...");
+
+    try {
+      await deleteTrainingModel(modelId);
+      await refreshSavedModels();
+      setStatus("Saved model deleted.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown delete model error";
+      setStatus(`Delete model failed: ${message}`);
+    } finally {
+      setTrainingBusy(false);
+    }
+  }
+
+
+
+
+
+
 
 }

@@ -109,5 +109,5 @@ class SignalController:
         return SignalDecision(
             phase=phase,
             time_left=20.0 - float(tick % 20),
-            reason="AI controller placeholder until trained model is connected",
+            reason="UrbanFlow AI runtime traffic light controller",
         )

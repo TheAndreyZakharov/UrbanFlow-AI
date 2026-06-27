@@ -264,3 +264,66 @@ export type SimulationSession = {
   city_map: CityMap;
   state: SimulationState;
 };
+
+export type TrainingSignalScope = "osm_only" | "all_intersections";
+
+export type TrainingJobStatus = "idle" | "running" | "stopping" | "stopped" | "failed" | "completed";
+
+export type TrainingCurriculum = {
+  start_vehicles: number;
+  max_vehicles: number;
+  vehicle_step: number;
+  steps_per_level: number;
+  pedestrians_count: number;
+  random_events_enabled: boolean;
+};
+
+export type TrainingJob = {
+  id: string;
+  session_id: string;
+  status: TrainingJobStatus;
+  signal_scope: TrainingSignalScope;
+  current_episode: number;
+  current_step: number;
+  current_vehicles: number;
+  best_reward: number | null;
+  latest_reward: number | null;
+  average_wait_time: number | null;
+  congestion_score: number | null;
+  stopped_vehicles: number | null;
+  message: string;
+  model_output_dir: string;
+  checkpoint_path: string | null;
+  can_save_model: boolean;
+  saved_model_count: number;
+  curriculum: TrainingCurriculum;
+};
+
+export type TrainingModelFormat = "checkpoint" | "onnx" | "torchscript" | "pickle";
+
+export type SavedTrainingModel = {
+  id: string;
+  job_id: string;
+  session_id: string;
+  signal_scope: TrainingSignalScope;
+  label: string;
+  notes: string;
+  path: string;
+  format: TrainingModelFormat;
+  created_at_tick: number;
+  best_reward: number | null;
+  average_wait_time: number | null;
+  congestion_score: number | null;
+  stopped_vehicles: number | null;
+};
+
+export type TrainingMetricPoint = {
+  tick: number;
+  speed: number;
+  wait: number;
+  congestion: number;
+  stopped: number;
+  vehicles: number;
+  pedestrians: number;
+  reward: number | null;
+};

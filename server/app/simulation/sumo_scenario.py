@@ -1,3 +1,4 @@
+import hashlib
 import os
 import shutil
 import subprocess
@@ -210,7 +211,7 @@ async def build_sumo_scenario(
     all_routes_path = scenario_dir / "all_routes.rou.xml"
     config_path = scenario_dir / "simulation.sumocfg"
 
-    await download_osm_xml(city_map=city_map, output_path=osm_path)
+    await ensure_cached_osm_xml(city_map=city_map, output_path=osm_path)
 
     build_network(
         osm_path=osm_path,
@@ -289,6 +290,28 @@ async def build_sumo_scenario(
 
     return config_path
 
+async def ensure_cached_osm_xml(city_map: CityMapDto, output_path: Path) -> None:
+    cache_path = cached_osm_xml_path(city_map)
+
+    if cache_path.exists():
+        shutil.copyfile(cache_path, output_path)
+        return
+
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = cache_path.with_suffix(".tmp.xml")
+
+    await download_osm_xml(city_map=city_map, output_path=temporary_path)
+
+    temporary_path.replace(cache_path)
+    shutil.copyfile(cache_path, output_path)
+
+
+def cached_osm_xml_path(city_map: CityMapDto) -> Path:
+    bbox = city_map.bbox
+    bbox_key = f"{bbox.south:.7f},{bbox.west:.7f},{bbox.north:.7f},{bbox.east:.7f}"
+    bbox_hash = hashlib.sha1(bbox_key.encode("utf-8")).hexdigest()[:16]
+
+    return Path("data") / "osm" / f"sumo_{bbox_hash}.osm.xml"
 
 async def download_osm_xml(city_map: CityMapDto, output_path: Path) -> None:
     bbox = city_map.bbox

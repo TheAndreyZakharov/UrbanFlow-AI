@@ -146,9 +146,9 @@ export function SimulationControls({
       <label>
         Traffic light controller
         <select value={mode} onChange={(event) => onModeChange(event.target.value as SimulationMode)}>
-          <option value="rule_based">SUMO traffic lights</option>
+          <option value="rule_based">SUMO automatic control</option>
           <option value="fixed">Manual fixed cycle</option>
-          <option value="ai">AI controller later</option>
+          <option value="ai">UrbanFlow AI control</option>
         </select>
       </label>
     </section>
