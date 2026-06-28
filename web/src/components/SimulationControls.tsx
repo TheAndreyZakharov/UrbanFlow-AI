@@ -148,7 +148,7 @@ export function SimulationControls({
         <select value={mode} onChange={(event) => onModeChange(event.target.value as SimulationMode)}>
           <option value="rule_based">SUMO automatic control</option>
           <option value="fixed">Manual fixed cycle</option>
-          <option value="ai">UrbanFlow AI control</option>
+          <option value="ai">UrbanFlow AI control — latest saved model</option>
         </select>
       </label>
     </section>

@@ -26,7 +26,7 @@ class OverpassClient:
         headers = {
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "Accept": "application/json",
-            "User-Agent": "UrbanFlow-AI/0.1 local-development qmpzqwertyud@gmail.com",
+            "User-Agent": "UrbanFlow-AI/0.1 local-development",
         }
 
         timeout = httpx.Timeout(connect=25.0, read=180.0, write=25.0, pool=25.0)

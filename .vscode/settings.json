@@ -1,0 +1,42 @@
+{
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "files.hotExit": "off",
+
+  "ruff.exclude": [
+    "**/.git",
+    "**/.mypy_cache",
+    "**/.pytest_cache",
+    "**/.ruff_cache",
+    "**/.venv",
+    "**/__pycache__",
+    "**/build",
+    "**/dist",
+    "**/node_modules",
+    "**/server/.venv",
+    "**/web/node_modules",
+    "**/ai/notebooks/*.ipynb"
+  ],
+
+  "python.analysis.exclude": [
+    "**/.git",
+    "**/.mypy_cache",
+    "**/.pytest_cache",
+    "**/.ruff_cache",
+    "**/.venv",
+    "**/__pycache__",
+    "**/build",
+    "**/dist",
+    "**/node_modules",
+    "**/server/.venv",
+    "**/web/node_modules",
+    "**/ai/notebooks/*.ipynb"
+  ],
+
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.useLibraryCodeForTypes": true,
+
+  "jupyter.askForKernelRestart": false,
+  "jupyter.debugJustMyCode": false,
+  "notebook.output.textLineLimit": 5000
+}

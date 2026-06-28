@@ -682,11 +682,20 @@ label {
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  min-width: 0;
   padding: 10px;
   border-radius: 14px;
   background: rgba(2, 6, 23, 0.48);
   border: 1px solid rgba(148, 163, 184, 0.15);
   font-size: 12px;
+}
+
+.list-item span,
+.list-item strong,
+.list-item small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .leaflet-container {
@@ -1109,6 +1118,84 @@ label {
   padding: 0 10px;
   border-radius: 10px;
   font-size: 11px;
+}
+
+.dock-panel,
+.panel-block,
+.panel-block *,
+.training-detail-list,
+.training-detail-item,
+.training-metric {
+  min-width: 0;
+}
+
+.panel-block {
+  overflow: hidden;
+}
+
+.training-copy {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.training-metric strong {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.18;
+}
+
+.training-detail-list {
+  display: grid;
+  gap: 8px;
+}
+
+.training-detail-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(2, 6, 23, 0.48);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  font-size: 12px;
+}
+
+.training-detail-item span {
+  min-width: 0;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.training-detail-item strong {
+  min-width: 0;
+  max-width: 100%;
+  color: #e2e8f0;
+  font-size: 11px;
+  line-height: 1.38;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.training-detail-item strong:hover {
+  color: #38bdf8;
+}
+
+.training-detail-item code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 420px) {
+  .simulation-count-grid,
+  .button-row-two,
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 980px) {

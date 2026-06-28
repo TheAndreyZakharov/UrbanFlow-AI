@@ -220,6 +220,7 @@ async def build_sumo_scenario(
         pt_lines_path=pt_lines_path,
         tls_junction_ids=[],
     )
+    repair_unknown_tls_references(base_net_path)
 
     tls_junction_ids = []
 
@@ -239,6 +240,8 @@ async def build_sumo_scenario(
         )
     else:
         shutil.copyfile(base_net_path, net_path)
+
+    repair_unknown_tls_references(net_path)
 
     build_vehicle_trips(
         net_path=net_path,
@@ -575,6 +578,44 @@ def junction_ids_for_city_intersections(net_path: Path, city_map: CityMapDto) ->
         for junction_id, _x, _y, _incoming_edge_count, _incoming_lane_count in junctions
     ]
 
+def repair_unknown_tls_references(net_path: Path) -> None:
+    if not net_path.exists():
+        return
+
+    try:
+        tree = ET.parse(net_path)
+    except ET.ParseError:
+        return
+
+    root = tree.getroot()
+    known_tls_ids = {
+        element.get("id")
+        for element in root.findall("tlLogic")
+        if element.get("id")
+    }
+
+    changed = False
+
+    for connection in root.findall("connection"):
+        tls_id = connection.get("tl")
+
+        if tls_id and tls_id not in known_tls_ids:
+            connection.attrib.pop("tl", None)
+            connection.attrib.pop("linkIndex", None)
+            changed = True
+
+    for junction in root.findall("junction"):
+        junction_id = junction.get("id")
+        junction_type = junction.get("type")
+
+        if junction_type == "traffic_light" and junction_id not in known_tls_ids:
+            junction.set("type", "priority")
+            changed = True
+
+    if changed:
+        temporary_path = net_path.with_suffix(net_path.suffix + ".tmp")
+        tree.write(temporary_path, encoding="utf-8", xml_declaration=True)
+        temporary_path.replace(net_path)
 
 def build_vehicle_trips(net_path: Path, trips_path: Path, vehicles_count: int) -> None:
     trips_path.write_text("<routes>\n</routes>\n", encoding="utf-8")

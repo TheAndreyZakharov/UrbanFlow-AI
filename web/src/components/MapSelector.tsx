@@ -29,13 +29,13 @@ type Props = {
   onClose: () => void;
 };
 
-function MapFocus({ center }: { center: [number, number] }) {
+function MapFocus({ target }: { target: { center: [number, number]; zoom: number; key: number } }) {
   const map = useMap();
 
   useEffect(() => {
-    map.setView(center, map.getZoom(), { animate: true });
+    map.setView(target.center, target.zoom, { animate: true });
     setTimeout(() => map.invalidateSize(), 50);
-  }, [center, map]);
+  }, [target.key, map]);
 
   return null;
 }
@@ -86,7 +86,11 @@ export function MapSelector({
   onImportOsm,
   onClose
 }: Props) {
-  const [focusCenter, setFocusCenter] = useState<[number, number]>(center);
+  const [focusTarget, setFocusTarget] = useState({
+    center,
+    zoom,
+    key: 0
+  });
   const [visualAreaSize, setVisualAreaSize] = useState(clampAreaSize(Number(areaSizeText) || 1000));
   const animationRef = useRef<number | null>(null);
 
@@ -171,10 +175,16 @@ export function MapSelector({
     const lat = Number(firstResult.lat);
     const lon = Number(firstResult.lon);
     const nextCenter: [number, number] = [lat, lon];
+    const nextZoom = 15;
 
-    setFocusCenter(nextCenter);
+    setFocusTarget((current) => ({
+      center: nextCenter,
+      zoom: nextZoom,
+      key: current.key + 1
+    }));
     onCenterChange(nextCenter);
     onSelectedCenterChange(nextCenter);
+    onZoomChange(nextZoom);
     onBboxChange(buildSquareBbox(lat, lon, targetAreaSize));
   }
 
@@ -218,7 +228,7 @@ export function MapSelector({
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          <MapFocus center={focusCenter} />
+          <MapFocus target={focusTarget} />
           <CenterAreaBinder sizeMeters={visualAreaSize} onMapMove={updateSelectionFromCenter} />
 
           {rectangleBounds && (

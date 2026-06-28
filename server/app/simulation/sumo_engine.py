@@ -156,6 +156,10 @@ class SumoSimulationEngine:
             self._sumo_config_path = next_sumo_config_path
             self._start_sumo()
 
+            if self.mode == "ai":
+                self._load_latest_ai_model_unlocked()
+                self.urbanflow_tls_controller.reset()
+
             return self._state_unlocked()
 
     def close(self) -> None:
@@ -224,6 +228,7 @@ class SumoSimulationEngine:
             self._restore_sumo_traffic_lights()
 
             if mode == "ai":
+                self._load_latest_ai_model_unlocked()
                 self.urbanflow_tls_controller.reset()
 
             return self._state_unlocked()
@@ -320,6 +325,8 @@ class SumoSimulationEngine:
             throughput=self.throughput,
         )
 
+        self._record_ai_training_metrics(metrics)
+
         return SimulationStateDto(
             session_id=self.session_id,
             tick=self.tick,
@@ -345,6 +352,39 @@ class SumoSimulationEngine:
             closed_road_ids=sorted(self.closed_road_ids),
             forced_open_road_ids=sorted(self.forced_open_road_ids),
         )
+
+    def _load_latest_ai_model_unlocked(self) -> None:
+        signal_scope = "all_intersections" if self.signals_on_all_intersections else "osm_only"
+
+        try:
+            loaded_model_path = self.urbanflow_tls_controller.load_latest_saved_model(signal_scope)
+
+            if loaded_model_path is not None:
+                print(f"UrbanFlow AI loaded saved model: {loaded_model_path}")
+            else:
+                print(f"UrbanFlow AI saved model not found for scope={signal_scope}; using default runtime policy.")
+        except Exception as error:
+            print(f"UrbanFlow AI model load failed: {error!r}; using default runtime policy.")
+
+    def _record_ai_training_metrics(self, metrics) -> None:
+        if self.mode != "ai":
+            return
+
+        try:
+            from app.simulation.training_jobs import training_job_store
+
+            training_job_store.record_runtime_metrics(
+                session_id=self.session_id,
+                current_step=self.tick,
+                current_vehicles=self.vehicles_count,
+                latest_reward=self.urbanflow_tls_controller.last_reward,
+                average_wait_time=float(metrics.average_vehicle_wait_time),
+                congestion_score=float(metrics.congestion_score),
+                stopped_vehicles=int(metrics.stopped_vehicles),
+                model_state=self.urbanflow_tls_controller.export_model_state(),
+            )
+        except Exception:
+            return
 
     def _require_sumo_started(self) -> None:
         if self._started:
@@ -375,6 +415,8 @@ class SumoSimulationEngine:
             "--step-length",
             "1",
             "--no-warnings",
+            "true",
+            "--ignore-route-errors",
             "true",
         ]
 

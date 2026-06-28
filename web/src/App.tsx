@@ -66,9 +66,9 @@ export function App() {
   const [status, setStatus] = useState("Open Map, search a place and import real OSM data.");
   const [mapOpen, setMapOpen] = useState(false);
   const [mapMounted, setMapMounted] = useState(false);
-  const [mapCenter, setMapCenter] = useState<[number, number]>([55.751244, 37.618423]);
-  const [mapSelectedCenter, setMapSelectedCenter] = useState<[number, number]>([55.751244, 37.618423]);
-  const [mapZoom, setMapZoom] = useState(15);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([20.0, 0.0]);
+  const [mapSelectedCenter, setMapSelectedCenter] = useState<[number, number]>([20.0, 0.0]);
+  const [mapZoom, setMapZoom] = useState(2);
   const [mapQuery, setMapQuery] = useState("");
   const [mapAreaSizeText, setMapAreaSizeText] = useState("1000");
   const [isImporting, setIsImporting] = useState(false);

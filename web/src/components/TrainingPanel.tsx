@@ -38,9 +38,10 @@ export function TrainingPanel({
   return (
     <section className="panel-block">
       <h2>AI training</h2>
+
       <p className="muted">
-        Train UrbanFlow AI on the current generated SUMO zone. SUMO moves vehicles, UrbanFlow AI controls real SUMO
-        traffic lights. Curriculum increases traffic difficulty from low load to high load.
+        Train UrbanFlow AI on the current generated SUMO zone. SUMO moves vehicles, and UrbanFlow AI controls real SUMO
+        traffic lights. Saved models are loaded automatically when you select UrbanFlow AI control in the Simulation panel.
       </p>
 
       <label>
@@ -147,7 +148,7 @@ export function TrainingPanel({
       <label className="settings-toggle-row">
         <span className="settings-toggle-copy">
           <strong>Random road events during training</strong>
-          <small>Accidents and roadworks make the controller more robust after the real trainer is connected.</small>
+          <small>Accidents and roadworks make the traffic-light controller more robust.</small>
         </span>
 
         <input
@@ -187,19 +188,14 @@ export function TrainingPanel({
         </button>
       </div>
 
-      <div className="button-row button-row-two">
-        <button disabled={!job || !canSaveModel || isBusy} onClick={() => onExportModel("onnx")}>
-          Export ONNX
-        </button>
-
-        <button disabled={!job || !canSaveModel || isBusy} onClick={() => onExportModel("torchscript")}>
-          Export TorchScript
-        </button>
-      </div>
+      <p className="muted training-copy">
+        ONNX and TorchScript are hidden for now because the current UrbanFlow AI controller is a JSON checkpoint policy,
+        not a PyTorch neural network. The saved JSON model is the active runtime model used by simulation.
+      </p>
 
       {!canSaveModel && (
-        <p className="muted">
-          Model saving unlocks after the real RL trainer writes checkpoint_path. The UI is ready; the trainer will fill it.
+        <p className="muted training-copy">
+          Model saving unlocks after the AI controller writes a checkpoint from real SUMO training metrics.
         </p>
       )}
 
@@ -215,21 +211,10 @@ export function TrainingPanel({
       </div>
 
       {job && (
-        <div className="list">
-          <div className="list-item">
-            <span>Model dir</span>
-            <strong>{job.model_output_dir}</strong>
-          </div>
-
-          <div className="list-item">
-            <span>Checkpoint</span>
-            <strong>{job.checkpoint_path ?? "not created yet"}</strong>
-          </div>
-
-          <div className="list-item">
-            <span>Message</span>
-            <strong>{job.message}</strong>
-          </div>
+        <div className="training-detail-list">
+          <TrainingDetail label="Training run dir" value={job.model_output_dir} />
+          <TrainingDetail label="Checkpoint" value={job.checkpoint_path ?? "not created yet"} />
+          <TrainingDetail label="Message" value={job.message} />
         </div>
       )}
     </section>
@@ -238,9 +223,18 @@ export function TrainingPanel({
 
 function Metric({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="metric">
+    <div className="metric training-metric">
       <span>{label}</span>
       <strong>{value}</strong>
+    </div>
+  );
+}
+
+function TrainingDetail({ label, value }: { label: string; value: string | number | null | undefined }) {
+  return (
+    <div className="training-detail-item">
+      <span>{label}</span>
+      <strong title={String(value ?? "—")}>{value ?? "—"}</strong>
     </div>
   );
 }

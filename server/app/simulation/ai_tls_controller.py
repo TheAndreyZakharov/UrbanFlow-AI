@@ -1,119 +1,101 @@
+from __future__ import annotations
+
+import sys
 from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Literal
 
 
-@dataclass
-class TlsRuntimeState:
-    last_switch_tick: int = 0
-    last_phase: int = 0
+TrainingSignalScope = Literal["osm_only", "all_intersections"]
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+AI_ROOT = PROJECT_ROOT / "ai"
+MODELS_ROOT = PROJECT_ROOT / "data" / "models"
+
+
+def ensure_ai_package_path() -> None:
+    if AI_ROOT.exists() and str(AI_ROOT) not in sys.path:
+        sys.path.insert(0, str(AI_ROOT))
+
+
+def create_runtime_controller() -> Any:
+    ensure_ai_package_path()
+
+    from urbanflow_ai.integration.runtime_controller import UrbanFlowRuntimeController
+
+    return UrbanFlowRuntimeController()
 
 
 @dataclass
 class UrbanFlowTlsController:
-    min_green_ticks: int = 12
-    max_green_ticks: int = 45
-    queue_switch_threshold: int = 4
-    state_by_tls_id: dict[str, TlsRuntimeState] = field(default_factory=dict)
+    runtime_controller: Any = field(default_factory=create_runtime_controller)
+    loaded_model_path: Path | None = None
 
     def reset(self) -> None:
-        self.state_by_tls_id = {}
+        self.runtime_controller.reset()
 
     def apply(self, conn, tick: int) -> None:
-        try:
-            tls_ids = list(conn.trafficlight.getIDList())
-        except Exception:
-            return
+        self.runtime_controller.apply(conn=conn, tick=tick)
 
-        for tls_id in tls_ids:
-            self._apply_tls(conn=conn, tick=tick, tls_id=tls_id)
+    def load_latest_saved_model(self, signal_scope: TrainingSignalScope) -> Path | None:
+        model_path = latest_saved_model_path(signal_scope)
 
-    def _apply_tls(self, conn, tick: int, tls_id: str) -> None:
-        try:
-            current_phase = int(conn.trafficlight.getPhase(tls_id))
-            logics = conn.trafficlight.getAllProgramLogics(tls_id)
-            controlled_lanes = list(conn.trafficlight.getControlledLanes(tls_id))
-        except Exception:
-            return
+        if model_path is None:
+            self.runtime_controller = create_runtime_controller()
+            self.loaded_model_path = None
+            return None
 
-        if not logics or not logics[0].phases:
-            return
+        ensure_ai_package_path()
 
-        phases = logics[0].phases
-        phase_count = len(phases)
+        from urbanflow_ai.integration.runtime_controller import UrbanFlowRuntimeController
 
-        if phase_count <= 1:
-            return
+        self.runtime_controller = UrbanFlowRuntimeController.from_checkpoint(model_path)
+        self.loaded_model_path = model_path
+        return model_path
 
-        runtime_state = self.state_by_tls_id.setdefault(
-            tls_id,
-            TlsRuntimeState(last_switch_tick=tick, last_phase=current_phase),
-        )
+    def load_model(self, path: str | Path) -> Path:
+        model_path = Path(path)
 
-        ticks_since_switch = tick - runtime_state.last_switch_tick
+        if not model_path.exists():
+            raise FileNotFoundError(f"UrbanFlow AI model checkpoint does not exist: {model_path}")
 
-        if ticks_since_switch < self.min_green_ticks:
-            return
+        ensure_ai_package_path()
 
-        current_score = self._phase_pressure_score(
-            conn=conn,
-            state=phases[current_phase].state,
-            controlled_lanes=controlled_lanes,
-        )
+        from urbanflow_ai.integration.runtime_controller import UrbanFlowRuntimeController
 
-        best_phase = current_phase
-        best_score = current_score
+        self.runtime_controller = UrbanFlowRuntimeController.from_checkpoint(model_path)
+        self.loaded_model_path = model_path
+        return model_path
 
-        for phase_index, phase in enumerate(phases):
-            if phase_index == current_phase:
-                continue
+    @property
+    def last_reward(self) -> float | None:
+        return self.runtime_controller.last_reward
 
-            if not self._phase_has_green(phase.state):
-                continue
+    def export_model_state(self) -> dict[str, Any]:
+        payload = self.runtime_controller.checkpoint_payload()
 
-            score = self._phase_pressure_score(
-                conn=conn,
-                state=phase.state,
-                controlled_lanes=controlled_lanes,
-            )
+        payload["loaded_model_path"] = str(self.loaded_model_path) if self.loaded_model_path else None
 
-            if score > best_score:
-                best_score = score
-                best_phase = phase_index
+        return payload
 
-        should_switch_by_pressure = best_phase != current_phase and best_score >= current_score + self.queue_switch_threshold
-        should_switch_by_timeout = ticks_since_switch >= self.max_green_ticks and best_phase != current_phase
+    def save_checkpoint(self, path: str | Path) -> Path:
+        return self.runtime_controller.save_checkpoint(path)
 
-        if not should_switch_by_pressure and not should_switch_by_timeout:
-            return
 
-        try:
-            conn.trafficlight.setPhase(tls_id, best_phase)
-            conn.trafficlight.setPhaseDuration(tls_id, self.min_green_ticks)
-            runtime_state.last_switch_tick = tick
-            runtime_state.last_phase = best_phase
-        except Exception:
-            return
+def latest_saved_model_path(signal_scope: TrainingSignalScope) -> Path | None:
+    scope_dir_name = "tls_all_intersections" if signal_scope == "all_intersections" else "tls_osm_only"
+    saved_dir = MODELS_ROOT / scope_dir_name / "saved"
 
-    def _phase_pressure_score(self, conn, state: str, controlled_lanes: list[str]) -> int:
-        score = 0
+    if not saved_dir.exists():
+        return None
 
-        for index, signal_char in enumerate(state):
-            if index >= len(controlled_lanes):
-                continue
+    candidates = [
+        path
+        for path in saved_dir.glob("*.json")
+        if not path.name.endswith(".metadata.json")
+    ]
 
-            if signal_char not in {"G", "g"}:
-                continue
+    if not candidates:
+        return None
 
-            lane_id = controlled_lanes[index]
-
-            try:
-                halted = int(conn.lane.getLastStepHaltingNumber(lane_id))
-                vehicles = int(conn.lane.getLastStepVehicleNumber(lane_id))
-            except Exception:
-                continue
-
-            score += halted * 3 + vehicles
-
-        return score
-
-    def _phase_has_green(self, state: str) -> bool:
-        return "G" in state or "g" in state
+    return max(candidates, key=lambda path: path.stat().st_mtime)
